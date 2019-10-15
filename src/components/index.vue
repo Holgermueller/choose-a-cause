@@ -19,8 +19,9 @@ export default {
   },
   methods: {
     findCharity() {
-      const apiKey = "";
-      console.log("click");
+      const apiKey = process.env.VUE_APP_CHARITY_API;
+      const applicationID = process.env.VUE_APP_APID;
+
       axios.get("https://api.data.charitynavigator.org/v2").then(response => {
         console.log(response);
       });

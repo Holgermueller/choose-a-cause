@@ -1,13 +1,13 @@
 <template>
   <div id>
-    <v-hover v-for="charity in charities_array" :key="charity.ein">
-      <v-card class="info-card" tile>
-        <h1>{{charity.charityName}}</h1>
+    <v-hover class="info-card">
+      <v-card>
+        <h1>{{charityName}}</h1>
         <hr />
-        <p>{{charity.mailingAddress.city}}</p>
-        <p>{{charity.mailingAddress.stateOrProvince}}</p>
+        <p>{{city}}</p>
+        <p>{{stateOrProvince}}</p>
         <v-card-actions>
-          <v-btn :id="charity.ein" @click="learnMore">Learn more</v-btn>
+          <v-btn :id="id" @click="learnMore">Learn More</v-btn>
         </v-card-actions>
       </v-card>
     </v-hover>
@@ -16,16 +16,31 @@
 
 <script>
 export default {
+  data() {
+    return {};
+  },
   props: {
-    charities_array: {
-      type: Array,
+    charityName: {
+      type: String,
       required: true
     },
-    methods: {
-      learnMore() {
-        let targetId = event.currentTarget.id;
-        console.log("targetId");
-      }
+    city: {
+      type: String,
+      required: false
+    },
+    stateOrProvince: {
+      type: String,
+      required: false
+    },
+    id: {
+      type: String,
+      required: true
+    }
+  },
+  methods: {
+    learnMore: function() {
+      const targetId = event.currentTarget.id;
+      console.log(targetId);
     }
   }
 };

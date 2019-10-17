@@ -3,7 +3,14 @@
     <!-- <v-card>
       <v-btn>find a charity</v-btn>
     </v-card>-->
-    <CharityCard :charities_array="charities_array" />
+    <CharityCard
+      v-for="charity in charities_array"
+      :key="charity.ein"
+      :charityName="charity.charityName"
+      :city="charity.mailingAddress.city"
+      :stateOrProvince="charity.mailingAddress.stateOrProvince"
+      :id="charity.ein"
+    />
   </div>
 </template>
 

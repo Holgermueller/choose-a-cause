@@ -1,12 +1,15 @@
 <template>
-  <div id="singleCharity">
-    <v-card></v-card>
+  <div>
+    <h1>this is a protected page</h1>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+    
+}
 </script>
 
 <style scoped>
+
 </style>

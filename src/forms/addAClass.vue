@@ -2,10 +2,11 @@
   <div data-app id="addClassForm">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{on}">
-        <v-btn block color="green" dark v-on="on">Add A Class</v-btn>
+        <v-btn block class="button" color="green" dark v-on="on">Add A Class</v-btn>
       </template>
 
-      <v-card>
+      <v-card
+      class="add-class-dialog">
         <v-card-title>Add a class:</v-card-title>
         <v-card-text>
           <v-container fluid>
@@ -27,7 +28,6 @@
           </v-container>
         </v-card-text>
         <v-card-actions>
-          <
           <v-btn color="red" @click="dialog = false">Cancel</v-btn>
           <v-spacer></v-spacer>
           <v-btn color="blue" @click="addClass">Submit</v-btn>
@@ -71,4 +71,7 @@ export default {
 </script>
 
 <style scoped>
+.add-class-dialog {
+  border: 3px ridge blue;
+}
 </style>

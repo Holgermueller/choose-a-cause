@@ -1,10 +1,21 @@
 <template>
   <div id="profile">
-    <AddClassDialog :classList="classList" />
+    <div class="buttons-div">
+      <AddClassDialog :classList="classList" />
+    </div>
 
     <h1>Classes will appear below.</h1>
 
-    <ClassCard v-for="single_class in classList" :key="single_class.id" />
+<div class="courses-display">
+    <ClassCard
+    class="single-card"
+      v-for="single_class in classList"
+      :key="single_class.id"
+      :courseName="single_class.courseName"
+      :id="single_class.id"
+    />
+</div>
+
   </div>
 </template>
 
@@ -25,16 +36,17 @@ export default {
     };
   },
   created() {
-    db.collection("classes")
+    db.collection("courses")
       .get()
       .then(querySnapshot => {
-        console.log(querySnapshot);
-        // querySnapshot.forEach(doc => {
-        //   console.log(doc);
-        //   // const data = {
-
-        //   // }
-        // });
+        querySnapshot.forEach(doc => {
+          const data = {
+            id: doc.id,
+            courseName: doc.data().courseName
+          };
+          this.classList.push(data);
+          console.log(data);
+        });
       })
       .catch(err => {
         console.log("Error getting document: " + err);
@@ -45,4 +57,15 @@ export default {
 </script>
 
 <style scoped>
+.buttons-div {
+  width: 75%;
+  margin: 5% auto;
+}
+.courses-display {
+  width: 75%;
+  margin: 2% auto;
+}
+.single-card {
+  margin: 2% 0;
+}
 </style>

@@ -5,8 +5,7 @@
         <v-btn block class="button" color="green" dark v-on="on">Add A Class</v-btn>
       </template>
 
-      <v-card
-      class="add-class-dialog">
+      <v-card class="add-class-dialog">
         <v-card-title>Add a class:</v-card-title>
         <v-card-text>
           <v-container fluid>
@@ -38,6 +37,8 @@
 </template>
 
 <script>
+import db from ".././components/firebase/firebaseInit";
+
 export default {
   data() {
     return {
@@ -55,13 +56,31 @@ export default {
   methods: {
     addClass() {
       let class_name = this.class_name;
-      console.log(class_name);
+
+      db.collection("courses").add({ courseName: class_name });
       this.clearField();
       this.dialog = false;
+      this.updateClassList();
     },
     updateClassList() {
       let classList = this.classList;
+
       classList.length = 0;
+
+      db.collection("courses")
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            const data = {
+              id: doc.id,
+              courseName: doc.data().courseName
+            };
+            this.classList.push(data);
+          });
+        })
+        .catch(err => {
+          console.log("Error getting document: " + err);
+        });
     },
     clearField() {
       this.$refs.textField.reset();

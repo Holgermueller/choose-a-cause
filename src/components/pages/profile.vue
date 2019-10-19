@@ -6,16 +6,15 @@
 
     <h1>Classes will appear below.</h1>
 
-<div class="courses-display">
-    <ClassCard
-    class="single-card"
-      v-for="single_class in classList"
-      :key="single_class.id"
-      :courseName="single_class.courseName"
-      :id="single_class.id"
-    />
-</div>
-
+    <div class="courses-display">
+      <ClassCard
+        class="single-card"
+        v-for="single_class in classList"
+        :key="single_class.id"
+        :courseName="single_class.courseName"
+        :id="single_class.id"
+      />
+    </div>
   </div>
 </template>
 
@@ -45,7 +44,6 @@ export default {
             courseName: doc.data().courseName
           };
           this.classList.push(data);
-          console.log(data);
         });
       })
       .catch(err => {

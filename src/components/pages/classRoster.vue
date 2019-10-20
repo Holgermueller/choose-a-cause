@@ -1,6 +1,7 @@
 <template>
   <div id="roster">
     <h1>Roster Will appear here.</h1>
+    <p>{{id}}</p>
     <v-btn>
       <router-link to="/user/:id">Back</router-link>
     </v-btn>
@@ -18,7 +19,12 @@ export default {
     };
   },
   created() {},
-  props: {},
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
   methods: {}
 };
 </script>

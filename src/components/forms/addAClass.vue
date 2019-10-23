@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import db from ".././components/firebase/firebaseInit";
+import db from "../firebase/firebaseInit";
 
 export default {
   data() {
@@ -57,7 +57,14 @@ export default {
     addClass() {
       let class_name = this.class_name;
 
-      db.collection("courses").add({ courseName: class_name });
+      db.collection("courses")
+        .add({ courseName: class_name })
+        .then(() => {
+          console.log("Class addition successful");
+        })
+        .catch(err => {
+          console.log("Error: " + err);
+        });
       this.clearField();
       this.dialog = false;
       this.updateClassList();

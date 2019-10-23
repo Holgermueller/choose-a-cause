@@ -12,7 +12,7 @@
             <v-container fluid>
               <v-layout wrap>
                 <v-flex xs12 sm12 md13 lg12 xl12>
-                  <v-text-field type="text" v-model="first_name" label="First name"></v-text-field>
+                  <v-text-field type="text" v-model="firstName" label="First name"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm12 md13 lg12 xl12>
                   <v-text-field type="text" v-model="last_name" label="Last name"></v-text-field>
@@ -35,29 +35,30 @@
 </template>
 
 <script>
-import db from "../components/firebase/firebaseInit";
+import db from "../firebase/firebaseInit";
 
 export default {
   data() {
     return {
       dialog: false,
-      first_name: null,
+      firstName: null,
       last_name: null,
       preferred_name: null
     };
   },
   methods: {
     submitStudent() {
-      let firstname = this.first_name;
+      let firstName = this.firstName;
       let lastname = this.last_name;
       let preferredname = this.preferred_name;
+      console.log(firstName);
 
-    //   db.collection("courses")
-    //     .doc(this.id)
-    //     .collection("roster")
-    //     .add({ firstname: firstname });
+      db.collection("courses")
+        .doc(this.id)
+        .collection("roster")
+        .set({ firstname: firstName });
 
-      this.dialog = false;
+      //this.dialog = false;
       this.clearForm();
     },
     clearForm() {
@@ -69,4 +70,7 @@ export default {
 </script>
 
 <style scoped>
+.add-student-dialog {
+  border: 3px ridge lightskyblue;
+}
 </style>

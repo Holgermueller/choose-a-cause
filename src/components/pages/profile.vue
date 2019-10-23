@@ -23,7 +23,7 @@
 <script>
 import db from "../firebase/firebaseInit";
 import ClassCard from "../layout/ClassCard";
-import AddClassDialog from "../../forms/addAClass";
+import AddClassDialog from "../forms/addAClass";
 
 export default {
   name: "Profile",

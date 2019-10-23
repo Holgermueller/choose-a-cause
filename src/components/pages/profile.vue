@@ -4,7 +4,7 @@
       <AddClassDialog :classList="classList" />
     </div>
 
-    <h1>Classes will appear below.</h1>
+    <h1>Your classes:</h1>
 
     <div class="courses-display">
       <ClassCard

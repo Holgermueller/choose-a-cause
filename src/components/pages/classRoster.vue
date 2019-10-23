@@ -1,32 +1,37 @@
 <template>
   <div id="roster">
-    <h1>{{courseName}}</h1>
+    <h1>{{courseName}} Roster:</h1>
     <p>{{id}}</p>
     <v-btn>
       <router-link to="/user/:id">Back</router-link>
     </v-btn>
 
-<div class="roster-display">
-    <RosterCard
-    class="roster-card"
-      v-for="(single_student, index) in classRoster"
-      :key="single_student.id"
-      :firstname="single_student.firstName"
-      :index="index"
-    />
-</div>
+    <div class="add-student-div">
+      <AddStudentDialog />
+    </div>
 
+    <div class="roster-display">
+      <RosterCard
+        class="roster-card"
+        v-for="(single_student, index) in classRoster"
+        :key="single_student.id"
+        :firstname="single_student.firstName"
+        :index="index"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import db from "../firebase/firebaseInit";
 import RosterCard from "../layout/RosterCard";
+import AddStudentDialog from "../../forms/addAStudent";
 
 export default {
   name: "singleClass",
   components: {
-    RosterCard
+    RosterCard,
+    AddStudentDialog
   },
   data() {
     return {
@@ -70,5 +75,9 @@ export default {
 }
 .roster-card {
   margin: 2% 0;
+}
+.add-student-div {
+  width: 75%;
+  margin: 2% auto;
 }
 </style>

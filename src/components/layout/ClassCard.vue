@@ -6,8 +6,8 @@
         <v-card-actions>
           <v-btn :id="id" @click="deleteClass(index)">Delete</v-btn>
           <v-spacer></v-spacer>
-          <v-btn :id="id" :courseName="courseName" @click="goToRoster">
-            <router-link :to="/singleClass/+ id">See roster</router-link>
+          <v-btn  @click="goToRoster">
+            <router-link v-bind:courseName="courseName" :to="/singleClass/ + id">See roster</router-link>
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -43,7 +43,6 @@ export default {
   methods: {
     goToRoster() {
       let targetId = event.currentTarget.id;
-      console.log(targetId);
     },
     deleteClass(index) {
       this.classList.splice(index, 1);

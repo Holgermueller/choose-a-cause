@@ -42,6 +42,10 @@ export default {
     id: {
       type: String,
       required: true
+    },
+    classRoster: {
+      type: Array,
+      required: true
     }
   },
   data() {
@@ -62,15 +66,43 @@ export default {
       db.collection("courses")
         .doc(this.id)
         .collection("roster")
-        .add({ firstname: firstName });
+        .add({ firstname: firstName })
+        .then(() => {
+          console.log("Student successfully added!");
+        })
+        .catch(err => {
+          console.log("An error has occurred: " + err);
+        });
 
-      //this.dialog = false;
+      this.dialog = false;
       this.clearForm();
+      this.updateRoster();
     },
     clearForm() {
       this.$refs.form.reset();
     },
-    updateRoster() {}
+    updateRoster() {
+      let classRoster = this.classRoster;
+
+      classRoster.length = 0;
+
+      db.collection("courses")
+        .doc(this.id)
+        .collection("roster")
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            const data = {
+              studentId: doc.id,
+              firstName: doc.data().firstname
+            };
+            this.classRoster.push(data);
+          });
+        })
+        .catch(err => {
+          console.log("Error: " + err);
+        });
+    }
   }
 };
 </script>

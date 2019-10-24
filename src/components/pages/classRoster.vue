@@ -8,8 +8,7 @@
     </router-link>
 
     <div class="add-student-div">
-      <AddStudentDialog
-      :id="id" />
+      <AddStudentDialog :id="id" :classRoster="classRoster" />
     </div>
 
     <div class="roster-display">
@@ -37,8 +36,7 @@ export default {
   },
   data() {
     return {
-      classRoster: [],
-      
+      classRoster: []
     };
   },
 
@@ -53,7 +51,6 @@ export default {
     }
   },
   created() {
-
     db.collection("courses")
       .doc(this.id)
       .collection("roster")
@@ -66,6 +63,9 @@ export default {
           };
           this.classRoster.push(data);
         });
+      })
+      .catch(err => {
+        console.log("Error: " + err);
       });
   },
   methods: {}

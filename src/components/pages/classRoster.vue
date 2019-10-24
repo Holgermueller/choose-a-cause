@@ -2,9 +2,10 @@
   <div id="roster">
     <h1>{{courseName}} Roster:</h1>
     <p>{{id}}</p>
-    <v-btn>
-      <router-link to="/user/:id">Back</router-link>
-    </v-btn>
+
+    <router-link to="/user/:id">
+      <v-btn>Back</v-btn>
+    </router-link>
 
     <div class="add-student-div">
       <AddStudentDialog />
@@ -35,7 +36,8 @@ export default {
   },
   data() {
     return {
-      classRoster: []
+      classRoster: [],
+      
     };
   },
 
@@ -50,6 +52,7 @@ export default {
     }
   },
   created() {
+
     db.collection("courses")
       .doc(this.id)
       .collection("roster")

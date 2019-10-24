@@ -6,9 +6,10 @@
         <v-card-actions>
           <v-btn :id="id" @click="deleteClass(index)">Delete</v-btn>
           <v-spacer></v-spacer>
-          <v-btn  @click="goToRoster">
-            <router-link v-bind:courseName="courseName" :to="/singleClass/ + id">See roster</router-link>
-          </v-btn>
+
+          <router-link :to="{name: 'singleClass', params: {courseName: courseName, id:id}}">
+            <v-btn @click="goToRoster">See roster</v-btn>
+          </router-link>
         </v-card-actions>
       </v-card>
     </v-hover>

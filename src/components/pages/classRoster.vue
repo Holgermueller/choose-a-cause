@@ -1,25 +1,36 @@
 <template>
   <div id="roster">
-    <h1>{{courseName}} Roster:</h1>
+    <h1 class="course-name-display">{{courseName}} Roster:</h1>
     <p>{{id}}</p>
 
     <router-link to="/user/:id">
       <v-btn>Back</v-btn>
     </router-link>
 
+    <div class="name-display-div">
+      <NameDisplay :classRoster="classRoster" />
+    </div>
+
     <div class="add-student-div">
       <AddStudentDialog :id="id" :classRoster="classRoster" />
     </div>
 
-    <div class="roster-display">
-      <RosterCard
-        class="roster-card"
-        v-for="(single_student, index) in classRoster"
-        :key="single_student.id"
-        :firstname="single_student.firstName"
-        :index="index"
-      />
-    </div>
+    <v-expansion-panels class="expansion-panel">
+      <v-expansion-panel>
+        <v-expansion-panel-header class="panel-header">See Roster</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <div class="roster-display">
+            <RosterCard
+              class="roster-card"
+              v-for="(single_student, index) in classRoster"
+              :key="single_student.id"
+              :firstname="single_student.firstName"
+              :index="index"
+            />
+          </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </div>
 </template>
 
@@ -27,12 +38,14 @@
 import db from "../firebase/firebaseInit";
 import RosterCard from "../layout/RosterCard";
 import AddStudentDialog from "../forms/addAStudent";
+import NameDisplay from "../layout/NameDisplay";
 
 export default {
   name: "singleClass",
   components: {
     RosterCard,
-    AddStudentDialog
+    AddStudentDialog,
+    NameDisplay
   },
   data() {
     return {
@@ -73,6 +86,14 @@ export default {
 </script>
 
 <style scoped>
+.course-name-display {
+  padding: 5%;
+  text-align: center;
+}
+.name-display-div {
+  width: 85%;
+  margin: 4% auto;
+}
 .roster-display {
   width: 75%;
   margin: 2px auto;
@@ -83,5 +104,12 @@ export default {
 .add-student-div {
   width: 75%;
   margin: 2% auto;
+}
+.expansion-panel {
+  width: 75%;
+  margin: 8px auto 16px auto;
+}
+.panel-header {
+  background-color: aqua;
 }
 </style>

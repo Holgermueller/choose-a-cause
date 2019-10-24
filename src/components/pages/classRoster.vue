@@ -8,7 +8,8 @@
     </router-link>
 
     <div class="add-student-div">
-      <AddStudentDialog />
+      <AddStudentDialog
+      :id="id" />
     </div>
 
     <div class="roster-display">

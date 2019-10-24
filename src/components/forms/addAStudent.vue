@@ -27,7 +27,7 @@
         <v-card-actions>
           <v-btn color="red" @click="dialog = false">Cancel</v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue" @click="submitStudent">Submit</v-btn>
+          <v-btn color="blue" :id="id" @click="submitStudent">Submit</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -38,6 +38,12 @@
 import db from "../firebase/firebaseInit";
 
 export default {
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       dialog: false,
@@ -56,7 +62,7 @@ export default {
       db.collection("courses")
         .doc(this.id)
         .collection("roster")
-        .set({ firstname: firstName });
+        .add({ firstname: firstName });
 
       //this.dialog = false;
       this.clearForm();

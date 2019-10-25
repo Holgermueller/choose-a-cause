@@ -39,7 +39,7 @@
 <script>
 import db from "../firebase/firebaseInit";
 import RosterCard from "../layout/RosterCard";
-import AddStudentDialog from "../forms/addAStudent";
+import AddStudentDialog from "../Dialogs/addAStudent";
 import NameDisplay from "../layout/NameDisplay";
 
 export default {

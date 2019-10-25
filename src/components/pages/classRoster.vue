@@ -3,16 +3,18 @@
     <h1 class="course-name-display">{{courseName}} Roster:</h1>
     <p>{{id}}</p>
 
-    <router-link to="/user/:id">
-      <v-btn>Back</v-btn>
-    </router-link>
-
     <div class="name-display-div">
       <NameDisplay :classRoster="classRoster" />
     </div>
 
     <div class="add-student-div">
       <AddStudentDialog :id="id" :classRoster="classRoster" />
+    </div>
+
+    <div class="back-button">
+      <router-link to="/user/:id">
+        <v-btn color="primary" block>Back to dashboard</v-btn>
+      </router-link>
     </div>
 
     <v-expansion-panels class="expansion-panel">
@@ -100,6 +102,13 @@ export default {
 }
 .roster-card {
   margin: 2% 0;
+}
+.back-button {
+  width: 75%;
+  margin: 2% auto;
+}
+a {
+  text-decoration: none;
 }
 .add-student-div {
   width: 75%;

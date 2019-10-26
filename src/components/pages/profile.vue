@@ -4,7 +4,7 @@
       <AddClassDialog :classList="classList" />
     </div>
 
-    <h1>Your classes:</h1>
+    <h1 class="sub-header">Your classes:</h1>
 
     <div class="courses-display">
       <ClassCard
@@ -57,6 +57,9 @@ export default {
 </script>
 
 <style scoped>
+.sub-header {
+  text-align: center;
+}
 .buttons-div {
   width: 75%;
   margin: 5% auto;

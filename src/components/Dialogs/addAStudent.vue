@@ -24,6 +24,7 @@
             </v-container>
           </v-form>
         </v-card-text>
+        <v-divider></v-divider>
         <v-card-actions>
           <v-btn color="red" @click="dialog = false">Cancel</v-btn>
           <v-spacer></v-spacer>

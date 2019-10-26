@@ -4,11 +4,11 @@
       <v-card :elevation="hover?12:2">
         <h1 class="course-name">{{courseName}}</h1>
         <v-card-actions>
-          <v-btn :id="id" @click="deleteClass(index)">Delete</v-btn>
+          <DeleteCourse :id="id" :courseName="courseName" :index="index" :classList="classList" />
           <v-spacer></v-spacer>
 
           <router-link :to="{name: 'singleClass', params: {courseName: courseName, id:id}}">
-            <v-btn @click="goToRoster">See roster</v-btn>
+            <v-btn color="primary" @click="goToRoster">See roster</v-btn>
           </router-link>
         </v-card-actions>
       </v-card>
@@ -18,8 +18,10 @@
 
 <script>
 import db from "../firebase/firebaseInit";
+import DeleteCourse from "../Dialogs/deleteCourse";
 
 export default {
+  components: { DeleteCourse },
   data() {
     return {};
   },
@@ -44,21 +46,6 @@ export default {
   methods: {
     goToRoster() {
       let targetId = event.currentTarget.id;
-    },
-    deleteClass(index) {
-      this.classList.splice(index, 1);
-
-      let targetId = event.currentTarget.id;
-
-      db.collection("courses")
-        .doc(targetId)
-        .delete()
-        .then(() => {
-          console.log("Document successfully deleted!");
-        })
-        .catch(err => {
-          console.error("Error removing document: " + err);
-        });
     }
   }
 };
@@ -68,5 +55,8 @@ export default {
 .course-name {
   margin-left: 4%;
   padding: 2%;
+}
+a {
+  text-decoration: none;
 }
 </style>

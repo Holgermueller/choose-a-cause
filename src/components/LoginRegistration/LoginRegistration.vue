@@ -3,15 +3,20 @@
     <v-card class="login-register" width="500">
       <v-tabs v-model="tab" fixed-tabs>
         <v-tab v-for="(form, index) in forms" :key="index">
-          <h2>{{form.formName}}</h2>
+          <h2>
+            <span :class="form.icon"></span>
+            {{form.formName}}
+          </h2>
         </v-tab>
       </v-tabs>
 
       <v-tabs-items v-model="tab">
         <v-tab-item v-for="(form, index) in forms" :key="index">
           <v-card>
+            <v-card-title class="text-center">
+              <h3>{{form.formMessage}}</h3>
+            </v-card-title>
             <v-card-text>
-              <h3 class="form-message">{{form.formMessage}}</h3>
               <div v-if="form.formName === 'Register'">
                 <RegistrationForm />
               </div>
@@ -41,9 +46,14 @@ export default {
       forms: [
         {
           formName: "Register",
-          formMessage: "Register Here:"
+          formMessage: "Register Here:",
+          icon: "mdi mdi-pen"
         },
-        { formName: "Login", formMessage: "Log in here:" }
+        {
+          formName: "Login",
+          formMessage: "Log in here:",
+          icon: "mdi mdi-keyboard"
+        }
       ]
     };
   }

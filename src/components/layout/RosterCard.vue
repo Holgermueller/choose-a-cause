@@ -9,9 +9,9 @@
           <v-expansion-panel-content>
             <v-card>
               <v-card-actions>
-                <v-btn color="red">Delete</v-btn>
+                <DeleteStudentDialog />
                 <v-spacer></v-spacer>
-                <v-btn color="primary">Update</v-btn>
+                <UpdateStudentDialog />
               </v-card-actions>
             </v-card>
           </v-expansion-panel-content>
@@ -22,10 +22,16 @@
 </template>
 
 <script>
-import { type } from "os";
+import UpdateStudentDialog from "../Dialogs/updateStudent";
+import DeleteStudentDialog from "../Dialogs/deleteStudent";
+
 export default {
   data() {
     return {};
+  },
+  components: {
+    UpdateStudentDialog,
+    DeleteStudentDialog
   },
   props: {
     firstname: {

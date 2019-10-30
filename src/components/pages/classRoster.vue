@@ -1,6 +1,6 @@
 <template>
   <div id="roster">
-    <h1 class="course-name-display">{{courseName}} Roster:</h1>
+    <h1 class="course-name-display">{{CourseName}} Roster:</h1>
     <p>{{id}}</p>
 
     <div class="name-display-div">
@@ -28,6 +28,7 @@
               :key="single_student.id"
               :firstname="single_student.firstName"
               :index="index"
+              :studentId="single_student.id"
             />
           </div>
         </v-expansion-panel-content>
@@ -60,7 +61,7 @@ export default {
       type: String,
       required: true
     },
-    courseName: {
+    CourseName: {
       type: String,
       required: true
     }

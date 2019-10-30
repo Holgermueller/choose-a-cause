@@ -4,14 +4,14 @@
       <v-expansion-panels inset>
         <v-expansion-panel>
           <v-expansion-panel-header :elevation="hover?12:2">
-            <h1 class="student-name">{{firstname}}</h1>
+            <h1 class="student-name">{{firstname}} {{studentId}}</h1>
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-card>
               <v-card-actions>
-                <DeleteStudentDialog />
+                <DeleteStudentDialog :id="id" />
                 <v-spacer></v-spacer>
-                <UpdateStudentDialog />
+                <UpdateStudentDialog :id="id" />
               </v-card-actions>
             </v-card>
           </v-expansion-panel-content>
@@ -26,6 +26,7 @@ import UpdateStudentDialog from "../Dialogs/updateStudent";
 import DeleteStudentDialog from "../Dialogs/deleteStudent";
 
 export default {
+  name: "RosterCard",
   data() {
     return {};
   },
@@ -38,11 +39,15 @@ export default {
       type: String,
       required: true
     },
-    lastname: {
-      type: String,
-      required: true
-    },
-    preferredname: {
+    // lastname: {
+    //   type: String,
+    //   required: true
+    // },
+    // preferredname: {
+    //   type: String,
+    //   required: true
+    // },
+    studentId: {
       type: String,
       required: true
     }

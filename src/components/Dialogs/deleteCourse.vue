@@ -6,7 +6,7 @@
       </template>
 
       <v-card class="delete-class-dialog">
-        <v-card-title class="red">Delete {{courseName}}?</v-card-title>
+        <v-card-title class="red">Delete {{CourseName}}?</v-card-title>
         <v-card-text>
           <p>Are you certain you want to delete this course?</p>
           <p>This action cannot be reversed.</p>
@@ -26,6 +26,7 @@
 import db from "../firebase/firebaseInit";
 
 export default {
+  name: "DeleteCourse",
   data() {
     return {
       dialog: false
@@ -36,7 +37,7 @@ export default {
       type: String,
       required: true
     },
-    courseName: {
+    CourseName: {
       type: String,
       required: true
     },

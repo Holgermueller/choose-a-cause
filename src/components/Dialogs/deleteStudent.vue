@@ -15,7 +15,7 @@
         <v-card-actions>
           <v-btn color="red" class="text--white" @click="dialog = false">NO</v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" class="text--white">YES</v-btn>
+          <v-btn color="primary" :id="studentId" class="text--white" @click="deleteStudent">YES</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -24,11 +24,23 @@
 
 <script>
 export default {
+  name: "DeleteStudentDialog",
+  props: {
+    studentId: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       dialog: false
     };
+  },
+  methods: {
+    deleteStudent() {
+      let targetId = event.currentTarget.id;
+      console.log(targetId);
+    }
   }
 };
-
 </script>

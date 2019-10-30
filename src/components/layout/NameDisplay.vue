@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  name: "NameDisplay",
   props: {
     classRoster: {
       type: Array,

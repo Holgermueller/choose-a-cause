@@ -39,6 +39,7 @@
 import db from "../firebase/firebaseInit";
 
 export default {
+  name: "AddStudentDialog",
   props: {
     id: {
       type: String,

@@ -41,6 +41,7 @@
 import db from "../firebase/firebaseInit";
 
 export default {
+  name: "AddClassDialog",
   data() {
     return {
       dialog: false,

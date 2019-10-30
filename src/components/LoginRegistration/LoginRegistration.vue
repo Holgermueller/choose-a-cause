@@ -36,6 +36,7 @@ import RegistrationForm from "./RegistrationForm";
 import LoginForm from "./LoginForm";
 
 export default {
+  name: "LoginRegisterForms",
   components: {
     RegistrationForm,
     LoginForm

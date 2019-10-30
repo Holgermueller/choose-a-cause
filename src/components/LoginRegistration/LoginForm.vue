@@ -39,6 +39,7 @@
 import db from "../firebase/firebaseInit";
 
 export default {
+  name: "LoginForm",
   data() {
     return {
       usernameOrEmail: null,

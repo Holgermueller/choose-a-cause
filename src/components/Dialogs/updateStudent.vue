@@ -21,6 +21,7 @@
 
 <script>
 export default {
+  name:"UpdateStudentDialog",
   date() {
     return {
       dialog: false

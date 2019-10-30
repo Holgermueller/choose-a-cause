@@ -11,7 +11,7 @@
         class="single-card"
         v-for="(single_class, index) in classList"
         :key="single_class.id"
-        :courseName="single_class.courseName"
+        :CourseName="single_class.courseName"
         :id="single_class.id"
         :classList="classList"
         :index="index"

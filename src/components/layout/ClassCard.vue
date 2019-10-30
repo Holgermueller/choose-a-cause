@@ -2,12 +2,12 @@
   <div>
     <v-hover id="id" v-slot:default="{hover}">
       <v-card :elevation="hover?12:2">
-        <h1 class="course-name">{{courseName}}</h1>
+        <h1 class="course-name">{{CourseName}}</h1>
         <v-card-actions>
-          <DeleteCourse :id="id" :courseName="courseName" :index="index" :classList="classList" />
+          <DeleteCourse :id="id" :CourseName="CourseName" :index="index" :classList="classList" />
           <v-spacer></v-spacer>
 
-          <router-link :to="{name: 'singleClass', params: {courseName: courseName, id:id}}">
+          <router-link :to="{name: 'singleClass', params: {CourseName: CourseName, id:id}}">
             <v-btn color="primary" @click="goToRoster">See roster</v-btn>
           </router-link>
         </v-card-actions>
@@ -21,12 +21,13 @@ import db from "../firebase/firebaseInit";
 import DeleteCourse from "../Dialogs/deleteCourse";
 
 export default {
+  name: "ClassCard",
   components: { DeleteCourse },
   data() {
     return {};
   },
   props: {
-    courseName: {
+    CourseName: {
       type: String,
       required: true
     },

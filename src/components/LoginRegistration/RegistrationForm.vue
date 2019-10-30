@@ -55,6 +55,7 @@
 import db from "../firebase/firebaseInit";
 
 export default {
+  name: "RegistrationForm",
   data() {
     return {
       username: null,

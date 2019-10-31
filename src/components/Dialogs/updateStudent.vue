@@ -12,7 +12,7 @@
         <v-card-actions>
           <v-btn color="red" class="text--white" @click="dialog = false">cancel</v-btn>
           <v-spacer></v-spacer>
-          <v-btn>update</v-btn>
+          <v-btn @click="updateStudentInfo()">update</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -26,6 +26,11 @@ export default {
     return {
       dialog: false
     };
+  },
+  methods: {
+    updateStudentInfo() {
+      console.log("click")
+    }
   }
 };
 </script>

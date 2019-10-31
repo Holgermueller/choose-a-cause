@@ -4,14 +4,14 @@
       <v-expansion-panels inset>
         <v-expansion-panel>
           <v-expansion-panel-header :elevation="hover?12:2">
-            <h1 class="student-name">{{firstname}} {{studentId}}</h1>
+            <h1 class="student-name">{{firstname}}</h1>
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-card>
               <v-card-actions>
-                <DeleteStudentDialog :id="id" />
+                <DeleteStudentDialog :studentId="studentId" />
                 <v-spacer></v-spacer>
-                <UpdateStudentDialog :id="id" />
+                <UpdateStudentDialog :studentId="studentId" />
               </v-card-actions>
             </v-card>
           </v-expansion-panel-content>

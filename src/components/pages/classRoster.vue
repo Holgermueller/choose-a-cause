@@ -1,6 +1,6 @@
 <template>
   <div id="roster">
-    <h1 class="course-name-display">{{CourseName}} Roster:</h1>
+    <h1 class="course-name-display" :title="CourseName">{{CourseName}} Roster:</h1>
     <p>{{id}}</p>
 
     <div class="name-display-div">
@@ -25,10 +25,10 @@
             <RosterCard
               class="roster-card"
               v-for="(single_student, index) in classRoster"
-              :key="single_student.id"
+              :key="single_student.studentId"
               :firstname="single_student.firstName"
               :index="index"
-              :studentId="single_student.id"
+              :studentId="single_student.studentId"
             />
           </div>
         </v-expansion-panel-content>
@@ -52,7 +52,8 @@ export default {
   },
   data() {
     return {
-      classRoster: []
+      classRoster: [],
+      CourseName: this.$route.params.CourseName
     };
   },
 
@@ -60,11 +61,11 @@ export default {
     id: {
       type: String,
       required: true
-    },
-    CourseName: {
-      type: String,
-      required: true
     }
+    // CourseName: {
+    //   type: String,
+    //   required: true
+    // }
   },
   created() {
     db.collection("courses")
@@ -83,6 +84,16 @@ export default {
       .catch(err => {
         console.log("Error: " + err);
       });
+  },
+  mounted() {
+    if (localStorage.CourseName) {
+      this.CourseName = localStorage.CourseName;
+    }
+  },
+  watch: {
+    CourseName(newCourseName) {
+      localStorage.CourseName = newCourseName;
+    }
   },
   methods: {}
 };

@@ -1,6 +1,10 @@
 <template>
   <div id="roster">
-    <h1 class="course-name-display" :title="CourseName">{{CourseName}} Roster:</h1>
+    <h1
+      class="course-name-display"
+      id="courseNameDisplay"
+      :title="CourseName"
+    >{{CourseName}} Roster:</h1>
     <p>{{id}}</p>
 
     <div class="name-display-div">
@@ -53,7 +57,8 @@ export default {
   data() {
     return {
       classRoster: [],
-      CourseName: this.$route.params.CourseName
+      CourseName: this.$route.params.CourseName,
+      newCourseName: ""
     };
   },
 
@@ -86,13 +91,19 @@ export default {
       });
   },
   mounted() {
-    if (localStorage.CourseName) {
-      this.CourseName = localStorage.CourseName;
+    console.log("Course page mounted.");
+    if (localStorage.getItem("CourseName")) {
+      this.CourseName = JSON.parse(
+        localStorage.getItem("CourseName", this.CourseName)
+      );
     }
   },
   watch: {
-    CourseName(newCourseName) {
-      localStorage.CourseName = newCourseName;
+    CourseName: {
+      handler() {
+        console.log("Course name changed");
+        localStorage.setItem("CourseName", JSON.stringify(this.CourseName));
+      }
     }
   },
   methods: {}

@@ -1,7 +1,7 @@
 <template>
   <div id="header">
     <v-card class="app-header" tile>
-      <h1 class="app-name">Choose a Student</h1>
+      <h1 class="app-name"><span class="mdi mdi-hand"></span> Choose a Student</h1>
       <div class="nav">
         <router-link to="/">Home</router-link>
         <router-link to="/user/:id">Login</router-link>

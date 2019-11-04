@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import db from "../firebase/firebaseInit";
+
 export default {
   name: "DeleteStudentDialog",
   props: {
@@ -38,8 +40,19 @@ export default {
   },
   methods: {
     deleteStudent() {
-      let targetId = event.currentTarget.id;
+      let targetId = event.currentTarget.studentId;
       console.log(targetId);
+      db.collection("courses")
+        .doc(this.id)
+        .collection("roster")
+        .doc(targetId)
+        .delete()
+        .then(() => {
+          console.log("Student deleted");
+        })
+        .catch(err => {
+          console.error("Error removing document: " + err);
+        });
     }
   }
 };

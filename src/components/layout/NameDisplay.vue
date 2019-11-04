@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import db from "../firebase/firebaseInit";
+
 export default {
   name: "NameDisplay",
   props: {

@@ -11,7 +11,7 @@
               <v-card-actions>
                 <DeleteStudentDialog :studentId="studentId" />
                 <v-spacer></v-spacer>
-                <UpdateStudentDialog :studentId="studentId" />
+                <UpdateStudentDialog :studentId="studentId" :index="index" :firstname="firstname" />
               </v-card-actions>
             </v-card>
           </v-expansion-panel-content>
@@ -49,6 +49,10 @@ export default {
     // },
     studentId: {
       type: String,
+      required: true
+    },
+    index: {
+      type: Number,
       required: true
     }
   },

@@ -15,7 +15,7 @@
         <v-card-actions>
           <v-btn color="red" class="text--white" @click="dialog = false">NO</v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" :id="studentId" class="text--white" @click="deleteStudent">YES</v-btn>
+          <v-btn color="primary" :id="studentId" class="text--white" @click="deleteStudent(index)">YES</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -30,6 +30,10 @@ export default {
   props: {
     studentId: {
       type: String,
+      required: true
+    },
+    index: {
+      type: Number,
       required: true
     }
   },

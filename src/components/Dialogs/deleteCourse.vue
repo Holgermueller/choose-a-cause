@@ -2,7 +2,9 @@
   <div id="deleteDialog">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{on}">
-        <v-btn color="red" v-on="on">Delete</v-btn>
+        <v-btn color="red" v-on="on">
+          <span class="mdi mdi-trash-can-outline"></span>Delete
+        </v-btn>
       </template>
 
       <v-card class="delete-class-dialog">
@@ -13,9 +15,13 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="red" @click="dialog = false">cancel</v-btn>
+          <v-btn color="red" @click="dialog = false" class="text--white">
+            <span class="mdi mdi-cancel"></span> cancel
+          </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" :id="id" @click="deleteCourse(index)">Yes</v-btn>
+          <v-btn color="primary" :id="id" @click="deleteCourse(index)">
+            <span class="mdi mdi-check-bold"></span> Yes
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

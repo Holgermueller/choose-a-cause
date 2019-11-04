@@ -2,7 +2,9 @@
   <div data-app id="addClassForm">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{on}">
-        <v-btn block class="button" color="green" dark v-on="on">Add A Class</v-btn>
+        <v-btn block class="button" color="green" dark v-on="on">
+          <span class="mdi mdi-plus-thick"></span> Add A Class
+        </v-btn>
       </template>
 
       <v-card class="add-class-dialog">
@@ -28,9 +30,11 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="red" @click="dialog = false">Cancel</v-btn>
+          <v-btn color="red" @click="dialog = false">
+            <span class="mdi mdi-cancel"></span> Cancel
+          </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue" @click="addClass">Submit</v-btn>
+          <v-btn color="blue" @click="addClass"><span class="mdi mdi-check-bold"></span> Submit</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

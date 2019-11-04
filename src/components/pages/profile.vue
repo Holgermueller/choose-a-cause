@@ -1,10 +1,14 @@
 <template>
   <div id="profile">
+    <div id="profileHeader">
+      <h1><span class="mdi mdi-account-circle"></span> Hello, Professor {name goes here}</h1>
+    </div>
+
     <div class="buttons-div">
       <AddClassDialog :classList="classList" />
     </div>
 
-    <h1 class="sub-header">Your classes:</h1>
+    <h1 class="sub-header">Here are your classes:</h1>
 
     <div class="courses-display">
       <ClassCard
@@ -57,6 +61,11 @@ export default {
 </script>
 
 <style scoped>
+#profileHeader {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  text-align: center;
+}
 .sub-header {
   text-align: center;
 }

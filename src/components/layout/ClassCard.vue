@@ -8,7 +8,9 @@
           <v-spacer></v-spacer>
 
           <router-link :to="{name: 'singleClass', params: {CourseName: CourseName, id:id}}">
-            <v-btn color="primary" @click="goToRoster">See roster</v-btn>
+            <v-btn color="primary" @click="goToRoster">
+              <span class="mdi mdi-account-group"></span> See roster
+            </v-btn>
           </router-link>
         </v-card-actions>
       </v-card>

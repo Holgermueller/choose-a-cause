@@ -17,7 +17,7 @@
 
     <div class="back-button">
       <router-link to="/user/:id">
-        <v-btn color="primary" block>Back to dashboard</v-btn>
+        <v-btn color="primary" block><span class="mdi mdi-view-dashboard"></span> Back to dashboard</v-btn>
       </router-link>
     </div>
 
@@ -103,7 +103,8 @@ export default {
       handler() {
         console.log("Course name changed");
         localStorage.setItem("CourseName", JSON.stringify(this.CourseName));
-      }
+      },
+      deep: true
     }
   },
   methods: {}

@@ -33,6 +33,7 @@
               :firstname="single_student.firstName"
               :index="index"
               :studentId="single_student.studentId"
+              :classRoster="classRoster"
             />
           </div>
         </v-expansion-panel-content>

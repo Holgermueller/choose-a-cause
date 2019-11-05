@@ -35,6 +35,10 @@ export default {
     index: {
       type: Number,
       required: true
+    },
+    classRoster: {
+      type: Array,
+      required: true
     }
   },
   data() {
@@ -43,7 +47,9 @@ export default {
     };
   },
   methods: {
-    deleteStudent() {
+    deleteStudent(index) {
+      this.classRoster.splice(index, 1);
+
       let targetId = event.currentTarget.studentId;
       console.log(targetId);
       db.collection("courses")

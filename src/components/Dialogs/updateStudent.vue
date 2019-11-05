@@ -6,7 +6,7 @@
       </template>
 
       <v-card>
-        <v-card-title>Update {{firstname}} info:</v-card-title>
+        <v-card-title>Update info for {{firstname}}:</v-card-title>
         <v-card-text>
           <v-form ref="form">
             <v-container fluid>

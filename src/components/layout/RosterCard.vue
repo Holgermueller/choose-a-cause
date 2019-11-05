@@ -1,23 +1,21 @@
 <template>
   <div>
-    <v-hover id="id" v-slot:default="{hover}">
-      <v-expansion-panels inset>
-        <v-expansion-panel>
-          <v-expansion-panel-header :elevation="hover?12:2">
-            <h1 class="student-name">{{firstname}}</h1>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-card>
-              <v-card-actions>
-                <DeleteStudentDialog :studentId="studentId" />
-                <v-spacer></v-spacer>
-                <UpdateStudentDialog :studentId="studentId" :index="index" :firstname="firstname" />
-              </v-card-actions>
-            </v-card>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
-    </v-hover>
+    <v-expansion-panels inset>
+      <v-expansion-panel>
+        <v-expansion-panel-header>
+          <h1 class="student-name">{{firstname}}</h1>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <v-card>
+            <v-card-actions>
+              <DeleteStudentDialog :classRoster="classRoster" :studentId="studentId" />
+              <v-spacer></v-spacer>
+              <UpdateStudentDialog :studentId="studentId" :index="index" :firstname="firstname" />
+            </v-card-actions>
+          </v-card>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </div>
 </template>
 
@@ -53,6 +51,10 @@ export default {
     },
     index: {
       type: Number,
+      required: true
+    },
+    classRoster: {
+      type: Array,
       required: true
     }
   },

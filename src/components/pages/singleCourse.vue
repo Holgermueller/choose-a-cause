@@ -5,19 +5,21 @@
       id="courseNameDisplay"
       :title="CourseName"
     >{{CourseName}} Roster:</h1>
-    <p>{{id}}</p>
+    <p>{{courseId}}</p>
 
     <div class="name-display-div">
-      <NameDisplay :classRoster="classRoster" />
+      <NameDisplay :courseRoster="courseRoster" />
     </div>
 
     <div class="add-student-div">
-      <AddStudentDialog :id="id" :classRoster="classRoster" />
+      <AddStudentDialog :courseId="courseId" :courseRoster="courseRoster" />
     </div>
 
     <div class="back-button">
-      <router-link to="/user/:id">
-        <v-btn color="primary" block><span class="mdi mdi-view-dashboard"></span> Back to dashboard</v-btn>
+      <router-link to="/user/:userId">
+        <v-btn color="primary" block>
+          <span class="mdi mdi-view-dashboard"></span> Back to dashboard
+        </v-btn>
       </router-link>
     </div>
 
@@ -28,12 +30,12 @@
           <div class="roster-display">
             <RosterCard
               class="roster-card"
-              v-for="(single_student, index) in classRoster"
+              v-for="(single_student, index) in courseRoster"
               :key="single_student.studentId"
               :firstname="single_student.firstName"
               :index="index"
               :studentId="single_student.studentId"
-              :classRoster="classRoster"
+              :courseRoster="courseRoster"
             />
           </div>
         </v-expansion-panel-content>
@@ -57,7 +59,7 @@ export default {
   },
   data() {
     return {
-      classRoster: [],
+      courseRoster: [],
       CourseName: this.$route.params.CourseName,
       newCourseName: ""
     };
@@ -84,7 +86,7 @@ export default {
             studentId: doc.id,
             firstName: doc.data().firstname
           };
-          this.classRoster.push(data);
+          this.courseRoster.push(data);
         });
       })
       .catch(err => {

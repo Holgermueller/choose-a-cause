@@ -1,5 +1,5 @@
 <template>
-  <div id="deleteDialog">
+  <div id="deleteCourseDialog">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{on}">
         <v-btn color="red" v-on="on">
@@ -19,7 +19,7 @@
             <span class="mdi mdi-cancel"></span> cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" :id="id" @click="deleteCourse(index)">
+          <v-btn color="primary" :courseId="courseId" @click="deleteCourse(index)">
             <span class="mdi mdi-check-bold"></span> Yes
           </v-btn>
         </v-card-actions>
@@ -39,7 +39,7 @@ export default {
     };
   },
   props: {
-    id: {
+    courseId: {
       type: String,
       required: true
     },
@@ -60,7 +60,7 @@ export default {
     deleteCourse(index) {
       this.classList.splice(index, 1);
 
-      let targetId = event.currentTarget.id;
+      let targetId = event.currentTarget.courseId;
 
       db.collection("courses")
         .doc(targetId)

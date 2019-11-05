@@ -8,7 +8,11 @@
         <v-expansion-panel-content>
           <v-card>
             <v-card-actions>
-              <DeleteStudentDialog :classRoster="classRoster" :studentId="studentId" />
+              <DeleteStudentDialog
+                :classRoster="classRoster"
+                :studentId="studentId"
+                :courseID="id"
+              />
               <v-spacer></v-spacer>
               <UpdateStudentDialog :studentId="studentId" :index="index" :firstname="firstname" />
             </v-card-actions>
@@ -55,6 +59,10 @@ export default {
     },
     classRoster: {
       type: Array,
+      required: true
+    },
+    id: {
+      type: String,
       required: true
     }
   },

@@ -5,19 +5,19 @@
     </div>
 
     <div class="buttons-div">
-      <AddClassDialog :classList="classList" />
+      <AddCourseDialoig :classList="classList" />
     </div>
 
     <h1 class="sub-header">Here are your classes:</h1>
 
     <div class="courses-display">
-      <ClassCard
+      <CourseCard
         class="single-card"
-        v-for="(single_class, index) in classList"
-        :key="single_class.id"
-        :CourseName="single_class.courseName"
-        :id="single_class.id"
-        :classList="classList"
+        v-for="(single_course, index) in CourseList"
+        :key="single_course.id"
+        :CourseName="single_course.courseName"
+        :courseId="single_course.id"
+        :CourseList="CourseList"
         :index="index"
       />
     </div>
@@ -26,18 +26,18 @@
 
 <script>
 import db from "../firebase/firebaseInit";
-import ClassCard from "../layout/ClassCard";
-import AddClassDialog from "../Dialogs/addAClass";
+import CourseCard from "../layout/CourseCard";
+import AddCourseDialoig from "../Dialogs/addACourse";
 
 export default {
   name: "Profile",
   components: {
-    ClassCard,
-    AddClassDialog
+    CourseCard,
+    AddCourseDialoig
   },
   data() {
     return {
-      classList: []
+      CourseList: []
     };
   },
   created() {
@@ -46,10 +46,10 @@ export default {
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           const data = {
-            id: doc.id,
+            courseId: doc.id,
             courseName: doc.data().courseName
           };
-          this.classList.push(data);
+          this.CourseList.push(data);
         });
       })
       .catch(err => {

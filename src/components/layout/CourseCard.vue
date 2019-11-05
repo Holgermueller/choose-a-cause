@@ -1,13 +1,20 @@
 <template>
   <div>
-    <v-hover id="id" v-slot:default="{hover}">
+    <v-hover id="courseId" v-slot:default="{hover}">
       <v-card :elevation="hover?12:2">
         <h1 class="course-name">{{CourseName}}</h1>
         <v-card-actions>
-          <DeleteCourse :id="id" :CourseName="CourseName" :index="index" :classList="classList" />
+          <DeleteCourse
+            :courseId="courseId"
+            :CourseName="CourseName"
+            :index="index"
+            :CourseList="CourseList"
+          />
           <v-spacer></v-spacer>
 
-          <router-link :to="{name: 'singleClass', params: {CourseName: CourseName, id:id}}">
+          <router-link
+            :to="{name: 'singleClass', params: {CourseName: CourseName, courseId:courseId}}"
+          >
             <v-btn color="primary" @click="goToRoster">
               <span class="mdi mdi-account-group"></span> See roster
             </v-btn>
@@ -23,7 +30,7 @@ import db from "../firebase/firebaseInit";
 import DeleteCourse from "../Dialogs/deleteCourse";
 
 export default {
-  name: "ClassCard",
+  name: "CourseCard",
   components: { DeleteCourse },
   data() {
     return {};
@@ -33,11 +40,11 @@ export default {
       type: String,
       required: true
     },
-    id: {
+    courseId: {
       type: String,
       required: true
     },
-    classList: {
+    CourseList: {
       type: Array,
       required: true
     },
@@ -48,7 +55,7 @@ export default {
   },
   methods: {
     goToRoster() {
-      let targetId = event.currentTarget.id;
+      let targetId = event.currentTarget.courseId;
     }
   }
 };

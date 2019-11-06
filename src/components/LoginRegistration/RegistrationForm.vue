@@ -104,6 +104,7 @@ export default {
         this.errors.push("Passwords do not match.");
       } else {
         this.registerUser();
+        this.clearRegistrationForm();
       }
     },
     checkValidEmail(email) {

@@ -11,7 +11,7 @@
               <DeleteStudentDialog
                 :classRoster="classRoster"
                 :studentId="studentId"
-                :courseID="id"
+                :CourseId="id"
               />
               <v-spacer></v-spacer>
               <UpdateStudentDialog :studentId="studentId" :index="index" :firstname="firstname" />

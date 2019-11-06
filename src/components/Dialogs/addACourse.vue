@@ -64,7 +64,7 @@ export default {
       let course_name = this.course_name;
 
       db.collection("courses")
-        .add({ courseName: course_name })
+        .add({ CourseName: course_name })
         .then(() => {
           console.log("Class addition successful");
         })
@@ -73,9 +73,9 @@ export default {
         });
       this.clearField();
       this.dialog = false;
-      this.updateClassList();
+      this.updateCourseList();
     },
-    updateClassList() {
+    updateCourseList() {
       let CourseList = this.CourseList;
 
       CourseList.length = 0;
@@ -85,8 +85,8 @@ export default {
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
             const data = {
-              courseId: doc.id,
-              courseName: doc.data().courseName
+              CourseId: doc.id,
+              CourseName: doc.data().CourseName
             };
             this.CourseList.push(data);
           });

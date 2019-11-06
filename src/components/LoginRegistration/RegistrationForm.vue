@@ -9,9 +9,11 @@
           outlined
         ></v-text-field>
       </v-flex>
+
       <v-flex xs12 sm12 md12 lg12 xl12>
         <v-text-field prepend-icon="mdi-email" v-model="email" label="E-mail*" outlined></v-text-field>
       </v-flex>
+
       <v-flex xs12 sm12 md12 lg12 xl12>
         <v-text-field
           v-model="password"
@@ -25,6 +27,7 @@
           @click:append="show_password = !show_password"
         ></v-text-field>
       </v-flex>
+
       <v-flex xs12 sm12 md12 lg12 xl12>
         <v-text-field
           v-model="confirm_password"
@@ -38,15 +41,25 @@
       </v-flex>
     </v-form>
     <small>* Indicates required field</small>
+
+    <section id="registrationErrors" v-if="errors.length">
+      <b>Please fix the following error(s):</b>
+      <ul class="errors-list">
+        <li v-for="(error, index) in errors" :key="index">{{error}}</li>
+      </ul>
+    </section>
+
     <v-divider></v-divider>
     <v-card-actions>
       <v-btn color="red" @click="clearRegistrationForm" class="white--text">
         <span class="mdi mdi-close-circle white--text"></span>
-        Cancel</v-btn>
+        Cancel
+      </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="blue" @click="getRegistrationData" class="white--text">
+      <v-btn color="blue" @click="checkRegistrationData" class="white--text">
         <span class="mdi mdi-check-bold white--text"></span>
-        Register</v-btn>
+        Register
+      </v-btn>
     </v-card-actions>
   </div>
 </template>
@@ -64,12 +77,48 @@ export default {
       confirm_password: null,
       show_password: false,
       show_confirm_password: false,
-      valid: true
+      valid: true,
+      errors: []
     };
   },
   methods: {
-    getRegistrationData() {
-      console.log("click");
+    checkRegistrationData() {
+      this.errors = [];
+
+      if (
+        !this.username &&
+        !this.email &&
+        !this.password &&
+        !this.confirm_password
+      ) {
+        this.errors.push("Please fill out all of the fields.");
+      } else if (!this.username) {
+        this.errors.push("Username required.");
+      } else if (!this.email) {
+        this.errors.push("Email required.");
+      } else if (!this.password) {
+        this.errors.push("Password required.");
+      } else if (!this.confirm_password) {
+        this.errors.push("Password confirmation required.");
+      } else if (this.password !== this.confirm_password) {
+        this.errors.push("Passwords do not match.");
+      } else {
+        this.registerUser();
+      }
+    },
+    checkValidEmail(email) {
+      const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      return regex.test(email);
+    },
+    checkPassword() {},
+    registerUser() {
+      const newUser = {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        confirm_password: this.confirm_password
+      };
+      console.log(newUser);
     },
     clearRegistrationForm() {
       this.$refs.form.reset();
@@ -79,4 +128,12 @@ export default {
 </script>
 
 <style scoped>
+#registrationErrors {
+  margin: 2% 0;
+  color: red;
+  text-align: center;
+}
+.errors-list {
+  list-style: none;
+}
 </style>

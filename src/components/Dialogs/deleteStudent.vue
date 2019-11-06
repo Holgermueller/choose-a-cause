@@ -15,7 +15,7 @@
         <v-card-actions>
           <v-btn color="red" class="text--white" @click="dialog = false">NO</v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" :courseId="id" :id="studentId" class="text--white" @click="deleteStudent(index)">YES</v-btn>
+          <v-btn color="primary" :CourseId="id" :id="studentId" class="text--white" @click="deleteStudent(index)">YES</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -40,7 +40,7 @@ export default {
       type: Array,
       required: true
     },
-    courseId: {
+    CourseId: {
       type: String,
       required: true
     }
@@ -56,8 +56,8 @@ export default {
       console.log(index)
 
       let targetId = event.currentTarget.id;
-      let courseId = event.currentTarget.courseId;
-      console.log(courseId)
+      let CourseId = event.currentTarget.CourseId;
+      console.log(CourseId)
       console.log(targetId);
       db.collection("courses")
         .doc(this.id)

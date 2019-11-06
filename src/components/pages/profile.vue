@@ -5,7 +5,7 @@
     </div>
 
     <div class="buttons-div">
-      <AddCourseDialoig :classList="classList" />
+      <AddCourseDialoig :CourseList="CourseList" />
     </div>
 
     <h1 class="sub-header">Here are your classes:</h1>
@@ -15,8 +15,8 @@
         class="single-card"
         v-for="(single_course, index) in CourseList"
         :key="single_course.id"
-        :CourseName="single_course.courseName"
-        :courseId="single_course.id"
+        :CourseName="single_course.CourseName"
+        :CourseId="single_course.id"
         :CourseList="CourseList"
         :index="index"
       />
@@ -46,8 +46,8 @@ export default {
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           const data = {
-            courseId: doc.id,
-            courseName: doc.data().courseName
+            CourseId: doc.id,
+            CourseName: doc.data().courseName
           };
           this.CourseList.push(data);
         });

@@ -19,7 +19,7 @@
             <span class="mdi mdi-cancel"></span> cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" :courseId="courseId" @click="deleteCourse(index)">
+          <v-btn color="primary" :CourseId="CourseId" @click="deleteCourse(index)">
             <span class="mdi mdi-check-bold"></span> Yes
           </v-btn>
         </v-card-actions>
@@ -39,7 +39,7 @@ export default {
     };
   },
   props: {
-    courseId: {
+    CourseId: {
       type: String,
       required: true
     },
@@ -51,16 +51,16 @@ export default {
       type: Number,
       required: true
     },
-    classList: {
+    CourseList: {
       type: Array,
       required: true
     }
   },
   methods: {
     deleteCourse(index) {
-      this.classList.splice(index, 1);
+      this.CourseList.splice(index, 1);
 
-      let targetId = event.currentTarget.courseId;
+      let targetId = event.currentTarget.CourseId;
 
       db.collection("courses")
         .doc(targetId)

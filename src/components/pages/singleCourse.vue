@@ -2,17 +2,17 @@
   <div id="roster">
     <h1
       class="course-name-display"
-      id="courseNameDisplay"
+      id="CourseNameDisplay"
       :title="CourseName"
     >{{CourseName}} Roster:</h1>
-    <p>{{courseId}}</p>
+    <p>{{CourseId}}</p>
 
     <div class="name-display-div">
-      <NameDisplay :courseRoster="courseRoster" />
+      <NameDisplay :CourseRoster="CourseRoster" />
     </div>
 
     <div class="add-student-div">
-      <AddStudentDialog :courseId="courseId" :courseRoster="courseRoster" />
+      <AddStudentDialog :CourseId="CourseId" :CourseRoster="CourseRoster" />
     </div>
 
     <div class="back-button">
@@ -30,12 +30,12 @@
           <div class="roster-display">
             <RosterCard
               class="roster-card"
-              v-for="(single_student, index) in courseRoster"
+              v-for="(single_student, index) in CourseRoster"
               :key="single_student.studentId"
               :firstname="single_student.firstName"
               :index="index"
               :studentId="single_student.studentId"
-              :courseRoster="courseRoster"
+              :CourseRoster="CourseRoster"
             />
           </div>
         </v-expansion-panel-content>
@@ -59,7 +59,7 @@ export default {
   },
   data() {
     return {
-      courseRoster: [],
+      CourseRoster: [],
       CourseName: this.$route.params.CourseName,
       newCourseName: ""
     };
@@ -86,7 +86,7 @@ export default {
             studentId: doc.id,
             firstName: doc.data().firstname
           };
-          this.courseRoster.push(data);
+          this.CourseRoster.push(data);
         });
       })
       .catch(err => {

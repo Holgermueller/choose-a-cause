@@ -22,7 +22,7 @@
           :type="show_password ? 'text' : 'password'"
           prepend-icon="mdi-lock"
           :append-icon="show_password ? 'mdi-eye' : 'mdi-eye-off'"
-          hint="Must have at least one capital letter, one symbol, and one number."
+          hint="Must have at least one capital letter, one symbol, one number, and at least 8 characters."
           persistent-hint
           @click:append="show_password = !show_password"
         ></v-text-field>
@@ -56,7 +56,7 @@
         Cancel
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="blue" @click="validate" class="white--text">
+      <v-btn color="blue" @click="checkRegistrationData" class="white--text">
         <span class="mdi mdi-check-bold white--text"></span>
         Register
       </v-btn>
@@ -96,8 +96,12 @@ export default {
         this.errors.push("Username required.");
       } else if (!this.email) {
         this.errors.push("Email required.");
+      } else if (!this.checkValidEmail(this.email)) {
+        this.errors.push("Invalid email.");
       } else if (!this.password) {
         this.errors.push("Password required.");
+      } else if (!this.isPasswordValid(this.password)) {
+        this.errors.push("Password does not meet criteria.");
       } else if (!this.confirm_password) {
         this.errors.push("Password confirmation required.");
       } else if (this.password !== this.confirm_password) {
@@ -107,21 +111,21 @@ export default {
         this.clearRegistrationForm();
       }
     },
+
     checkValidEmail(email) {
       const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       return regex.test(this.email);
     },
-    validate() {
-      this.errors = [];
 
-      if (this.checkValidEmail(this.email)) {
-        console.log("Valid!")
-      } else {
-        this.errors.push("Invalid email.");
-        console.log("Invalid!");
-      }
+    checkEmailExistsInDatabase(email) {},
+
+    isPasswordValid(password) {
+      const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+      return regex.test(this.password);
     },
-    checkPassword() {},
+
+    checkPasswordExistsInDatabase(password) {},
+
     registerUser() {
       const newUser = {
         username: this.username,
@@ -131,6 +135,7 @@ export default {
       };
       console.log(newUser);
     },
+
     clearRegistrationForm() {
       this.$refs.form.reset();
     }

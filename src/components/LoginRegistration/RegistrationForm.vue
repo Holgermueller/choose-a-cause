@@ -56,7 +56,7 @@
         Cancel
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="blue" @click="checkRegistrationData" class="white--text">
+      <v-btn color="blue" @click="validate" class="white--text">
         <span class="mdi mdi-check-bold white--text"></span>
         Register
       </v-btn>
@@ -109,7 +109,17 @@ export default {
     },
     checkValidEmail(email) {
       const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      return regex.test(email);
+      return regex.test(this.email);
+    },
+    validate() {
+      this.errors = [];
+
+      if (this.checkValidEmail(this.email)) {
+        console.log("Valid!")
+      } else {
+        this.errors.push("Invalid email.");
+        console.log("Invalid!");
+      }
     },
     checkPassword() {},
     registerUser() {

@@ -56,7 +56,7 @@
         Cancel
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="blue" @click="checkRegistrationData" class="white--text">
+      <v-btn color="blue" @click.prevent="checkRegistrationData" class="white--text">
         <span class="mdi mdi-check-bold white--text"></span>
         Register
       </v-btn>
@@ -66,6 +66,7 @@
 
 <script>
 import db from "../firebase/firebaseInit";
+import firebase from "firebase";
 
 export default {
   name: "RegistrationForm",
@@ -134,6 +135,16 @@ export default {
         confirm_password: this.confirm_password
       };
       console.log(newUser);
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(user => {
+          alert(`Account created for ${user.email}`);
+          //this.$router.push('/');
+        })
+        .catch(err => {
+          console.log("Error: " + err.message);
+        });
     },
 
     clearRegistrationForm() {

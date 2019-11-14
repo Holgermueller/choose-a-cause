@@ -14,7 +14,7 @@
           <v-spacer></v-spacer>
 
           <router-link
-            :to="{name: 'singleCourse', params: {CourseName: CourseName, CourseId:CourseId}}"
+            :to="{name: 'SingleCourse', params: {CourseName: CourseName, CourseId:CourseId}}"
           >
             <v-btn color="primary" @click="goToRoster">
               <span class="mdi mdi-account-group"></span> See roster

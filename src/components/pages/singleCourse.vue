@@ -51,7 +51,7 @@ import AddStudentDialog from "../Dialogs/addAStudent";
 import NameDisplay from "../layout/NameDisplay";
 
 export default {
-  name: "singleClass",
+  name: "SingleClass",
   components: {
     RosterCard,
     AddStudentDialog,

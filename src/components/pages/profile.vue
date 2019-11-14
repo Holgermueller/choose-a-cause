@@ -5,7 +5,7 @@
     </div>
 
     <div class="buttons-div">
-      <AddCourseDialoig :CourseList="CourseList" />
+      <AddCourseDialog :CourseList="CourseList" />
     </div>
 
     <h1 class="sub-header">Here are your classes:</h1>
@@ -27,13 +27,13 @@
 <script>
 import db from "../firebase/firebaseInit";
 import CourseCard from "../layout/CourseCard";
-import AddCourseDialoig from "../Dialogs/addACourse";
+import AddCourseDialog from "../Dialogs/addACourse";
 
 export default {
   name: "Profile",
   components: {
     CourseCard,
-    AddCourseDialoig
+    AddCourseDialog
   },
   data() {
     return {

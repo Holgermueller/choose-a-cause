@@ -19,7 +19,7 @@
             <span class="mdi mdi-cancel"></span> cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" :CourseId="CourseId" @click="deleteCourse(index)">
+          <v-btn color="primary"  @click="deleteCourse(index)">
             <span class="mdi mdi-check-bold"></span> Yes
           </v-btn>
         </v-card-actions>
@@ -39,10 +39,10 @@ export default {
     };
   },
   props: {
-    CourseId: {
-      type: String,
-      required: true
-    },
+    // CourseId: {
+    //   type: String,
+    //   required: true
+    // },
     CourseName: {
       type: String,
       required: true

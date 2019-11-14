@@ -14,7 +14,7 @@ export default new VueRouter({
     { path: "/about", name: "About", component: About },
     { path: "/user/:userId", name: "Profile", component: Profile, props: true },
     {
-      path: "/singleCourse/:courseId",
+      path: "/singleCourse/:CourseId",
       name: "SingleCourse",
       component: SingleCourse,
       props: true

@@ -1,7 +1,10 @@
 <template>
   <div id="profile">
     <div id="profileHeader">
-      <h1><span class="mdi mdi-account-circle"></span> Hello, Professor {name goes here}</h1>
+      <h1>
+        <span class="mdi mdi-account-circle"></span> Hello, Professor {name goes
+        here}
+      </h1>
     </div>
 
     <div class="buttons-div">
@@ -14,9 +17,9 @@
       <CourseCard
         class="single-card"
         v-for="(single_course, index) in CourseList"
-        :key="single_course.id"
+        :key="single_course.CourseId"
         :CourseName="single_course.CourseName"
-        :CourseId="single_course.id"
+        :CourseId="single_course.CourseId"
         :CourseList="CourseList"
         :index="index"
       />

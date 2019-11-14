@@ -3,7 +3,7 @@
     <v-hover id="CourseId" v-slot:default="{hover}">
       <v-card :elevation="hover?12:2">
         <h1 class="course-name">{{CourseName}}</h1>
-        <p>{{CourseId}}</p>
+        <p>iD: {{CourseId}}</p>
         <v-card-actions>
           <DeleteCourse
             :CourseId="CourseId"

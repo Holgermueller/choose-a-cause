@@ -1,9 +1,8 @@
 <template>
   <div>
-    <v-hover id="CourseId" v-slot:default="{hover}">
-      <v-card :elevation="hover?12:2">
-        <h1 class="course-name">{{CourseName}}</h1>
-        <p>iD: {{CourseId}}</p>
+    <v-hover id="CourseId" v-slot:default="{ hover }">
+      <v-card :elevation="hover ? 12 : 2">
+        <h1 class="course-name">{{ CourseName }}</h1>
         <v-card-actions>
           <DeleteCourse
             :CourseId="CourseId"
@@ -14,7 +13,10 @@
           <v-spacer></v-spacer>
 
           <router-link
-            :to="{name: 'SingleCourse', params: {CourseName: CourseName, CourseId:CourseId}}"
+            :to="{
+              name: 'SingleCourse',
+              params: { CourseName: CourseName, CourseId: CourseId }
+            }"
           >
             <v-btn color="primary" @click="goToRoster">
               <span class="mdi mdi-account-group"></span> See roster

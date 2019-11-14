@@ -51,7 +51,7 @@ import AddStudentDialog from "../Dialogs/addAStudent";
 import NameDisplay from "../layout/NameDisplay";
 
 export default {
-  name: "SingleClass",
+  name: "SingleCourse",
   components: {
     RosterCard,
     AddStudentDialog,
@@ -66,7 +66,7 @@ export default {
   },
 
   props: {
-    courseId: {
+    CourseId: {
       type: String,
       required: true
     }

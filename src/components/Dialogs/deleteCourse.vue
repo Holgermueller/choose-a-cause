@@ -39,10 +39,10 @@ export default {
     };
   },
   props: {
-    // CourseId: {
-    //   type: String,
-    //   required: true
-    // },
+    CourseId: {
+      type: String,
+      required: true
+    },
     CourseName: {
       type: String,
       required: true

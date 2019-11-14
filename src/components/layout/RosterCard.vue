@@ -61,7 +61,7 @@ export default {
       type: Array,
       required: true
     },
-    id: {
+    CourseId: {
       type: String,
       required: true
     }

@@ -1,7 +1,7 @@
 <template>
   <div id="addStudent">
     <v-dialog v-model="dialog" width="500">
-      <template v-slot:activator="{on}">
+      <template v-slot:activator="{ on }">
         <v-btn block class="button" color="green" dark v-on="on">
           <span class="mdi mdi-plus-thick"></span> Add a student
         </v-btn>
@@ -14,13 +14,25 @@
             <v-container fluid>
               <v-layout wrap>
                 <v-flex xs12 sm12 md13 lg12 xl12>
-                  <v-text-field type="text" v-model="firstName" label="First name"></v-text-field>
+                  <v-text-field
+                    type="text"
+                    v-model="firstName"
+                    label="First name"
+                  ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm12 md13 lg12 xl12>
-                  <v-text-field type="text" v-model="last_name" label="Last name"></v-text-field>
+                  <v-text-field
+                    type="text"
+                    v-model="last_name"
+                    label="Last name"
+                  ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm12 md13 lg12 xl12>
-                  <v-text-field type="text" v-model="preferred_name" label="Preferred name"></v-text-field>
+                  <v-text-field
+                    type="text"
+                    v-model="preferred_name"
+                    label="Preferred name"
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -32,7 +44,7 @@
             <span class="mdi mdi-cancel"></span> Cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue" :id="id" @click="submitStudent">
+          <v-btn color="blue" :CourseId="CourseId" @click="submitStudent">
             <span class="mdi mdi-check-bold"></span> Submit
           </v-btn>
         </v-card-actions>
@@ -47,11 +59,11 @@ import db from "../firebase/firebaseInit";
 export default {
   name: "AddStudentDialog",
   props: {
-    id: {
+    CourseId: {
       type: String,
       required: true
     },
-    classRoster: {
+    CourseRoster: {
       type: Array,
       required: true
     }
@@ -72,7 +84,7 @@ export default {
       console.log(firstName);
 
       db.collection("courses")
-        .doc(this.id)
+        .doc(this.CourseId)
         .collection("roster")
         .add({ firstname: firstName })
         .then(() => {
@@ -90,12 +102,12 @@ export default {
       this.$refs.form.reset();
     },
     updateRoster() {
-      let classRoster = this.classRoster;
+      let CourseRoster = this.CourseRoster;
 
-      classRoster.length = 0;
+      CourseRoster.length = 0;
 
       db.collection("courses")
-        .doc(this.id)
+        .doc(this.CourseId)
         .collection("roster")
         .get()
         .then(snapshot => {
@@ -104,7 +116,7 @@ export default {
               studentId: doc.id,
               firstName: doc.data().firstname
             };
-            this.classRoster.push(data);
+            this.CourseRoster.push(data);
           });
         })
         .catch(err => {

@@ -1,7 +1,7 @@
 <template>
   <div id="deleteStudent">
     <v-dialog v-model="dialog" width="500">
-      <template v-slot:activator="{on}">
+      <template v-slot:activator="{ on }">
         <v-btn color="red" class="text--white" v-on="on">Delete Student</v-btn>
       </template>
 
@@ -13,9 +13,17 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="red" class="text--white" @click="dialog = false">NO</v-btn>
+          <v-btn color="red" class="text--white" @click="dialog = false"
+            >NO</v-btn
+          >
           <v-spacer></v-spacer>
-          <v-btn color="primary" :CourseId="id" :id="studentId" class="text--white" @click="deleteStudent(index)">YES</v-btn>
+          <v-btn
+            color="primary"
+            :id="studentId"
+            class="text--white"
+            @click="deleteStudent(index)"
+            >YES</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -36,7 +44,7 @@ export default {
       type: Number,
       required: true
     },
-    classRoster: {
+    CourseRoster: {
       type: Array,
       required: true
     },
@@ -52,15 +60,12 @@ export default {
   },
   methods: {
     deleteStudent(index) {
-      //this.classRoster.splice(index, 1);
-      console.log(index)
+      this.CourseRoster.splice(index, 1);
+      console.log(index);
 
       let targetId = event.currentTarget.id;
-      let CourseId = event.currentTarget.CourseId;
-      console.log(CourseId)
-      console.log(targetId);
       db.collection("courses")
-        .doc(this.id)
+        .doc(this.CourseId)
         .collection("roster")
         .doc(targetId)
         .delete()
@@ -70,6 +75,8 @@ export default {
         .catch(err => {
           console.error("Error removing document: " + err);
         });
+
+        this.dialog = false;
     }
   }
 };

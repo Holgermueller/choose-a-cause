@@ -25,7 +25,7 @@
     <section id="loginErrorDisplay" v-if="errors.length">
       <b>Please correct the following error(s):</b>
       <ul class="errors-list">
-        <li v-for="(error, index) in errors" :key="index">{{error}}</li>
+        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
       </ul>
     </section>
 
@@ -45,6 +45,7 @@
 
 <script>
 import db from "../firebase/firebaseInit";
+import firebase from "firebase/app";
 
 export default {
   name: "LoginForm",
@@ -71,20 +72,19 @@ export default {
         this.checkPasswordValid();
         this.loginUser();
         this.clearLoginForm();
-
       }
     },
     checkUsernameEmailValid() {
-      console.log("Username/email not valid.")
+      console.log("Username/email not valid.");
     },
     checkPasswordValid() {
-      console.log("Password invalid.")
+      console.log("Password invalid.");
     },
     loginUser() {
       const userLoginInfo = {
         usernameOrEmail: this.usernameOrEmail,
         password: this.password
-      }
+      };
       console.log(userLoginInfo);
     },
     clearLoginForm() {

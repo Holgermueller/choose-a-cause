@@ -36,6 +36,7 @@
               :index="index"
               :studentId="single_student.studentId"
               :CourseRoster="CourseRoster"
+              :CourseId="CourseId"
             />
           </div>
         </v-expansion-panel-content>
@@ -77,7 +78,7 @@ export default {
   },
   created() {
     db.collection("courses")
-      .doc(this.id)
+      .doc(this.CourseId)
       .collection("roster")
       .get()
       .then(snapshot => {

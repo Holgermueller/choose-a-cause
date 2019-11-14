@@ -9,9 +9,10 @@
           <v-card>
             <v-card-actions>
               <DeleteStudentDialog
-                :classRoster="classRoster"
+                :CourseRoster="CourseRoster"
                 :studentId="studentId"
-                :CourseId="id"
+                :CourseId="CourseId"
+                :index="index"
               />
               <v-spacer></v-spacer>
               <UpdateStudentDialog :studentId="studentId" :index="index" :firstname="firstname" />
@@ -57,7 +58,7 @@ export default {
       type: Number,
       required: true
     },
-    classRoster: {
+    CourseRoster: {
       type: Array,
       required: true
     },

@@ -98,9 +98,11 @@ export default {
       this.clearForm();
       this.updateRoster();
     },
+
     clearForm() {
       this.$refs.form.reset();
     },
+    
     updateRoster() {
       let CourseRoster = this.CourseRoster;
 

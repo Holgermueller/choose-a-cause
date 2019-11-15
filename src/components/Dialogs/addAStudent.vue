@@ -81,7 +81,6 @@ export default {
       let firstName = this.firstName;
       let lastname = this.last_name;
       let preferredname = this.preferred_name;
-      console.log(firstName);
 
       db.collection("courses")
         .doc(this.CourseId)
@@ -89,20 +88,19 @@ export default {
         .add({ firstname: firstName })
         .then(() => {
           console.log("Student successfully added!");
+          this.dialog = false;
+          this.clearForm();
+          this.updateRoster();
         })
         .catch(err => {
           console.log("An error has occurred: " + err);
         });
-
-      this.dialog = false;
-      this.clearForm();
-      this.updateRoster();
     },
 
     clearForm() {
       this.$refs.form.reset();
     },
-    
+
     updateRoster() {
       let CourseRoster = this.CourseRoster;
 
@@ -116,7 +114,9 @@ export default {
           snapshot.forEach(doc => {
             const data = {
               studentId: doc.id,
-              firstName: doc.data().firstname
+              firstName: doc.data().firstname,
+              lastName: doc.data().lastname,
+              preferredname: doc.data().preferredname
             };
             this.CourseRoster.push(data);
           });

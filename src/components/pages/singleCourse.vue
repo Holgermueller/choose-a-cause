@@ -32,7 +32,9 @@
               class="roster-card"
               v-for="(single_student, index) in CourseRoster"
               :key="single_student.studentId"
-              :firstname="single_student.firstName"
+              :firstName="single_student.firstName"
+              :lastName="single_student.lastName"
+              :preferredName="single_student.preferredName"
               :index="index"
               :studentId="single_student.studentId"
               :CourseRoster="CourseRoster"
@@ -85,8 +87,11 @@ export default {
         snapshot.forEach(doc => {
           const data = {
             studentId: doc.id,
-            firstName: doc.data().firstname
+            firstName: doc.data().firstname,
+            lastName: doc.data().lastname,
+            preferredName: doc.data().preferredname
           };
+          console.log(data);
           this.CourseRoster.push(data);
         });
       })
@@ -94,6 +99,7 @@ export default {
         console.log("Error: " + err);
       });
   },
+
   mounted() {
     console.log("Course page mounted.");
     if (localStorage.getItem("CourseName")) {
@@ -102,6 +108,7 @@ export default {
       );
     }
   },
+
   watch: {
     CourseName: {
       handler() {

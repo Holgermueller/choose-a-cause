@@ -71,12 +71,11 @@ export default {
         .delete()
         .then(() => {
           console.log("Student deleted");
+          this.dialog = false;
         })
         .catch(err => {
           console.error("Error removing document: " + err);
         });
-
-        this.dialog = false;
     }
   }
 };

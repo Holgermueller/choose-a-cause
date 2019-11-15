@@ -3,7 +3,9 @@
     <v-expansion-panels inset>
       <v-expansion-panel>
         <v-expansion-panel-header>
-          <h1 class="student-name">{{ firstname }}</h1>
+          <h1 class="student-name">
+            {{ preferredName }}
+          </h1>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-card>
@@ -19,7 +21,9 @@
                 :studentId="studentId"
                 :CourseId="CourseId"
                 :index="index"
-                :firstname="firstname"
+                :firstName="firstName"
+                :lastName="lastName"
+                :preferredName="preferredName"
               />
             </v-card-actions>
           </v-card>
@@ -43,18 +47,18 @@ export default {
     DeleteStudentDialog
   },
   props: {
-    firstname: {
+    firstName: {
       type: String,
       required: true
     },
-    // lastname: {
-    //   type: String,
-    //   required: true
-    // },
-    // preferredname: {
-    //   type: String,
-    //   required: true
-    // },
+    lastName: {
+      type: String,
+      required: true
+    },
+    preferredName: {
+      type: String,
+      required: true
+    },
     studentId: {
       type: String,
       required: true

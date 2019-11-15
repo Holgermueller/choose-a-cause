@@ -8,7 +8,7 @@
       </template>
 
       <v-card>
-        <v-card-title>Update info for {{ firstname }}:</v-card-title>
+        <v-card-title>Update info for {{ preferredName }}:</v-card-title>
         <v-card-text>
           <v-form ref="form">
             <v-container fluid>
@@ -17,21 +17,21 @@
                   <v-text-field
                     type="text"
                     v-model="first_name_edit"
-                    :placeholder="firstname"
+                    :placeholder="firstName"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm12 md12 lg12 xl12>
                   <v-text-field
                     type="text"
                     v-model="last_name_edit"
-                    placeholder=""
+                    :placeholder="lastName"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm12 md12 lg12 xl12>
                   <v-text-field
                     type="text"
                     v-model="preferred_name_edit"
-                    placeholder
+                    :placeholder="preferredName"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -65,7 +65,15 @@ export default {
     };
   },
   props: {
-    firstname: {
+    firstName: {
+      type: String,
+      required: true
+    },
+    lastName: {
+      type: String,
+      required: true
+    },
+    preferredName: {
       type: String,
       required: true
     },
@@ -89,19 +97,18 @@ export default {
         .doc(this.CourseId)
         .collection("roster")
         .doc(targetId)
-        .set({
+        .update({
           firstname: newFirstName,
           lastname: newLastName,
           preferredname: newPreferredName
         })
         .then(() => {
           console.log("Student info updated successfully!");
+          this.dialog = false;
         })
         .catch(err => {
           console.log("An error has occurred: " + err);
         });
-
-        this.dialog = false;
     }
   }
 };

@@ -59,9 +59,9 @@ export default {
   data() {
     return {
       dialog: false,
-      first_name_edit: null,
-      last_name_edit: null,
-      preferred_name_edit: null
+      first_name_edit: this.firstName,
+      last_name_edit: this.lastName,
+      preferred_name_edit: this.preferredName
     };
   },
   props: {

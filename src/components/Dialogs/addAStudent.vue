@@ -79,13 +79,17 @@ export default {
   methods: {
     submitStudent() {
       let firstName = this.firstName;
-      let lastname = this.lastName;
-      let preferredname = this.preferredName;
+      let lastName = this.lastName;
+      let preferredName = this.preferredName;
 
       db.collection("courses")
         .doc(this.CourseId)
         .collection("roster")
-        .add({ firstname: firstName })
+        .add({
+          firstname: firstName,
+          lastname: lastName,
+          preferredname: preferredName
+        })
         .then(() => {
           console.log("Student successfully added!");
         })

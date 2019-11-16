@@ -23,14 +23,14 @@
                 <v-flex xs12 sm12 md13 lg12 xl12>
                   <v-text-field
                     type="text"
-                    v-model="last_name"
+                    v-model="lastName"
                     label="Last name"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm12 md13 lg12 xl12>
                   <v-text-field
                     type="text"
-                    v-model="preferred_name"
+                    v-model="preferredName"
                     label="Preferred name"
                   ></v-text-field>
                 </v-flex>
@@ -72,15 +72,15 @@ export default {
     return {
       dialog: false,
       firstName: null,
-      last_name: null,
-      preferred_name: null
+      lastName: null,
+      preferredName: null
     };
   },
   methods: {
     submitStudent() {
       let firstName = this.firstName;
-      let lastname = this.last_name;
-      let preferredname = this.preferred_name;
+      let lastname = this.lastName;
+      let preferredname = this.preferredName;
 
       db.collection("courses")
         .doc(this.CourseId)
@@ -88,13 +88,14 @@ export default {
         .add({ firstname: firstName })
         .then(() => {
           console.log("Student successfully added!");
-          this.dialog = false;
-          this.clearForm();
-          this.updateRoster();
         })
         .catch(err => {
           console.log("An error has occurred: " + err);
         });
+
+      this.dialog = false;
+      this.clearForm();
+      this.updateRoster();
     },
 
     clearForm() {
@@ -116,7 +117,7 @@ export default {
               studentId: doc.id,
               firstName: doc.data().firstname,
               lastName: doc.data().lastname,
-              preferredname: doc.data().preferredname
+              preferredName: doc.data().preferredname
             };
             this.CourseRoster.push(data);
           });

@@ -37,14 +37,16 @@ export default {
       if (calledArray.length === course_roster.length) {
         this.calledArray = [];
         this.chooseAName();
-      } else if (this.calledArray.includes(randomStudent.firstName)) {
+      } else if (this.calledArray.includes(randomStudent.preferredName)) {
         this.chooseAName();
       } else {
-        this.calledArray.push(randomStudent.firstName);
+        this.calledArray.push(randomStudent.preferredName);
       }
 
+      console.log(randomStudent.preferredName);
+
       document.querySelector("#displayedName").innerHTML =
-        randomStudent.firstName;
+        randomStudent.preferredName;
     }
   }
 };

@@ -1,7 +1,7 @@
 <template>
   <div data-app id="addCourseForm">
     <v-dialog v-model="dialog" width="500">
-      <template v-slot:activator="{on}">
+      <template v-slot:activator="{ on }">
         <v-btn block class="button" color="green" dark v-on="on">
           <span class="mdi mdi-plus-thick"></span> Add A Class
         </v-btn>
@@ -34,7 +34,9 @@
             <span class="mdi mdi-cancel"></span> Cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue" @click="addCourse"><span class="mdi mdi-check-bold"></span> Submit</v-btn>
+          <v-btn color="blue" @click="addCourse"
+            ><span class="mdi mdi-check-bold"></span> Submit</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -64,7 +66,7 @@ export default {
       let course_name = this.course_name;
 
       db.collection("courses")
-        .add({ CourseName: course_name })
+        .add({ courseName: course_name })
         .then(() => {
           console.log("Class addition successful");
         })
@@ -86,7 +88,7 @@ export default {
           querySnapshot.forEach(doc => {
             const data = {
               CourseId: doc.id,
-              CourseName: doc.data().CourseName
+              CourseName: doc.data().courseName
             };
             this.CourseList.push(data);
           });

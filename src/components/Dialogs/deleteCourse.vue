@@ -1,14 +1,14 @@
 <template>
   <div id="deleteCourseDialog">
     <v-dialog v-model="dialog" width="500">
-      <template v-slot:activator="{on}">
+      <template v-slot:activator="{ on }">
         <v-btn color="red" v-on="on">
           <span class="mdi mdi-trash-can-outline"></span>Delete
         </v-btn>
       </template>
 
       <v-card class="delete-class-dialog">
-        <v-card-title class="red">Delete {{CourseName}}?</v-card-title>
+        <v-card-title class="red">Delete {{ CourseName }}?</v-card-title>
         <v-card-text>
           <p>Are you certain you want to delete this course?</p>
           <p>This action cannot be reversed.</p>
@@ -19,7 +19,7 @@
             <span class="mdi mdi-cancel"></span> cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary"  @click="deleteCourse(index)">
+          <v-btn color="primary" @click="deleteCourse(index)">
             <span class="mdi mdi-check-bold"></span> Yes
           </v-btn>
         </v-card-actions>

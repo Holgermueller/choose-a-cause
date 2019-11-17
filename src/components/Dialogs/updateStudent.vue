@@ -104,6 +104,7 @@ export default {
         })
         .then(() => {
           console.log("Student info updated successfully!");
+          this.$router.go();
           this.dialog = false;
         })
         .catch(err => {

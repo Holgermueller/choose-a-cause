@@ -36,6 +36,7 @@
 <script>
 import UpdateStudentDialog from "../Dialogs/updateStudent";
 import DeleteStudentDialog from "../Dialogs/deleteStudent";
+import { bus } from "../../main";
 
 export default {
   name: "RosterCard",
@@ -76,7 +77,17 @@ export default {
       required: true
     }
   },
-  methods: {}
+  created() {
+    bus.$on("changePreferredName", data => {
+      this.preferredName = data;
+    });
+  },
+  methods: {
+    // grabUpdatedStudentInfo(value) {
+    //   this.preferredName = value;
+    //   console.log(value);
+    // }
+  }
 };
 </script>
 

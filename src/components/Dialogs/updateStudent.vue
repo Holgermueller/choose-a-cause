@@ -53,6 +53,7 @@
 
 <script>
 import db from "../firebase/firebaseInit";
+import { bus } from "../../main";
 
 export default {
   name: "UpdateStudentDialog",
@@ -104,12 +105,16 @@ export default {
         })
         .then(() => {
           console.log("Student info updated successfully!");
-          this.$router.go();
+          this.changePreferredName();
           this.dialog = false;
         })
         .catch(err => {
           console.log("An error has occurred: " + err);
         });
+    },
+    changePreferredName() {
+      //this.$emit("changePreferredName", this.preferredName);
+      bus.$emit("changePreferredName", this.preferredName);
     }
   }
 };

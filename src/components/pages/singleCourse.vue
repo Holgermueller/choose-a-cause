@@ -1,11 +1,9 @@
 <template>
   <div id="roster">
-    <h1
-      class="course-name-display"
-      id="CourseNameDisplay"
-      :title="CourseName"
-    >{{CourseName}} Roster:</h1>
-    <p>{{CourseId}}</p>
+    <h1 class="course-name-display" id="CourseNameDisplay" :title="CourseName">
+      {{ CourseName }} Roster:
+    </h1>
+    <p>{{ CourseId }}</p>
 
     <div class="name-display-div">
       <NameDisplay :CourseRoster="CourseRoster" />
@@ -25,7 +23,9 @@
 
     <v-expansion-panels class="expansion-panel">
       <v-expansion-panel>
-        <v-expansion-panel-header class="panel-header">See Roster</v-expansion-panel-header>
+        <v-expansion-panel-header class="panel-header"
+          >See Roster</v-expansion-panel-header
+        >
         <v-expansion-panel-content>
           <div class="roster-display">
             <RosterCard

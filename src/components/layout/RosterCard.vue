@@ -4,7 +4,7 @@
       <v-expansion-panel>
         <v-expansion-panel-header>
           <h1 class="student-name">
-            {{ preferredName }}
+            {{ preferred_name_for_display }}
           </h1>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
@@ -41,7 +41,9 @@ import { bus } from "../../main";
 export default {
   name: "RosterCard",
   data() {
-    return {};
+    return {
+      preferred_name_for_display: this.preferredName
+    };
   },
   components: {
     UpdateStudentDialog,
@@ -79,7 +81,7 @@ export default {
   },
   created() {
     bus.$on("changePreferredName", data => {
-      this.preferredName = data;
+      this.preferred_name_for_display = data;
     });
   },
   methods: {

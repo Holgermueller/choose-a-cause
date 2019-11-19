@@ -61,7 +61,6 @@ export default {
   methods: {
     deleteStudent(index) {
       this.CourseRoster.splice(index, 1);
-      console.log(index);
 
       let targetId = event.currentTarget.id;
       db.collection("courses")

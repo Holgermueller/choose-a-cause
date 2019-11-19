@@ -3,7 +3,10 @@
     <v-expansion-panels inset>
       <v-expansion-panel>
         <v-expansion-panel-header>
-          <h1 class="student-name">
+          <h1
+            class="student-name"
+            v-on:changePreferredName="grabUpdatedStudentInfo($event)"
+          >
             {{ preferred_name_for_display }}
           </h1>
         </v-expansion-panel-header>
@@ -79,16 +82,16 @@ export default {
       required: true
     }
   },
-  created() {
-    bus.$on("changePreferredName", data => {
-      this.preferred_name_for_display = data;
-    });
-  },
+  // created() {
+  //   bus.$on("changePreferredName", data => {
+  //     this.preferred_name_for_display = data;
+  //   });
+  // },
   methods: {
-    // grabUpdatedStudentInfo(value) {
-    //   this.preferredName = value;
-    //   console.log(value);
-    // }
+    grabUpdatedStudentInfo(updatedPreferredName) {
+      this.preferred_name_for_display = updatedPreferredName;
+      console.log("click");
+    }
   }
 };
 </script>

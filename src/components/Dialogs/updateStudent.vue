@@ -105,16 +105,18 @@ export default {
         })
         .then(() => {
           console.log("Student info updated successfully!");
-          this.changePreferredName();
           this.dialog = false;
         })
         .catch(err => {
           console.log("An error has occurred: " + err);
         });
+      this.changePreferredName();
     },
     changePreferredName() {
-      //this.$emit("changePreferredName", this.preferredName);
-      bus.$emit("changePreferredName", this.preferredName);
+      let newPreferredName = this.preferred_name_edit;
+      this.$emit("changePreferredName", newPreferredName);
+
+      //bus.$emit("changePreferredName", this.preferredName);
     }
   }
 };

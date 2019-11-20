@@ -3,7 +3,7 @@
     <v-form ref="form">
       <v-flex xs12 sm12 md12 lg12 xl12>
         <v-text-field
-          v-model="usernameOrEmail"
+          v-model="email"
           label="Username or Email"
           outlined
           prepend-icon="mdi-account-circle"
@@ -51,7 +51,7 @@ export default {
   name: "LoginForm",
   data() {
     return {
-      usernameOrEmail: null,
+      email: null,
       password: null,
       show_password: false,
       errors: []
@@ -61,31 +61,36 @@ export default {
     checkLoginData() {
       this.errors = [];
 
-      if (!this.usernameOrEmail && !this.password) {
+      if (!this.email && !this.password) {
         this.errors.push("All fields must be filled out to continue.");
-      } else if (!this.usernameOrEmail) {
+      } else if (!this.email) {
         this.errors.push("Username or email required.");
       } else if (!this.password) {
         this.errors.push("Password required.");
+      } else if (!this.checkEmailValid(this.email)) {
+        this.errors.push("Invalid email.");
+      } else if (!this.checkPasswordValid(this.password)) {
+        this.errors.push("Invalid password.");
       } else {
-        this.checkUsernameEmailValid();
-        this.checkPasswordValid();
         this.loginUser();
         this.clearLoginForm();
       }
     },
-    checkUsernameEmailValid() {
-      console.log("Username/email not valid.");
+    checkEmailValid(email) {
+      const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      return regex.test(this.email);
     },
-    checkPasswordValid() {
-      console.log("Password invalid.");
+    checkPasswordValid(password) {
+      const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+      return regex.test(this.password);
     },
     loginUser() {
       const userLoginInfo = {
-        usernameOrEmail: this.usernameOrEmail,
+        email: this.email,
         password: this.password
       };
       console.log(userLoginInfo);
+      console.log("User logged in.");
     },
     clearLoginForm() {
       this.$refs.form.reset();

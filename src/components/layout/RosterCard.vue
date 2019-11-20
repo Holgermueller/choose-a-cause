@@ -5,9 +5,9 @@
         <v-expansion-panel-header>
           <h1
             class="student-name"
-            v-on:changePreferredName="grabUpdatedStudentInfo($event)"
+            v-on:changePreferredName="updatePreferredNameOnDOM($event)"
           >
-            {{ preferred_name_for_display }}
+            {{ preferredNameForDisplay }}
           </h1>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
@@ -43,11 +43,7 @@ import { bus } from "../../main";
 
 export default {
   name: "RosterCard",
-  data() {
-    return {
-      preferred_name_for_display: this.preferredName
-    };
-  },
+
   components: {
     UpdateStudentDialog,
     DeleteStudentDialog
@@ -82,15 +78,18 @@ export default {
       required: true
     }
   },
-  // created() {
-  //   bus.$on("changePreferredName", data => {
-  //     this.preferred_name_for_display = data;
-  //   });
-  // },
+
+  data() {
+    return {
+      preferredNameForDisplay: this.preferredName
+    };
+  },
+
   methods: {
-    grabUpdatedStudentInfo(updatedPreferredName) {
-      this.preferred_name_for_display = updatedPreferredName;
+    updatePreferredNameOnDOM(updatedPreferredName) {
       console.log("click");
+
+      let preferredNameForDisplay = updatedPreferredName;
     }
   }
 };

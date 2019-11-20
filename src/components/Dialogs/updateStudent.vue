@@ -57,14 +57,6 @@ import { bus } from "../../main";
 
 export default {
   name: "UpdateStudentDialog",
-  data() {
-    return {
-      dialog: false,
-      first_name_edit: this.firstName,
-      last_name_edit: this.lastName,
-      preferred_name_edit: this.preferredName
-    };
-  },
   props: {
     firstName: {
       type: String,
@@ -87,6 +79,16 @@ export default {
       required: true
     }
   },
+
+  data() {
+    return {
+      dialog: false,
+      first_name_edit: this.firstName,
+      last_name_edit: this.lastName,
+      preferred_name_edit: this.preferredName
+    };
+  },
+
   methods: {
     updateStudentInfo() {
       let newFirstName = this.first_name_edit;
@@ -115,8 +117,6 @@ export default {
     changePreferredName() {
       let newPreferredName = this.preferred_name_edit;
       this.$emit("changePreferredName", newPreferredName);
-
-      //bus.$emit("changePreferredName", this.preferredName);
     }
   }
 };

@@ -33,11 +33,6 @@ import db from "../firebase/firebaseInit";
 
 export default {
   name: "DeleteCourse",
-  data() {
-    return {
-      dialog: false
-    };
-  },
   props: {
     CourseId: {
       type: String,
@@ -56,6 +51,12 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      dialog: false
+    };
+  },
+
   methods: {
     deleteCourse(index) {
       this.CourseList.splice(index, 1);

@@ -30,13 +30,13 @@
           <div class="roster-display">
             <RosterCard
               class="roster-card"
-              v-for="(single_student, index) in CourseRoster"
-              :key="single_student.studentId"
-              :firstName="single_student.firstName"
-              :lastName="single_student.lastName"
-              :preferredName="single_student.preferredName"
+              v-for="(singleStudent, index) in CourseRoster"
+              :key="singleStudent.studentId"
+              :firstName="singleStudent.firstName"
+              :lastName="singleStudent.lastName"
+              :preferredName="singleStudent.preferredName"
               :index="index"
-              :studentId="single_student.studentId"
+              :studentId="singleStudent.studentId"
               :CourseRoster="CourseRoster"
               :CourseId="CourseId"
             />
@@ -60,6 +60,12 @@ export default {
     AddStudentDialog,
     NameDisplay
   },
+  props: {
+    CourseId: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       CourseRoster: [],
@@ -68,16 +74,6 @@ export default {
     };
   },
 
-  props: {
-    CourseId: {
-      type: String,
-      required: true
-    }
-    // CourseName: {
-    //   type: String,
-    //   required: true
-    // }
-  },
   created() {
     db.collection("courses")
       .doc(this.CourseId)
@@ -100,24 +96,10 @@ export default {
       });
   },
 
-  mounted() {
-    console.log("Course page mounted.");
-    if (localStorage.getItem("CourseName")) {
-      this.CourseName = JSON.parse(
-        localStorage.getItem("CourseName", this.CourseName)
-      );
-    }
-  },
+  mounted() {},
 
-  watch: {
-    CourseName: {
-      handler() {
-        console.log("Course name changed");
-        localStorage.setItem("CourseName", JSON.stringify(this.CourseName));
-      },
-      deep: true
-    }
-  },
+  watch: {},
+
   methods: {}
 };
 </script>

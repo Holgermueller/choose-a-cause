@@ -35,9 +35,6 @@ import DeleteCourse from "../Dialogs/deleteCourse";
 export default {
   name: "CourseCard",
   components: { DeleteCourse },
-  data() {
-    return {};
-  },
   props: {
     CourseName: {
       type: String,
@@ -56,6 +53,10 @@ export default {
       required: true
     }
   },
+  data() {
+    return {};
+  },
+
   methods: {
     goToRoster() {
       let targetId = event.currentTarget.CourseId;

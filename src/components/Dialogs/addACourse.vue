@@ -48,6 +48,14 @@ import db from "../firebase/firebaseInit";
 
 export default {
   name: "AddCourseDialog",
+
+  props: {
+    CourseList: {
+      type: Array,
+      required: true
+    }
+  },
+
   data() {
     return {
       dialog: false,
@@ -55,12 +63,7 @@ export default {
       course_name: null
     };
   },
-  props: {
-    CourseList: {
-      type: Array,
-      required: true
-    }
-  },
+
   methods: {
     addCourse() {
       let course_name = this.course_name;

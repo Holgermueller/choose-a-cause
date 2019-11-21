@@ -7,9 +7,9 @@
       </h1>
     </div>
 
-    <DarkModeToggle />
-
     <div class="buttons-div">
+      <DarkModeToggle class="dark-mode-toggle" />
+
       <AddCourseDialog :CourseList="CourseList" />
     </div>
 

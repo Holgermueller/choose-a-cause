@@ -1,20 +1,24 @@
 <template>
-  <div>
-    <v-switch class="switch" label="Dark Mode" v-model="goDark"> </v-switch>
+  <div id="darkModeToggle">
+    <v-switch label="Dark Mode" v-model="goDark"> </v-switch>
+    <DarkModeTooltip class="tool-tip" />
   </div>
 </template>
 
 <script>
+import DarkModeTooltip from "./darkModeTooltip";
+
 export default {
   name: "DarkModeSwitch",
+  components: { DarkModeTooltip },
   data() {
     return {
       goDark: false
     };
   },
   computed: {
-    setThem() {
-      if (this.goDark == true) {
+    setTheme() {
+      if (this.goDark === true) {
         return (this.$vuetify.theme.dark = true);
       } else {
         return (this.$vuetify.theme.dark = false);
@@ -25,7 +29,7 @@ export default {
 </script>
 
 <style scoped>
-.switch {
-  margin: 1 auto;
+.tool-tip {
+  float: right;
 }
 </style>

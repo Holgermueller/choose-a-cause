@@ -20,8 +20,8 @@ export default {
     Home,
     Footer
   },
-  data: () => ({
-    //
-  })
+  data() {
+    return {};
+  }
 };
 </script>

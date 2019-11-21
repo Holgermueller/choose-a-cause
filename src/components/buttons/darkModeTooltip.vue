@@ -14,3 +14,9 @@
     </v-tooltip>
   </div>
 </template>
+
+<script>
+export default {
+  name: "DarkModeToolTip"
+};
+</script>

@@ -8,8 +8,6 @@
     </div>
 
     <div class="buttons-div">
-      <DarkModeToggle class="dark-mode-toggle" />
-
       <AddCourseDialog :CourseList="CourseList" />
     </div>
 
@@ -33,14 +31,12 @@
 import db from "../firebase/firebaseInit";
 import CourseCard from "../layout/CourseCard";
 import AddCourseDialog from "../Dialogs/addACourse";
-import DarkModeToggle from "../buttons/darkModeToggle";
 
 export default {
   name: "Profile",
   components: {
     CourseCard,
-    AddCourseDialog,
-    DarkModeToggle
+    AddCourseDialog
   },
   data() {
     return {

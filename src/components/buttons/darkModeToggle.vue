@@ -1,7 +1,6 @@
 <template>
   <div id="darkModeToggle">
     <v-switch label="Dark Mode" v-model="goDark"> </v-switch>
-    <DarkModeTooltip class="tool-tip" />
   </div>
 </template>
 
@@ -29,7 +28,7 @@ export default {
 </script>
 
 <style scoped>
-.tool-tip {
+/* .tool-tip {
   float: right;
-}
+} */
 </style>

@@ -1,7 +1,13 @@
 <template>
   <div id="header">
     <v-card class="app-header" tile>
-      <h1 class="app-name"><span class="mdi mdi-hand"></span> Choose a Student</h1>
+      <div>
+        <h1 class="app-name">
+          <span class="mdi mdi-hand"></span> Choose a Student
+          <DarkModeToggle class="toggle" />
+        </h1>
+      </div>
+
       <div class="nav">
         <router-link to="/">Home</router-link>
         <router-link to="/user/:id">Login</router-link>
@@ -11,6 +17,17 @@
     </v-card>
   </div>
 </template>
+
+<script>
+import DarkModeToggle from "../buttons/darkModeToggle";
+
+export default {
+  name: "Header",
+  components: {
+    DarkModeToggle
+  }
+};
+</script>
 
 <style scoped>
 .app-header {
@@ -27,5 +44,9 @@
 a {
   margin: 5%;
   text-decoration: none;
+}
+.toggle {
+  float: right;
+  margin: 0 8px 4px 0;
 }
 </style>

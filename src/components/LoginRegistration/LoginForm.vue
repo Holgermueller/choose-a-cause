@@ -4,7 +4,7 @@
       <v-flex xs12 sm12 md12 lg12 xl12>
         <v-text-field
           v-model="email"
-          label="Username or Email"
+          label="Email"
           outlined
           prepend-icon="mdi-account-circle"
         ></v-text-field>
@@ -57,6 +57,7 @@ export default {
       errors: []
     };
   },
+
   methods: {
     checkLoginData() {
       this.errors = [];
@@ -89,6 +90,7 @@ export default {
         email: this.email,
         password: this.password
       };
+
       console.log(userLoginInfo);
       console.log("User logged in.");
     },

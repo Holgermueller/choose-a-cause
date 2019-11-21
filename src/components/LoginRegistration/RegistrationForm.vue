@@ -11,7 +11,12 @@
       </v-flex>
 
       <v-flex xs12 sm12 md12 lg12 xl12>
-        <v-text-field prepend-icon="mdi-email" v-model="email" label="E-mail*" outlined></v-text-field>
+        <v-text-field
+          prepend-icon="mdi-email"
+          v-model="email"
+          label="E-mail*"
+          outlined
+        ></v-text-field>
       </v-flex>
 
       <v-flex xs12 sm12 md12 lg12 xl12>
@@ -45,7 +50,7 @@
     <section id="registrationErrors" v-if="errors.length">
       <b>Please fix the following error(s):</b>
       <ul class="errors-list">
-        <li v-for="(error, index) in errors" :key="index">{{error}}</li>
+        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
       </ul>
     </section>
 
@@ -56,7 +61,11 @@
         Cancel
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="blue" @click.prevent="checkRegistrationData" class="white--text">
+      <v-btn
+        color="blue"
+        @click.prevent="checkRegistrationData"
+        class="white--text"
+      >
         <span class="mdi mdi-check-bold white--text"></span>
         Register
       </v-btn>
@@ -82,6 +91,7 @@ export default {
       errors: []
     };
   },
+
   methods: {
     checkRegistrationData() {
       this.errors = [];
@@ -118,14 +128,18 @@ export default {
       return regex.test(this.email);
     },
 
-    checkEmailExistsInDatabase(email) {},
+    checkEmailExistsInDatabase(email) {
+      console.log(email);
+    },
 
     isPasswordValid(password) {
       const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
       return regex.test(this.password);
     },
 
-    checkPasswordExistsInDatabase(password) {},
+    checkPasswordExistsInDatabase(password) {
+      console.log(password);
+    },
 
     registerUser() {
       const newUser = {
@@ -134,6 +148,7 @@ export default {
         password: this.password,
         confirm_password: this.confirm_password
       };
+
       console.log(newUser);
       firebase
         .auth()

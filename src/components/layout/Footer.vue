@@ -1,12 +1,13 @@
 <template>
-  <div id="footer">
-    <v-footer>&copy;2019 Holger Mueller</v-footer>
-  </div>
+  <v-footer class="footer-text">
+    <v-col class="text-center" cols="12">&copy;2019 Holger Mueller</v-col>
+  </v-footer>
 </template>
 
 <style scoped>
 #footer {
-  position: absolute;
   bottom: 0;
+  left: 0;
+  position: absolute;
 }
 </style>

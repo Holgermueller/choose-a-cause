@@ -4,7 +4,6 @@
       <div>
         <h1 class="app-name">
           <span class="mdi mdi-hand"></span> Choose a Student
-          <DarkModeToggle class="toggle" />
         </h1>
       </div>
 
@@ -19,13 +18,10 @@
 </template>
 
 <script>
-import DarkModeToggle from "../buttons/darkModeToggle";
-
 export default {
   name: "Header",
-  components: {
-    DarkModeToggle
-  }
+  components: {},
+  props: {}
 };
 </script>
 
@@ -44,9 +40,5 @@ export default {
 a {
   margin: 5%;
   text-decoration: none;
-}
-.toggle {
-  float: right;
-  margin: 0 8px 4px 0;
 }
 </style>

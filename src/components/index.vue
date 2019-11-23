@@ -1,8 +1,5 @@
 <template>
   <div>
-    <v-card>
-      <h1>Welcome</h1>
-    </v-card>
     <LoginRegisterForms />
   </div>
 </template>
@@ -24,5 +21,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

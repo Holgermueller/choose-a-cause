@@ -1,7 +1,10 @@
 <template>
-  <v-app>
+  <v-app :dark="setTheme">
     <v-content>
       <Header />
+      <div class="toggle">
+        <v-switch label="Dark Mode" v-model="goDark"></v-switch>
+      </div>
       <router-view></router-view>
       <Footer />
     </v-content>
@@ -15,13 +18,39 @@ import Home from "./components/index";
 
 export default {
   name: "App",
+
   components: {
     Header,
     Home,
     Footer
   },
+
+  opts: {
+    theme: {
+      dark: false
+    }
+  },
+
   data() {
-    return {};
+    return {
+      goDark: false
+    };
+  },
+
+  computed: {
+    setTheme() {
+      if (this.goDark == true) {
+        return (this.$vuetify.theme.dark = true);
+      } else {
+        return (this.$vuetify.theme.dark = false);
+      }
+    }
   }
 };
 </script>
+
+<style scoped>
+.toggle {
+  position: absolute;
+}
+</style>

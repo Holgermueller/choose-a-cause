@@ -35,7 +35,7 @@
         <span class="mdi mdi-close-circle"></span>Cancel
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="blue" class="white--text" @click="checkLoginData">
+      <v-btn color="blue" class="white--text" @click.prevent="loginUser">
         <span class="mdi mdi-check-bold"></span>
         Submit
       </v-btn>
@@ -45,7 +45,7 @@
 
 <script>
 import db from "../firebase/firebaseInit";
-import firebase from "firebase/app";
+import firebase from "firebase";
 
 export default {
   name: "LoginForm",
@@ -85,14 +85,22 @@ export default {
       const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
       return regex.test(this.password);
     },
-    loginUser() {
+    loginUser(e) {
       const userLoginInfo = {
         email: this.email,
         password: this.password
       };
 
-      console.log(userLoginInfo);
-      console.log("User logged in.");
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(user => {
+          alert(`User logged in as: ${userLoginInfo.email}`);
+          this.$router.go({ path: this.$router.path });
+        })
+        .catch(err => {
+          console.log("Error: " + err.message);
+        });
     },
     clearLoginForm() {
       this.$refs.form.reset();

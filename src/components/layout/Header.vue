@@ -11,17 +11,30 @@
         <router-link to="/">Home</router-link>
         <router-link to="/user/:id">Login</router-link>
         <router-link to="/about">About</router-link>
-        <router-link to="/logout">Logout</router-link>
+        <v-btn @click="logout">Logout</v-btn>
       </div>
     </v-card>
   </div>
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
   name: "Header",
   components: {},
-  props: {}
+  props: {},
+  data() {
+    return {
+      isLoggedIn: false,
+      currentUser: false
+    };
+  },
+  methods: {
+    logout() {
+      console.log("click");
+    }
+  }
 };
 </script>
 

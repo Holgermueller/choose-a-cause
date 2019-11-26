@@ -75,7 +75,7 @@
 
 <script>
 import db from "../firebase/firebaseInit";
-import firebase from "firebase/app";
+import firebase from "firebase";
 
 export default {
   name: "RegistrationForm",
@@ -141,7 +141,7 @@ export default {
       console.log(password);
     },
 
-    registerUser() {
+    registerUser(e) {
       const newUser = {
         username: this.username,
         email: this.email,
@@ -154,7 +154,7 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(user => {
-          alert(`Account created for ${user.email}`);
+          alert(`Account created for: ${newUser.email}`);
           //this.$router.push('/');
         })
         .catch(err => {

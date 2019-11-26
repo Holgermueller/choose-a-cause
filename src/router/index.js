@@ -7,6 +7,7 @@ import SingleCourse from "../components/pages/singleCourse";
 import firebase from "firebase";
 
 Vue.use(VueRouter);
+
 let router = new VueRouter({
   mode: "history",
   routes: [

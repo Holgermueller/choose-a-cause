@@ -8,10 +8,15 @@
       </div>
 
       <div class="nav">
-        <router-link to="/">Home</router-link>
+        <router-link v-if="!isLoggedIn" to="/">Home</router-link>
+        <router-link v-if="isLoggedIn" to="/user/:id">
+          <v-btn>{{ currentUser }}</v-btn>
+        </router-link>
         <!-- <router-link to="/user/:id">Login</router-link> -->
-        <router-link to="/about">About</router-link>
-        <v-btn @click="logout">Logout</v-btn>
+        <router-link to="/about">
+          <v-btn>About</v-btn>
+        </router-link>
+        <v-btn v-if="isLoggedIn" @click="logout">Logout</v-btn>
       </div>
     </v-card>
   </div>
@@ -30,13 +35,21 @@ export default {
       currentUser: false
     };
   },
+
+  created() {
+    if (firebase.auth().currentUser) {
+      this.isLoggedIn = true;
+      this.currentUser = firebase.auth().currentUser.email;
+    }
+  },
+
   methods: {
     logout() {
       firebase
         .auth()
         .signOut()
         .then(() => {
-          this.$router.push("/");
+          this.$router.go({ path: this.$router.path });
         });
     }
   }

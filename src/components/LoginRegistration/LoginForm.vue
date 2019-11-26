@@ -77,14 +77,17 @@ export default {
         this.clearLoginForm();
       }
     },
+
     checkEmailValid(email) {
       const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       return regex.test(this.email);
     },
+
     checkPasswordValid(password) {
       const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
       return regex.test(this.password);
     },
+
     loginUser(e) {
       const userLoginInfo = {
         email: this.email,
@@ -95,13 +98,18 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(user => {
-          alert(`User logged in as: ${userLoginInfo.email}`);
-          this.$router.push("/user/:id");
+          const loggedInUser = {
+            id: user.id
+          };
+          alert(`User logged in as: ${userLoginInfo.uid}`);
+          this.$router.go({ path: this.$router.path });
+          console.log(userLoginInfo.uid);
         })
         .catch(err => {
           console.log("Error: " + err.message);
         });
     },
+
     clearLoginForm() {
       this.$refs.form.reset();
     }

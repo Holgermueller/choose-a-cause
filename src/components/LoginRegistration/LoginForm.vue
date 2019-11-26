@@ -96,7 +96,7 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(user => {
           alert(`User logged in as: ${userLoginInfo.email}`);
-          this.$router.go({ path: this.$router.path });
+          this.$router.push("/user/:id");
         })
         .catch(err => {
           console.log("Error: " + err.message);

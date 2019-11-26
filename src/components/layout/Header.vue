@@ -9,7 +9,7 @@
 
       <div class="nav">
         <router-link to="/">Home</router-link>
-        <router-link to="/user/:id">Login</router-link>
+        <!-- <router-link to="/user/:id">Login</router-link> -->
         <router-link to="/about">About</router-link>
         <v-btn @click="logout">Logout</v-btn>
       </div>
@@ -32,7 +32,12 @@ export default {
   },
   methods: {
     logout() {
-      console.log("click");
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push("/");
+        });
     }
   }
 };

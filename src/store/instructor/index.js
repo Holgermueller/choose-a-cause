@@ -37,7 +37,6 @@ export default {
             id: user.id
           };
           commit("setUser", signedInUser);
-          console.log(signedInUser);
         })
         .catch(err => {
           console.log(err);

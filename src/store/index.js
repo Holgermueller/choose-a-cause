@@ -1,3 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import * as firebase from "firebase";
+
+import instructor from "./instructor";
+
+Vue.use(Vuex);
+
+export const store = new Vuex.Store({
+  modules: {
+    instructor: instructor
+  }
+});

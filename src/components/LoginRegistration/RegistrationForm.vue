@@ -92,6 +92,8 @@ export default {
     };
   },
 
+  computed: {},
+
   methods: {
     checkRegistrationData() {
       this.errors = [];
@@ -142,24 +144,10 @@ export default {
     },
 
     registerUser(e) {
-      const newUser = {
-        username: this.username,
+      this.$store.dispatch("registerUser", {
         email: this.email,
-        password: this.password,
-        confirm_password: this.confirm_password
-      };
-
-      console.log(newUser);
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then(user => {
-          alert(`Account created for: ${newUser.email}`);
-          this.$router.go({ path: this.$router.path });
-        })
-        .catch(err => {
-          console.log("Error: " + err.message);
-        });
+        password: this.password
+      });
     },
 
     clearRegistrationForm() {

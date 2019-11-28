@@ -89,25 +89,11 @@ export default {
     },
 
     loginUser(e) {
-      const userLoginInfo = {
+      this.$store.dispatch("userLogin", {
         email: this.email,
         password: this.password
-      };
-
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(user => {
-          const loggedInUser = {
-            id: user.id
-          };
-          alert(`User logged in as: ${userLoginInfo.uid}`);
-          this.$router.go({ path: this.$router.path });
-          console.log(userLoginInfo.uid);
-        })
-        .catch(err => {
-          console.log("Error: " + err.message);
-        });
+      });
+      this.$router.go({ path: this.$router.path });
     },
 
     clearLoginForm() {

@@ -45,12 +45,8 @@ export default {
 
   methods: {
     logout() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$router.go({ path: this.$router.path });
-        });
+      this.$store.dispatch("logout");
+      this.$router.go({ path: this.$router.path });
     }
   }
 };

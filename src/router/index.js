@@ -14,7 +14,7 @@ let router = new VueRouter({
     { path: "/", name: "Home", component: Home },
     { path: "/about", name: "About", component: About },
     {
-      path: "/user/:userId",
+      path: "/user",
       name: "Profile",
       component: Profile,
       props: true,

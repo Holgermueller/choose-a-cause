@@ -39,6 +39,7 @@ export default {
       ];
       if (this.userIsAuthenticated) {
         menuLinks = [
+          { icon: "profile", title: "username", link: "/user" },
           { icon: "about", title: "About", link: "/about" },
           { icon: "signout", title: "Sign Out", link: "/" }
         ];
@@ -51,6 +52,12 @@ export default {
         this.$store.getters.user !== null &&
         this.$store.getters.user !== undefined
       );
+    }
+  },
+
+  watch: {
+    user(value) {
+      return value;
     }
   },
 

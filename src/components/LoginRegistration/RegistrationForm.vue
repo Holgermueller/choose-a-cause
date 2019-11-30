@@ -74,9 +74,6 @@
 </template>
 
 <script>
-import db from "../firebase/firebaseInit";
-import firebase from "firebase";
-
 export default {
   name: "RegistrationForm",
   data() {
@@ -92,7 +89,19 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    }
+  },
+
+  watch: {
+    user(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push("/user");
+      }
+    }
+  },
 
   methods: {
     checkRegistrationData() {

@@ -35,18 +35,22 @@
         <span class="mdi mdi-close-circle"></span>Cancel
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="blue" class="white--text" @click.prevent="loginUser">
-        <span class="mdi mdi-check-bold"></span>
-        Submit
-      </v-btn>
+      <router-link
+        :to="{
+          name: 'Profile',
+          params: { currentUser: currentUser, userId: userId }
+        }"
+      >
+        <v-btn color="blue" class="white--text" @click.prevent="loginUser">
+          <span class="mdi mdi-check-bold"></span>
+          Submit
+        </v-btn></router-link
+      >
     </v-card-actions>
   </div>
 </template>
 
 <script>
-import db from "../firebase/firebaseInit";
-import firebase from "firebase";
-
 export default {
   name: "LoginForm",
   data() {
@@ -54,8 +58,24 @@ export default {
       email: null,
       password: null,
       show_password: false,
+      currentUser: false,
+      userId: null,
       errors: []
     };
+  },
+
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    }
+  },
+
+  watch: {
+    user(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push("/user");
+      }
+    }
   },
 
   methods: {
@@ -91,9 +111,11 @@ export default {
     loginUser(e) {
       this.$store.dispatch("userLogin", {
         email: this.email,
-        password: this.password
+        password: this.password,
+        userId: this.userId,
+        currentUser: this.currentUser
       });
-      this.$router.go({ path: this.$router.path });
+      //this.$router.go({ path: this.$router.path });
     },
 
     clearLoginForm() {

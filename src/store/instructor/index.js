@@ -34,7 +34,8 @@ export default {
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(user => {
           const signedInUser = {
-            id: user.id
+            id: user.id,
+            courses: []
           };
           commit("setUser", signedInUser);
         })
@@ -50,7 +51,7 @@ export default {
   },
 
   getters: {
-    instructor(state) {
+    user(state) {
       return state.user;
     }
   }

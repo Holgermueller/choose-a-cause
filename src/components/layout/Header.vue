@@ -8,38 +8,49 @@
       </div>
 
       <div class="nav">
-        <router-link v-if="!isLoggedIn" to="/">Home</router-link>
-        <router-link v-if="isLoggedIn" to="/user/:id">
-          <v-btn>{{ currentUser }}</v-btn>
+        <router-link
+          v-for="link in menuLinks"
+          :key="link.title"
+          :to="link.link"
+        >
+          <v-btn>{{ link.title }}</v-btn>
         </router-link>
-        <!-- <router-link to="/user/:id">Login</router-link> -->
-        <router-link to="/about">
-          <v-btn>About</v-btn>
-        </router-link>
-        <v-btn v-if="isLoggedIn" @click="logout">Logout</v-btn>
       </div>
     </v-card>
   </div>
 </template>
 
 <script>
-import firebase from "firebase";
-
 export default {
   name: "Header",
   components: {},
   props: {},
   data() {
     return {
-      isLoggedIn: false,
-      currentUser: false
+      userId: null
     };
   },
 
-  created() {
-    if (firebase.auth().currentUser) {
-      this.isLoggedIn = true;
-      this.currentUser = firebase.auth().currentUser.email;
+  computed: {
+    menuLinks() {
+      let menuLinks = [
+        { icon: "face", title: "Home", link: "/" },
+        { icon: "about", title: "About", link: "/about" }
+      ];
+      if (this.userIsAuthenticated) {
+        menuLinks = [
+          { icon: "about", title: "About", link: "/about" },
+          { icon: "signout", title: "Sign Out", link: "/" }
+        ];
+      }
+      return menuLinks;
+    },
+
+    userIsAuthenticated() {
+      return (
+        this.$store.getters.user !== null &&
+        this.$store.getters.user !== undefined
+      );
     }
   },
 

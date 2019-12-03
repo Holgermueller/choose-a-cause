@@ -1,5 +1,10 @@
 <template>
   <div id="register">
+    <v-layout row v-if="error">
+      <v-flex xs12 sm12 md12 lg12 xl12>
+        <app-alert @dismissed="onDismissed" :text="error.message"> </app-alert>
+      </v-flex>
+    </v-layout>
     <v-form ref="form">
       <v-flex xs12 sm12 md12 lg12 xl12>
         <v-text-field
@@ -65,6 +70,8 @@
         color="blue"
         @click.prevent="checkRegistrationData"
         class="white--text"
+        :loading="loading"
+        :disabled="loading"
       >
         <span class="mdi mdi-check-bold white--text"></span>
         Register
@@ -92,6 +99,14 @@ export default {
   computed: {
     user() {
       return this.$store.getters.user;
+    },
+
+    error() {
+      return this.$store.getters.error;
+    },
+
+    loading() {
+      return this.$store.getters.loading;
     }
   },
 
@@ -161,6 +176,10 @@ export default {
 
     clearRegistrationForm() {
       this.$refs.form.reset();
+    },
+
+    onDismissed() {
+      this.$store.dispatch("clearError");
     }
   }
 };

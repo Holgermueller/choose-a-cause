@@ -5,10 +5,13 @@ import router from "./router";
 import firebase from "firebase";
 import "./components/firebase/firebaseInit";
 import { store } from "./store";
+import AlertCmp from "./components/shared/alert.vue";
 
 export const bus = new Vue();
 
 Vue.config.productionTip = false;
+
+Vue.component("app-alert", AlertCmp);
 
 let app;
 firebase.auth().onAuthStateChanged(user => {

@@ -1,5 +1,8 @@
 <template>
   <div id="login">
+    <v-layout row v-if="error">
+      <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+    </v-layout>
     <v-form ref="form">
       <v-flex xs12 sm12 md12 lg12 xl12>
         <v-text-field
@@ -41,7 +44,13 @@
           params: { currentUser: currentUser, userId: userId }
         }"
       >
-        <v-btn color="blue" class="white--text" @click.prevent="loginUser">
+        <v-btn
+          color="blue"
+          class="white--text"
+          @click.prevent="loginUser"
+          :loading="loading"
+          :disabled="loading"
+        >
           <span class="mdi mdi-check-bold"></span>
           Submit
         </v-btn></router-link
@@ -67,6 +76,14 @@ export default {
   computed: {
     user() {
       return this.$store.getters.user;
+    },
+
+    error() {
+      return this.$store.getters.error;
+    },
+
+    loading() {
+      return this.$store.getters.loading;
     }
   },
 
@@ -120,6 +137,10 @@ export default {
 
     clearLoginForm() {
       this.$refs.form.reset();
+    },
+
+    onDismissed() {
+      this.$store.dispatch("clearError");
     }
   }
 };

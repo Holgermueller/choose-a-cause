@@ -70,12 +70,24 @@ export default {
     logout({ commit }) {
       firebase.auth().signOut();
       commit("setUser", null);
+    },
+
+    clearError({ commit }) {
+      commit("clearError");
     }
   },
 
   getters: {
     user(state) {
       return state.user;
+    },
+
+    loading(state) {
+      return state.loading;
+    },
+
+    error(state) {
+      return state.error;
     }
   }
 };

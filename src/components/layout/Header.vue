@@ -15,6 +15,10 @@
         >
           <v-btn><span :class="link.icon"></span> {{ link.title }}</v-btn>
         </router-link>
+        <v-btn v-if="userIsAuthenticated" @click="logout">
+          <span class="mdi mdi-exit-to-app"></span>
+          Sign Out
+        </v-btn>
       </div>
     </v-card>
   </div>
@@ -48,8 +52,7 @@ export default {
             icon: "mdi mdi-book-open-page-variant",
             title: "About",
             link: "/about"
-          },
-          { icon: "mdi mdi-exit-to-app", title: "Sign Out", link: "/" }
+          }
         ];
       }
       return menuLinks;

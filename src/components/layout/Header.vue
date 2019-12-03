@@ -13,7 +13,7 @@
           :key="link.title"
           :to="link.link"
         >
-          <v-btn>{{ link.title }}</v-btn>
+          <v-btn><span :class="link.icon"></span> {{ link.title }}</v-btn>
         </router-link>
       </div>
     </v-card>
@@ -34,14 +34,22 @@ export default {
   computed: {
     menuLinks() {
       let menuLinks = [
-        { icon: "face", title: "Home", link: "/" },
-        { icon: "about", title: "About", link: "/about" }
+        { icon: "mdi mdi-home", title: "Home", link: "/" },
+        {
+          icon: "mdi mdi-book-open-page-variant",
+          title: "About",
+          link: "/about"
+        }
       ];
       if (this.userIsAuthenticated) {
         menuLinks = [
-          { icon: "profile", title: "username", link: "/user" },
-          { icon: "about", title: "About", link: "/about" },
-          { icon: "signout", title: "Sign Out", link: "/" }
+          { icon: "mdi mdi-account", title: "username", link: "/user" },
+          {
+            icon: "mdi mdi-book-open-page-variant",
+            title: "About",
+            link: "/about"
+          },
+          { icon: "mdi mdi-exit-to-app", title: "Sign Out", link: "/" }
         ];
       }
       return menuLinks;

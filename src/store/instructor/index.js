@@ -41,7 +41,6 @@ export default {
         .catch(err => {
           commit("setLoading", false);
           commit("setError", err);
-          console.log(err);
         });
     },
 
@@ -63,7 +62,6 @@ export default {
         .catch(err => {
           commit("setLoading", false);
           commit("setError", err);
-          console.log(err);
         });
     },
 

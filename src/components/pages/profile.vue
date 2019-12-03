@@ -38,11 +38,13 @@ export default {
     CourseCard,
     AddCourseDialog
   },
+
   data() {
     return {
       CourseList: []
     };
   },
+
   created() {
     db.collection("courses")
       .get()
@@ -59,6 +61,7 @@ export default {
         console.log("Error getting document: " + err);
       });
   },
+
   methods: {}
 };
 </script>

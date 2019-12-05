@@ -69,7 +69,7 @@ export default {
       let course_name = this.course_name;
 
       db.collection("courses")
-        .add({ courseName: course_name })
+        .add({ courseName: course_name, instructorId: user.uid })
         .then(() => {
           console.log("Class addition successful");
         })
@@ -80,6 +80,7 @@ export default {
       this.dialog = false;
       this.updateCourseList();
     },
+
     updateCourseList() {
       let CourseList = this.CourseList;
 
@@ -100,6 +101,7 @@ export default {
           console.log("Error getting document: " + err);
         });
     },
+
     clearField() {
       this.$refs.textField.reset();
     }

@@ -2,7 +2,7 @@ import * as firebase from "firebase";
 
 export default {
   state: {
-    courseList: []
+    CourseList: []
   },
 
   mutations: {
@@ -17,25 +17,30 @@ export default {
 
   actions: {
     loadCourses({ commit }) {
+      commit("setLoading", true);
       firebase
-        .database()
-        .ref("courses")
-        .once("value")
+        .collection("courses")
+        .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
             const data = {
               CourseId: doc.id,
               CourseName: doc.data().courseName
             };
-            commit("setCourses", courseList);
-            this.courseList.push(data);
+            this.CourseList.push(data);
+            commit("setCourses", this.CourseList);
           });
         })
         .catch(err => {
+          commit("setLoading", false);
           console.log("Error getting doc: " + err);
         });
     }
   },
 
-  getters: {}
+  getters: {
+    loadCourses(state) {
+      return state.CourseList;
+    }
+  }
 };

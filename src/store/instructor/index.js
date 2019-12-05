@@ -2,23 +2,12 @@ import * as firebase from "firebase";
 
 export default {
   state: {
-    user: null,
-    loading: false,
-    error: null
+    user: null
   },
 
   mutations: {
     setUser(state, payload) {
       state.user = payload;
-    },
-    setLoading(state, payload) {
-      state.loading = payload;
-    },
-    setError(state, payload) {
-      state.error = payload;
-    },
-    clearError(state) {
-      state.error = null;
     }
   },
 
@@ -68,24 +57,12 @@ export default {
     logout({ commit }) {
       firebase.auth().signOut();
       commit("setUser", null);
-    },
-
-    clearError({ commit }) {
-      commit("clearError");
     }
   },
 
   getters: {
     user(state) {
       return state.user;
-    },
-
-    loading(state) {
-      return state.loading;
-    },
-
-    error(state) {
-      return state.error;
     }
   }
 };

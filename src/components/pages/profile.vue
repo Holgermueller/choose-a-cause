@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import db from "../firebase/firebaseInit";
 import CourseCard from "../layout/CourseCard";
 import AddCourseDialog from "../Dialogs/addACourse";
 
@@ -39,27 +38,10 @@ export default {
     AddCourseDialog
   },
 
-  data() {
-    return {
-      CourseList: []
-    };
-  },
-
-  created() {
-    db.collection("courses")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          const data = {
-            CourseId: doc.id,
-            CourseName: doc.data().courseName
-          };
-          this.CourseList.push(data);
-        });
-      })
-      .catch(err => {
-        console.log("Error getting document: " + err);
-      });
+  computed: {
+    CourseList() {
+      return this.$store.getters.loadCourses;
+    }
   },
 
   methods: {}

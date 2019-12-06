@@ -23,7 +23,7 @@ let router = new VueRouter({
       }
     },
     {
-      path: "/singleCourse/:CourseId",
+      path: "/singleCourse/:courseId",
       name: "SingleCourse",
       component: SingleCourse,
       props: true,

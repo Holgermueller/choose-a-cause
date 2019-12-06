@@ -8,19 +8,27 @@
     </div>
 
     <div class="buttons-div">
-      <AddCourseDialog :CourseList="CourseList" />
+      <AddCourseDialog :courseList="courseList" />
     </div>
 
     <h1 class="sub-header">Here are your classes:</h1>
 
     <div class="courses-display">
+      <!-- <v-progress-linear
+        height="11"
+        indeterminate
+        rounded
+        :loading="loading"
+        :disabled="loading"
+      ></v-progress-linear> -->
+
       <CourseCard
         class="single-card"
-        v-for="(single_course, index) in CourseList"
-        :key="single_course.CourseId"
-        :CourseName="single_course.CourseName"
-        :CourseId="single_course.CourseId"
-        :CourseList="CourseList"
+        v-for="(singleCourse, index) in courseList"
+        :key="singleCourse.courseId"
+        :courseName="singleCourse.courseName"
+        :courseId="singleCourse.courseId"
+        :courseList="courseList"
         :index="index"
       />
     </div>
@@ -38,9 +46,17 @@ export default {
     AddCourseDialog
   },
 
+  created() {
+    console.log(this.$store.state.courseList);
+  },
+
   computed: {
-    CourseList() {
-      return this.$store.getters.loadCourses;
+    loading() {
+      return this.$store.getters.loading;
+    },
+
+    courseList() {
+      return this.$store.getters.loadCourseList;
     }
   },
 

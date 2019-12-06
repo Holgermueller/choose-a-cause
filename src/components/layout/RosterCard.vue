@@ -16,13 +16,13 @@
               <DeleteStudentDialog
                 :CourseRoster="CourseRoster"
                 :studentId="studentId"
-                :CourseId="CourseId"
+                :courseId="courseId"
                 :index="index"
               />
               <v-spacer></v-spacer>
               <UpdateStudentDialog
                 :studentId="studentId"
-                :CourseId="CourseId"
+                :courseId="courseId"
                 :index="index"
                 :firstName="firstName"
                 :lastName="lastName"
@@ -73,7 +73,7 @@ export default {
       type: Array,
       required: true
     },
-    CourseId: {
+    courseId: {
       type: String,
       required: true
     }

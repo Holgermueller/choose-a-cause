@@ -2,11 +2,20 @@ import * as firebase from "firebase";
 
 export default {
   state: {
-    CourseList: []
+    courseList: [
+      {
+        courseName: "Schlepping",
+        courseId: "xxx"
+      },
+      {
+        courseId: "ohnoohnoohno",
+        courseName: "No more courses. Sorry."
+      }
+    ]
   },
 
   mutations: {
-    setCourses(state, payload) {
+    setCourseList(state, payload) {
       state.courseList = payload;
     },
 
@@ -16,31 +25,56 @@ export default {
   },
 
   actions: {
-    loadCourses({ commit }) {
+    getCourseListFromDB({ commit }) {
       commit("setLoading", true);
-      firebase
-        .collection("courses")
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            const data = {
-              CourseId: doc.id,
-              CourseName: doc.data().courseName
-            };
-            this.CourseList.push(data);
-            commit("setCourses", this.CourseList);
-          });
-        })
-        .catch(err => {
-          commit("setLoading", false);
-          console.log("Error getting doc: " + err);
-        });
-    }
+
+      let courses = [];
+
+      commit("setCourseList", courses);
+
+      // firebase
+      //   .collection("courses")
+      //   .get()
+      //   .then(snapshot => {
+      //     if (snapshot.empty) {
+      //       let courses = [];
+      //       courses.push({
+      //         courseName: "No courses here. Better add some.",
+      //         courseId: "???"
+      //       });
+      //     } else {
+      //       const courses = [];
+      //       snapshot.forEach(doc => {
+      //         courses.push({
+      //           courseId: doc.id,
+      //           courseName: doc.data().courseName
+      //         });
+      //       });
+      //       commit("setCourseList", courses);
+      //       commit("setLoading", false);
+      //     }
+      //   })
+      //   .catch(err => {
+      //     commit("setLoading", false);
+      //     console.log("Error getting doc: " + err);
+      //   });
+    },
+
+    addNewCourse({ commit, getters }, payload) {
+      const newCourse = {
+        courseId: payload.courseId,
+        courseName: payload.courseName,
+        creatorId: getters.user.id
+      };
+      let key;
+    },
+
+    deleteCourse() {}
   },
 
   getters: {
-    loadCourses(state) {
-      return state.CourseList;
+    loadCourseList(state) {
+      return state.courseList;
     }
   }
 };

@@ -2,20 +2,20 @@
   <div>
     <v-hover id="CourseId" v-slot:default="{ hover }">
       <v-card :elevation="hover ? 12 : 2">
-        <h1 class="course-name">{{ CourseName }}</h1>
+        <h1 class="course-name">{{ courseName }}</h1>
         <v-card-actions>
           <DeleteCourse
-            :CourseId="CourseId"
-            :CourseName="CourseName"
+            :courseId="courseId"
+            :courseName="courseName"
             :index="index"
-            :CourseList="CourseList"
+            :courseList="courseList"
           />
           <v-spacer></v-spacer>
 
           <router-link
             :to="{
               name: 'SingleCourse',
-              params: { CourseName: CourseName, CourseId: CourseId }
+              params: { courseName: courseName, courseId: courseId }
             }"
           >
             <v-btn color="primary" @click="goToRoster">
@@ -36,15 +36,15 @@ export default {
   name: "CourseCard",
   components: { DeleteCourse },
   props: {
-    CourseName: {
+    courseName: {
       type: String,
       required: true
     },
-    CourseId: {
+    courseId: {
       type: String,
       required: true
     },
-    CourseList: {
+    courseList: {
       type: Array,
       required: true
     },
@@ -53,13 +53,10 @@ export default {
       required: true
     }
   },
-  data() {
-    return {};
-  },
 
   methods: {
     goToRoster() {
-      let targetId = event.currentTarget.CourseId;
+      let targetId = event.currentTarget.courseId;
     }
   }
 };

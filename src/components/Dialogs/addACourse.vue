@@ -15,7 +15,7 @@
               <v-flex xs12 sm12 md13 lg12 xl12>
                 <v-text-field
                   type="text"
-                  v-model="course_name"
+                  v-model="newCourseName"
                   label="Enter course name here*"
                   hint="Ex.: Multicultural Lit T-Th 9-9:50"
                   persistent-hint
@@ -50,7 +50,7 @@ export default {
   name: "AddCourseDialog",
 
   props: {
-    CourseList: {
+    courseList: {
       type: Array,
       required: true
     }
@@ -60,16 +60,16 @@ export default {
     return {
       dialog: false,
       errors: [],
-      course_name: null
+      newCourseName: null
     };
   },
 
   methods: {
     addCourse() {
-      let course_name = this.course_name;
+      let newCourseName = this.newCourseName;
 
       db.collection("courses")
-        .add({ courseName: course_name, instructorId: user.uid })
+        .add({ courseName: newCourseName, instructorId: user.uid })
         .then(() => {
           console.log("Class addition successful");
         })
@@ -82,19 +82,19 @@ export default {
     },
 
     updateCourseList() {
-      let CourseList = this.CourseList;
+      let courseList = this.courseList;
 
-      CourseList.length = 0;
+      courseList.length = 0;
 
       db.collection("courses")
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
             const data = {
-              CourseId: doc.id,
-              CourseName: doc.data().courseName
+              courseId: doc.id,
+              courseName: doc.data().courseName
             };
-            this.CourseList.push(data);
+            this.courseList.push(data);
           });
         })
         .catch(err => {

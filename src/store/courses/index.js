@@ -26,7 +26,7 @@ export default {
   },
 
   actions: {
-    getCourseListFromDB({ commit }, payload) {
+    getCourseListFromDB({ commit }) {
       commit("setLoading", true);
       db.collection("courses")
         .get()

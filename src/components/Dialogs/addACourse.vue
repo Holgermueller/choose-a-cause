@@ -34,7 +34,7 @@
             <span class="mdi mdi-cancel"></span> Cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue" @click="addCourse"
+          <v-btn color="blue" @click="addCourse" :disabled="!formIsValid"
             ><span class="mdi mdi-check-bold"></span> Submit</v-btn
           >
         </v-card-actions>
@@ -60,22 +60,26 @@ export default {
     return {
       dialog: false,
       errors: [],
-      newCourseName: null
+      newCourseName: ""
     };
+  },
+
+  computed: {
+    formIsValid() {
+      return this.newCourseName !== "";
+    }
   },
 
   methods: {
     addCourse() {
-      let newCourseName = this.newCourseName;
+      if (!this.formIsValid) {
+        return;
+      }
 
-      db.collection("courses")
-        .add({ courseName: newCourseName, instructorId: user.uid })
-        .then(() => {
-          console.log("Class addition successful");
-        })
-        .catch(err => {
-          console.log("Error: " + err);
-        });
+      this.$store.dispatch("addNewCourse", {
+        newCourseName: this.newCourseName
+      });
+
       this.clearField();
       this.dialog = false;
       this.updateCourseList();

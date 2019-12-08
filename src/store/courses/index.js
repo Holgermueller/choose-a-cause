@@ -1,4 +1,3 @@
-import * as firebase from "firebase";
 import db from "../../components/firebase/firebaseInit";
 
 export default {
@@ -22,6 +21,11 @@ export default {
 
     addCourse(state, payload) {
       state.courseList.push(payload);
+    },
+
+    deleteCourse(state, payload) {
+      const index = state.courseList.findIndex(course => course.id === payload);
+      state.courseList.splice(index, 1);
     }
   },
 
@@ -73,7 +77,20 @@ export default {
         });
     },
 
-    deleteCourse() {}
+    deleteCourse({ commit }, payload) {
+      let targetId = payload.courseId;
+
+      db.collection("courses")
+        .doc(targetId)
+        .delete()
+        .then(() => {
+          commit("deleteCourse");
+          console.log("Document successfully deleted!");
+        })
+        .catch(err => {
+          console.error("Error removing document: " + err);
+        });
+    }
   },
 
   getters: {

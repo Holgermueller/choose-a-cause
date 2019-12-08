@@ -33,13 +33,15 @@ import AddCourseDialog from "../Dialogs/addACourse";
 
 export default {
   name: "Profile",
+
   components: {
     CourseCard,
     AddCourseDialog
   },
 
   created() {
-    console.log(this.$store.state.courseList);
+    console.log(this.$store.getters.loadCourseList);
+    return this.$store.getters.loadCourseList;
   },
 
   computed: {

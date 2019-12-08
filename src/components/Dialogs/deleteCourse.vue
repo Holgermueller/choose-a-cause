@@ -59,19 +59,11 @@ export default {
 
   methods: {
     deleteCourse(index) {
-      this.CourseList.splice(index, 1);
+      this.courseList.splice(index, 1);
 
-      let targetId = event.currentTarget.courseId;
-
-      db.collection("courses")
-        .doc(targetId)
-        .delete()
-        .then(() => {
-          console.log("Document successfully deleted!");
-        })
-        .catch(err => {
-          console.error("Error removing document: " + err);
-        });
+      this.$store.dispatch("deleteCourse", {
+        courseId: this.courseId
+      });
     }
   }
 };

@@ -52,9 +52,9 @@ export default {
                 courseName: doc.data().courseName
               };
               newCourses.push(data);
+              commit("setCourseList", newCourses);
+              commit("setLoading", false);
             });
-            commit("setCourseList", newCourses);
-            commit("setLoading", false);
           }
         })
         .catch(err => {
@@ -63,11 +63,11 @@ export default {
         });
     },
 
-    addNewCourse({ commit }, payload) {
+    addNewCourse({ commit, getters }, payload) {
       const newCourse = payload.newCourseName;
 
       db.collection("courses")
-        .add({ courseName: newCourse })
+        .add({ courseName: newCourse, creatorId: getters.user.id })
         .then(() => {
           commit("addCourse", ...newCourse);
           console.log("Class addition successful!");

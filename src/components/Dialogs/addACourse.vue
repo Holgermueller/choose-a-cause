@@ -82,29 +82,29 @@ export default {
 
       this.clearField();
       this.dialog = false;
-      this.updateCourseList();
+      //this.updateCourseList();
     },
 
-    updateCourseList() {
-      let courseList = this.courseList;
+    // updateCourseList() {
+    //   let courseList = this.courseList;
 
-      courseList.length = 0;
+    //   courseList.length = 0;
 
-      db.collection("courses")
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            const data = {
-              courseId: doc.id,
-              courseName: doc.data().courseName
-            };
-            this.courseList.push(data);
-          });
-        })
-        .catch(err => {
-          console.log("Error getting document: " + err);
-        });
-    },
+    //   db.collection("courses")
+    //     .get()
+    //     .then(querySnapshot => {
+    //       querySnapshot.forEach(doc => {
+    //         const data = {
+    //           courseId: doc.id,
+    //           courseName: doc.data().courseName
+    //         };
+    //         this.courseList.push(data);
+    //       });
+    //     })
+    //     .catch(err => {
+    //       console.log("Error getting document: " + err);
+    //     });
+    // },
 
     clearField() {
       this.$refs.textField.reset();

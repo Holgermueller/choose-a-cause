@@ -13,14 +13,16 @@ Vue.config.productionTip = false;
 
 Vue.component("app-alert", AlertCmp);
 
-let app;
-firebase.auth().onAuthStateChanged(user => {
-  if (!app) {
-    app = new Vue({
-      vuetify,
-      router,
-      store,
-      render: h => h(App)
-    }).$mount("#app");
+new Vue({
+  vuetify,
+  router,
+  store,
+  render: h => h(App),
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch("autoSignIn", user);
+      }
+    });
   }
-});
+}).$mount("#app");

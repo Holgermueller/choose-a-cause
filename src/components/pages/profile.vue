@@ -14,6 +14,13 @@
     <h1 class="sub-header">Here are your classes:</h1>
 
     <div class="courses-display">
+      <v-progress-linear
+        height="11"
+        indeterminate
+        rounded
+        v-if="loading"
+      ></v-progress-linear>
+
       <CourseCard
         class="single-card"
         v-for="(singleCourse, index) in courseList"
@@ -41,12 +48,17 @@ export default {
 
   created() {
     console.log(this.$store.getters.loadCourseList);
+    console.log(this.$store.state.courseList);
     return this.$store.getters.loadCourseList;
   },
 
   computed: {
     courseList() {
       return this.$store.getters.loadCourseList;
+    },
+
+    loading() {
+      return this.$store.getters.loading;
     }
   },
 

@@ -52,7 +52,7 @@ export default {
                 courseName: doc.data().courseName
               };
               newCourses.push(data);
-              commit("setCourseList", newCourses);
+              commit("setCourseList", ...data);
               commit("setLoading", false);
             });
           }
@@ -70,7 +70,6 @@ export default {
         .add({ courseName: newCourse, creatorId: getters.user.id })
         .then(() => {
           commit("addCourse", ...newCourse);
-          console.log("Class addition successful!");
         })
         .catch(err => {
           console.log(err);

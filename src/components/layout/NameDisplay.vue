@@ -19,7 +19,7 @@ import db from "../firebase/firebaseInit";
 export default {
   name: "NameDisplay",
   props: {
-    CourseRoster: {
+    courseRoster: {
       type: Array,
       required: true
     }
@@ -31,12 +31,12 @@ export default {
   },
   methods: {
     chooseAName() {
-      let CourseRoster = this.CourseRoster;
+      let courseRoster = this.courseRoster;
       let randomStudent =
-        CourseRoster[Math.floor(Math.random() * CourseRoster.length)];
+        courseRoster[Math.floor(Math.random() * courseRoster.length)];
       let calledArray = this.calledArray;
 
-      if (calledArray.length === CourseRoster.length) {
+      if (calledArray.length === courseRoster.length) {
         this.calledArray = [];
         this.chooseAName();
       } else if (this.calledArray.includes(randomStudent.preferredName)) {

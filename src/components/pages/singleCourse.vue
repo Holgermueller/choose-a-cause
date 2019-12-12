@@ -1,20 +1,20 @@
 <template>
   <div id="roster">
-    <h1 class="course-name-display" id="CourseNameDisplay" :title="CourseName">
-      {{ CourseName }} Roster:
+    <h1 class="course-name-display" id="CourseNameDisplay" :title="courseName">
+      {{ courseName }} Roster:
     </h1>
-    <p>{{ CourseId }}</p>
+    <p>{{ courseId }}</p>
 
     <div class="name-display-div">
-      <NameDisplay :CourseRoster="CourseRoster" />
+      <NameDisplay :courseRoster="courseRoster" />
     </div>
 
     <div class="add-student-div">
-      <AddStudentDialog :CourseId="CourseId" :CourseRoster="CourseRoster" />
+      <AddStudentDialog :courseId="courseId" :courseRoster="courseRoster" />
     </div>
 
     <div class="back-button">
-      <router-link to="/user/:userId">
+      <router-link to="/user">
         <v-btn color="primary" block>
           <span class="mdi mdi-view-dashboard"></span> Back to dashboard
         </v-btn>
@@ -30,15 +30,15 @@
           <div class="roster-display">
             <RosterCard
               class="roster-card"
-              v-for="(singleStudent, index) in CourseRoster"
+              v-for="(singleStudent, index) in courseRoster"
               :key="singleStudent.studentId"
               :firstName="singleStudent.firstName"
               :lastName="singleStudent.lastName"
               :preferredName="singleStudent.preferredName"
               :index="index"
               :studentId="singleStudent.studentId"
-              :CourseRoster="CourseRoster"
-              :CourseId="CourseId"
+              :courseRoster="courseRoster"
+              :courseId="courseId"
             />
           </div>
         </v-expansion-panel-content>
@@ -61,22 +61,22 @@ export default {
     NameDisplay
   },
   props: {
-    CourseId: {
+    courseId: {
       type: String,
       required: true
     }
   },
   data() {
     return {
-      CourseRoster: [],
-      CourseName: this.$route.params.CourseName,
+      courseRoster: [],
+      courseName: this.$route.params.courseName,
       newCourseName: ""
     };
   },
 
   created() {
     db.collection("courses")
-      .doc(this.CourseId)
+      .doc(this.courseId)
       .collection("roster")
       .get()
       .then(snapshot => {
@@ -88,7 +88,7 @@ export default {
             preferredName: doc.data().preferredname
           };
           console.log(data);
-          this.CourseRoster.push(data);
+          this.courseRoster.push(data);
         });
       })
       .catch(err => {

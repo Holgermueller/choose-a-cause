@@ -55,7 +55,7 @@ export default {
     },
 
     autoSignIn({ commit }, payload) {
-      commit("setUser", { id: payload.uid });
+      commit("setUser", { id: payload.uid, courses: [] });
     },
 
     logout({ commit }) {

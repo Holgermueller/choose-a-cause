@@ -2,13 +2,6 @@
   <div>
     <v-hover id="CourseId" v-slot:default="{ hover }">
       <v-card :elevation="hover ? 12 : 2">
-        <!-- <v-progress-linear
-          height="11"
-          indeterminate
-          rounded
-          :loading="loading"
-          :disabled="loading"
-        ></v-progress-linear> -->
         <h1 class="course-name">{{ courseName }}</h1>
         <v-card-actions>
           <DeleteCourse
@@ -61,11 +54,7 @@ export default {
     }
   },
 
-  computed: {
-    loading() {
-      return this.$store.getters.loading;
-    }
-  },
+  computed: {},
 
   methods: {
     goToRoster() {

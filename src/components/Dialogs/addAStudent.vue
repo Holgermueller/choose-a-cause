@@ -44,7 +44,7 @@
             <span class="mdi mdi-cancel"></span> Cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue" :CourseId="CourseId" @click="submitStudent">
+          <v-btn color="blue" :courseId="courseId" @click="submitStudent">
             <span class="mdi mdi-check-bold"></span> Submit
           </v-btn>
         </v-card-actions>
@@ -59,11 +59,11 @@ import db from "../firebase/firebaseInit";
 export default {
   name: "AddStudentDialog",
   props: {
-    CourseId: {
+    courseId: {
       type: String,
       required: true
     },
-    CourseRoster: {
+    courseRoster: {
       type: Array,
       required: true
     }
@@ -83,7 +83,7 @@ export default {
       let preferredName = this.preferredName;
 
       db.collection("courses")
-        .doc(this.CourseId)
+        .doc(this.courseId)
         .collection("roster")
         .add({
           firstname: firstName,
@@ -107,12 +107,12 @@ export default {
     },
 
     updateRoster() {
-      let CourseRoster = this.CourseRoster;
+      let courseRoster = this.courseRoster;
 
-      CourseRoster.length = 0;
+      courseRoster.length = 0;
 
       db.collection("courses")
-        .doc(this.CourseId)
+        .doc(this.courseId)
         .collection("roster")
         .get()
         .then(snapshot => {

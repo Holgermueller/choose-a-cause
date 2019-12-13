@@ -64,8 +64,8 @@ export default {
   name: "LoginForm",
   data() {
     return {
-      email: null,
-      password: null,
+      email: "",
+      password: "",
       show_password: false,
       currentUser: false,
       userId: null,

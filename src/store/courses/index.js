@@ -47,12 +47,12 @@ export default {
           } else {
             let newCourses = [];
             data.forEach(doc => {
-              let data = {
+              let courseData = {
                 courseId: doc.id,
                 courseName: doc.data().courseName
               };
-              newCourses.push(data);
-              commit("setCourseList", ...data);
+              newCourses.push(courseData);
+              commit("setCourseList", newCourses);
               commit("setLoading", false);
             });
           }

@@ -85,10 +85,10 @@ export default {
   name: "RegistrationForm",
   data() {
     return {
-      username: null,
-      email: null,
-      password: null,
-      confirm_password: null,
+      username: "",
+      email: "",
+      password: "",
+      confirm_password: "",
       show_password: false,
       show_confirm_password: false,
       valid: true,

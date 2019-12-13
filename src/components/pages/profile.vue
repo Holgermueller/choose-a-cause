@@ -2,8 +2,8 @@
   <div id="profile">
     <div id="profileHeader">
       <h1>
-        <span class="mdi mdi-account-circle"></span> Hello, Professor {name goes
-        here}
+        <span class="mdi mdi-account-circle"></span> Hello, Professor
+        {{ userId }}
       </h1>
     </div>
 
@@ -46,6 +46,8 @@ export default {
     AddCourseDialog
   },
 
+  props: {},
+
   created() {
     console.log(this.$store.getters.loadCourseList);
     console.log(this.$store.state.courseList);
@@ -55,6 +57,10 @@ export default {
   computed: {
     courseList() {
       return this.$store.getters.loadCourseList;
+    },
+
+    userId() {
+      this.$route.params.userId;
     },
 
     loading() {

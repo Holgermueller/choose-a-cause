@@ -1,4 +1,4 @@
-import db from "../../components/firebase/firebaseInit";
+import firebase from "../../components/firebase/firebaseInit";
 
 export default {
   state: {
@@ -32,33 +32,26 @@ export default {
   actions: {
     getCourseListFromDB({ commit }) {
       commit("setLoading", true);
-      db.collection("courses")
+
+      firebase
+        .collection("courses")
         .get()
-        .then(data => {
-          if (data.empty) {
-            let newCourses = [];
-            let data = {
-              courseName: "No courses here. Better add some.",
-              courseId: "OhNoOhNoOhNo"
+        .then(querySnapshot => {
+          console.log(querySnapshot);
+          let coursesFromDb = [];
+          querySnapshot.forEach(doc => {
+            let courseData = {
+              courseId: doc.id,
+              courseName: doc.data().courseName
             };
-            newCourses.push(data);
-            commit("setCourseList", newCourses);
+            console.log(coursesFromDb);
+            coursesFromDb.push(courseData);
+            commit("setCourseList", coursesFromDb);
             commit("setLoading", false);
-          } else {
-            let newCourses = [];
-            data.forEach(doc => {
-              let courseData = {
-                courseId: doc.id,
-                courseName: doc.data().courseName
-              };
-              newCourses.push(courseData);
-              commit("setCourseList", newCourses);
-              commit("setLoading", false);
-            });
-          }
+          });
         })
         .catch(err => {
-          commit("setLoading", false);
+          commit("setLoading", true);
           alert("Error getting docs: " + err);
         });
     },
@@ -66,7 +59,8 @@ export default {
     addNewCourse({ commit, getters }, payload) {
       const newCourse = payload.newCourseName;
 
-      db.collection("courses")
+      firebase
+        .collection("courses")
         .add({ courseName: newCourse, creatorId: getters.user.id })
         .then(() => {
           commit("addCourse", ...newCourse);
@@ -79,7 +73,8 @@ export default {
     deleteCourse({ commit }, payload) {
       let targetId = payload.courseId;
 
-      db.collection("courses")
+      firebase
+        .collection("courses")
         .doc(targetId)
         .delete()
         .then(() => {

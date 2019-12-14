@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
 import router from "./router";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import "./components/firebase/firebaseInit";
 import { store } from "./store";
 import AlertCmp from "./components/shared/alert.vue";

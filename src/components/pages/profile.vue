@@ -29,6 +29,7 @@
         :courseId="singleCourse.courseId"
         :courseList="courseList"
         :index="index"
+        v-if="!loading"
       />
     </div>
   </div>
@@ -46,12 +47,9 @@ export default {
     AddCourseDialog
   },
 
-  props: {},
-
   created() {
     console.log(this.$store.getters.loadCourseList);
-    console.log(this.$store.state.courseList);
-    return this.$store.getters.loadCourseList;
+    console.log(this.$store.getters.user);
   },
 
   computed: {
@@ -60,7 +58,7 @@ export default {
     },
 
     userId() {
-      this.$route.params.userId;
+      return this.$store.getters.user.id;
     },
 
     loading() {

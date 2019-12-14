@@ -1,4 +1,4 @@
-import * as firebase from "firebase";
+import * as firebase from "firebase/app";
 
 export default {
   state: {
@@ -54,8 +54,8 @@ export default {
         });
     },
 
-    autoSignIn({ commit }, payload) {
-      commit("setUser", { id: payload.uid, courses: [] });
+    autoSignIn({ commit, getters }, payload) {
+      commit("setUser", { id: payload.uid, courses: getters.courses });
     },
 
     logout({ commit }) {

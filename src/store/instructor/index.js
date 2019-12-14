@@ -1,4 +1,5 @@
 import * as firebase from "firebase/app";
+import db from "../../components/firebase/firebaseInit";
 
 export default {
   state: {
@@ -12,7 +13,7 @@ export default {
   },
 
   actions: {
-    registerUser({ commit }, payload) {
+    registerUser({ commit, getters }, payload) {
       commit("setLoading", true);
       commit("clearError");
 
@@ -30,6 +31,20 @@ export default {
         .catch(err => {
           commit("setLoading", false);
           commit("setError", err);
+        });
+    },
+
+    createNewUserProfile({ commit, getters }, payload) {
+      const newUser = { username: payload.username, userId: payload.uid };
+
+      db.collection("users")
+        .add({ username: payload.username, userId: getters.user.id })
+        .then(() => {
+          commit("setUser", ...newUser);
+        })
+        .catch(err => {
+          commit("setError", err);
+          commit("setLoading", false);
         });
     },
 
@@ -51,6 +66,15 @@ export default {
         .catch(err => {
           commit("setLoading", false);
           commit("setError", err);
+        });
+    },
+
+    getUserProfile({ commit, getters }, payload) {
+      db.collection("users")
+        .get()
+        .then()
+        .catch(err => {
+          console.log(err);
         });
     },
 

@@ -50,6 +50,7 @@ export default {
   created() {
     console.log(this.$store.getters.loadCourseList);
     console.log(this.$store.getters.user);
+    console.log(this.$store.getters.user.userName);
   },
 
   computed: {
@@ -59,6 +60,10 @@ export default {
 
     userId() {
       return this.$store.getters.user.id;
+    },
+
+    userName() {
+      return this.$store.getters.user.userName;
     },
 
     loading() {

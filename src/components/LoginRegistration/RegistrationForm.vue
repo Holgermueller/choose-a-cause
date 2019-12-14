@@ -172,6 +172,10 @@ export default {
         email: this.email,
         password: this.password
       });
+
+      this.$store.dispatch("createNewUserProfile", {
+        username: this.username
+      });
     },
 
     clearRegistrationForm() {

@@ -29,7 +29,6 @@
         :courseId="singleCourse.courseId"
         :courseList="courseList"
         :index="index"
-        v-if="!loading"
       />
     </div>
   </div>

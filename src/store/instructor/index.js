@@ -13,7 +13,7 @@ export default {
   },
 
   actions: {
-    registerUser({ commit, getters }, payload) {
+    registerUser({ commit }, payload) {
       commit("setLoading", true);
       commit("clearError");
 
@@ -23,6 +23,7 @@ export default {
         .then(user => {
           commit("setLoading", false);
           const newUser = {
+            email: user.email,
             id: user.uid,
             courses: []
           };
@@ -35,16 +36,20 @@ export default {
     },
 
     createNewUserProfile({ commit, getters }, payload) {
-      const newUser = { username: payload.username, userId: payload.uid };
-
+      const newUserName = payload.username;
+      const userEmail = payload.email;
+      //const userId = user.uid;
       db.collection("users")
-        .add({ username: payload.username, userId: getters.user.id })
+        .add({
+          username: newUserName,
+          email: userEmail,
+          userId: getters.user.id
+        })
         .then(() => {
-          commit("setUser", ...newUser);
+          console.log("New user added...");
         })
         .catch(err => {
           commit("setError", err);
-          commit("setLoading", false);
         });
     },
 
@@ -58,6 +63,7 @@ export default {
         .then(user => {
           commit("setLoading", false);
           const signedInUser = {
+            email: user.email,
             id: user.id,
             courses: []
           };

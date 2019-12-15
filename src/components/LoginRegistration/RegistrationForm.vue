@@ -174,7 +174,8 @@ export default {
       });
 
       this.$store.dispatch("createNewUserProfile", {
-        username: this.username
+        username: this.username,
+        email: this.email
       });
     },
 

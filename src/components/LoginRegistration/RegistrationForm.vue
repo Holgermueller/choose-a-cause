@@ -170,13 +170,14 @@ export default {
     registerUser(e) {
       this.$store.dispatch("registerUser", {
         email: this.email,
-        password: this.password
+        password: this.password,
+        username: this.username
       });
 
-      this.$store.dispatch("createNewUserProfile", {
-        username: this.username,
-        email: this.email
-      });
+      // this.$store.dispatch("createNewUserProfile", {
+      //   username: this.username,
+      //   email: this.email
+      // });
     },
 
     clearRegistrationForm() {

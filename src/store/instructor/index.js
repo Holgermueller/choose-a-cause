@@ -28,6 +28,14 @@ export default {
             courses: []
           };
           commit("setUser", newUser);
+
+          const username = payload.username;
+          const userEmail = payload.email;
+          return db
+            .collection("users")
+            .doc(user.uid)
+            .set({ username: username, userEmail: userEmail });
+          //console.log("New user added!");
         })
         .catch(err => {
           commit("setLoading", false);
@@ -35,23 +43,23 @@ export default {
         });
     },
 
-    createNewUserProfile({ commit, getters }, payload) {
-      const newUserName = payload.username;
-      const userEmail = payload.email;
-      //const userId = user.uid;
-      db.collection("users")
-        .add({
-          username: newUserName,
-          email: userEmail,
-          userId: getters.user.id
-        })
-        .then(() => {
-          console.log("New user added...");
-        })
-        .catch(err => {
-          commit("setError", err);
-        });
-    },
+    // createNewUserProfile({ commit, getters }, payload) {
+    //   const newUserName = payload.username;
+    //   const userEmail = payload.email;
+    //   //const userId = user.uid;
+    //   db.collection("users")
+    //     .add({
+    //       username: newUserName,
+    //       email: userEmail,
+    //       userId: getters.user.id
+    //     })
+    //     .then(() => {
+    //       console.log("New user added...");
+    //     })
+    //     .catch(err => {
+    //       commit("setError", err);
+    //     });
+    // },
 
     userLogin({ commit }, payload) {
       commit("setLoading", true);

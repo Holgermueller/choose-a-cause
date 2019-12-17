@@ -29,13 +29,18 @@ export default {
           };
           commit("setUser", newUser);
 
-          const username = payload.username;
-          const userEmail = payload.email;
-          return db
-            .collection("users")
-            .doc(user.uid)
-            .set({ username: username, userEmail: userEmail });
-          //console.log("New user added!");
+          db.collection("users")
+            .add({
+              username: payload.username,
+              email: user.email,
+              userId: user.uid
+            })
+            .then(() => {
+              console.log("New user added!");
+            })
+            .catch(err => {
+              console.log(err);
+            });
         })
         .catch(err => {
           commit("setLoading", false);
@@ -48,10 +53,11 @@ export default {
     //   const userEmail = payload.email;
     //   //const userId = user.uid;
     //   db.collection("users")
-    //     .add({
+    //     .doc(getters.newUser.uid)
+    //     .set({
     //       username: newUserName,
     //       email: userEmail,
-    //       userId: getters.user.id
+    //       userId: getters.newUser.uid
     //     })
     //     .then(() => {
     //       console.log("New user added...");
@@ -69,6 +75,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(user => {
+          console.log(user);
           commit("setLoading", false);
           const signedInUser = {
             email: user.email,

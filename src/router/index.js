@@ -4,6 +4,8 @@ import Home from "../components/index";
 import About from "../components/pages/about";
 import Profile from "../components/pages/profile";
 import SingleCourse from "../components/pages/singleCourse";
+import ForgotPassword from "../components/pages/forgotPassword";
+import ResetPassword from "../components/pages/resetPassword";
 import firebase from "firebase";
 
 Vue.use(VueRouter);
@@ -13,6 +15,16 @@ let router = new VueRouter({
   routes: [
     { path: "/", name: "Home", component: Home },
     { path: "/about", name: "About", component: About },
+    {
+      path: "/forgotPassword",
+      name: "ForgotPassword",
+      component: ForgotPassword
+    },
+    {
+      path: "/resetPassword",
+      name: "ResetPassword",
+      component: ResetPassword
+    },
     {
       path: "/user",
       name: "Profile",

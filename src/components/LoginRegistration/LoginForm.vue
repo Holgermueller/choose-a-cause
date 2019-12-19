@@ -23,6 +23,11 @@
           @click:append="show_password = !show_password"
         ></v-text-field>
       </v-flex>
+      <v-flex xs12 sm12 md12 lg12 xl12>
+        <router-link to="/forgotPassword">
+          <p>Forgot Password?</p>
+        </router-link>
+      </v-flex>
     </v-form>
 
     <section id="loginErrorDisplay" v-if="errors.length">

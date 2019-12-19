@@ -57,7 +57,7 @@ export default {
     },
 
     userId() {
-      return this.$store.getters.userProfile.email;
+      return this.$store.getters.userProfile.username;
     },
 
     userName() {

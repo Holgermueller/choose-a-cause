@@ -30,9 +30,9 @@ export default {
           const user = userCredential.user;
 
           const newUser = {
+            username: payload.username,
             email: user.email,
-            id: user.uid,
-            courses: []
+            id: user.uid
           };
           commit("setUser", newUser);
           commit("setUserProfile", newUser);
@@ -40,11 +40,11 @@ export default {
           db.collection("users")
             .add({
               username: payload.username,
-              email: user.email,
+              email: payload.email,
               userId: user.uid
             })
-            .then(() => {
-              console.log("New user added!");
+            .then(doc => {
+              console.log(doc.data());
             })
             .catch(err => {
               commit("setError", err);
@@ -66,7 +66,7 @@ export default {
         .then(user => {
           commit("setLoading", false);
           const signedInUser = {
-            email: user.email,
+            email: payload.email,
             id: user.id,
             courses: []
           };

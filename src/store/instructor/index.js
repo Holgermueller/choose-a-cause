@@ -3,12 +3,16 @@ import db from "../../components/firebase/firebaseInit";
 
 export default {
   state: {
-    user: null
+    user: null,
+    userProfile: []
   },
 
   mutations: {
     setUser(state, payload) {
       state.user = payload;
+    },
+    setUserProfile(state, payload) {
+      state.userProfile = payload;
     }
   },
 
@@ -31,6 +35,7 @@ export default {
             courses: []
           };
           commit("setUser", newUser);
+          commit("setUserProfile", newUser);
 
           db.collection("users")
             .add({
@@ -42,7 +47,7 @@ export default {
               console.log("New user added!");
             })
             .catch(err => {
-              console.log(err);
+              commit("setError", err);
             });
         })
         .catch(err => {
@@ -50,25 +55,6 @@ export default {
           commit("setError", err);
         });
     },
-
-    // createNewUserProfile({ commit, getters }, payload) {
-    //   const newUserName = payload.username;
-    //   const userEmail = payload.email;
-    //   //const userId = user.uid;
-    //   db.collection("users")
-    //     .doc(getters.newUser.uid)
-    //     .set({
-    //       username: newUserName,
-    //       email: userEmail,
-    //       userId: getters.newUser.uid
-    //     })
-    //     .then(() => {
-    //       console.log("New user added...");
-    //     })
-    //     .catch(err => {
-    //       commit("setError", err);
-    //     });
-    // },
 
     userLogin({ commit }, payload) {
       commit("setLoading", true);
@@ -78,7 +64,6 @@ export default {
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(user => {
-          console.log(user);
           commit("setLoading", false);
           const signedInUser = {
             email: user.email,
@@ -86,6 +71,17 @@ export default {
             courses: []
           };
           commit("setUser", signedInUser);
+          commit("setUserProfile", signedInUser);
+
+          db.collection("users")
+            .doc(user.id)
+            .get()
+            .then(querySnapshot => {
+              console.log(querySnapshot);
+            })
+            .catch(err => {
+              console.log(err);
+            });
         })
         .catch(err => {
           commit("setLoading", false);
@@ -115,6 +111,9 @@ export default {
   getters: {
     user(state) {
       return state.user;
+    },
+    userProfile(state) {
+      return state.userProfile;
     }
   }
 };

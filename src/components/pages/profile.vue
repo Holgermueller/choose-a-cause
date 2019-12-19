@@ -47,9 +47,8 @@ export default {
   },
 
   created() {
-    console.log(this.$store.getters.loadCourseList);
-    console.log(this.$store.getters.user);
-    console.log(this.$store.getters.user.userName);
+    //return this.$store.getters.loadCourseList;
+    console.log(this.$store.getters.userProfile);
   },
 
   computed: {
@@ -58,7 +57,7 @@ export default {
     },
 
     userId() {
-      return this.$store.getters.user.id;
+      return this.$store.getters.userProfile.email;
     },
 
     userName() {

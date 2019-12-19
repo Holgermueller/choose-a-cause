@@ -154,10 +154,6 @@ export default {
       return regex.test(this.email);
     },
 
-    checkEmailExistsInDatabase(email) {
-      console.log(email);
-    },
-
     isPasswordValid(password) {
       const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
       return regex.test(this.password);
@@ -173,11 +169,6 @@ export default {
         password: this.password,
         username: this.username
       });
-
-      // this.$store.dispatch("createNewUserProfile", {
-      //   username: this.username,
-      //   email: this.email
-      // });
     },
 
     clearRegistrationForm() {

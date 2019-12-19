@@ -37,14 +37,12 @@ export default {
         .collection("courses")
         .get()
         .then(querySnapshot => {
-          console.log(querySnapshot);
           let coursesFromDb = [];
           querySnapshot.forEach(doc => {
             let courseData = {
               courseId: doc.id,
               courseName: doc.data().courseName
             };
-            console.log(coursesFromDb);
             coursesFromDb.push(courseData);
             commit("setCourseList", coursesFromDb);
             commit("setLoading", false);

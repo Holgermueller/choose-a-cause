@@ -2,7 +2,6 @@
   <v-app :dark="setTheme">
     <v-content>
       <Header />
-      <DarkModeToggle />
       <div class="toggle">
         <v-switch label="Dark Mode" v-model="goDark"></v-switch>
       </div>
@@ -16,7 +15,6 @@
 <script>
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-import Home from "./components/index";
 import DarkModeToggle from "./components/buttons/darkModeToggle";
 
 export default {
@@ -24,9 +22,7 @@ export default {
 
   components: {
     Header,
-    Home,
-    Footer,
-    DarkModeToggle
+    Footer
   },
 
   opts: {
@@ -44,7 +40,6 @@ export default {
   computed: {
     setTheme() {
       if (this.goDark == true) {
-        console.log("theme change");
         return (this.$vuetify.theme.dark = true);
       } else {
         return (this.$vuetify.theme.dark = false);

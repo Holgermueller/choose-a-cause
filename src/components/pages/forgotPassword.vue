@@ -24,10 +24,12 @@ export default {
   name: "ForgotPassword",
   data() {
     return {
-      email: ""
+      email: "",
+      errors: []
     };
   },
   methods: {
+    checkValidEmail() {},
     submitEmail() {
       console.log(this.email);
     }

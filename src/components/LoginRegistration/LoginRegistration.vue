@@ -5,7 +5,7 @@
         <v-tab v-for="(form, index) in forms" :key="index">
           <h2>
             <span :class="form.icon"></span>
-            {{form.formName}}
+            {{ form.formName }}
           </h2>
         </v-tab>
       </v-tabs>
@@ -14,7 +14,7 @@
         <v-tab-item v-for="(form, index) in forms" :key="index">
           <v-card>
             <v-card-title class="text-center">
-              <h3>{{form.formMessage}}</h3>
+              <h3>{{ form.formMessage }}</h3>
             </v-card-title>
             <v-card-text>
               <div v-if="form.formName === 'Register'">
@@ -63,7 +63,7 @@ export default {
 
 <style scoped>
 .login-register {
-  margin: 5% auto;
+  margin: 9% auto;
 }
 .form-message {
   text-align: center;

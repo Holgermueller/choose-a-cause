@@ -35,7 +35,8 @@ export default {
   data() {
     return {
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      errors: []
     };
   },
   methods: {}

@@ -20,8 +20,11 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password)
-        .then(user => {
+        .then(userCredential => {
           commit("setLoading", false);
+
+          const user = userCredential.user;
+
           const newUser = {
             email: user.email,
             id: user.uid,

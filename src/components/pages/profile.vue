@@ -3,11 +3,12 @@
     <div id="profileHeader">
       <h1>
         <span class="mdi mdi-account-circle"></span> Hello, Professor
-        {{ userId }}
+        {{ username }}
       </h1>
     </div>
 
     <div class="buttons-div">
+      <UpdateUserInfoDialog />
       <AddCourseDialog :courseList="courseList" />
     </div>
 
@@ -37,18 +38,19 @@
 <script>
 import CourseCard from "../layout/CourseCard";
 import AddCourseDialog from "../Dialogs/addACourse";
+import UpdateUserInfoDialog from "../Dialogs/updateUsername";
 
 export default {
   name: "Profile",
 
   components: {
     CourseCard,
-    AddCourseDialog
+    AddCourseDialog,
+    UpdateUserInfoDialog
   },
 
   created() {
     //return this.$store.getters.loadCourseList;
-    //console.log(this.$store.getters.userProfile);
   },
 
   computed: {
@@ -56,12 +58,8 @@ export default {
       return this.$store.getters.loadCourseList;
     },
 
-    userId() {
-      return this.$store.getters.userProfile.username;
-    },
-
-    userName() {
-      return this.$store.getters.user.userName;
+    username() {
+      return this.$store.getters.user.username;
     },
 
     loading() {

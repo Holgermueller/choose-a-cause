@@ -1,17 +1,17 @@
 import * as firebase from "firebase/app";
-import db from "../../components/firebase/firebaseInit";
 
 export default {
   state: {
-    user: null,
-    userProfile: []
+    user: null
   },
 
   mutations: {
     setUser(state, payload) {
       state.user = payload;
     },
-    setUserProfile(state, payload) {
+
+    updateUsename(state, payload) {
+      state.user = payload;
       state.userProfile = payload;
     }
   },
@@ -47,20 +47,6 @@ export default {
           };
 
           commit("setUser", newUser);
-          commit("setUserProfile", newUser);
-
-          db.collection("users")
-            .add({
-              username: payload.username,
-              email: payload.email,
-              userId: user.uid
-            })
-            .then(doc => {
-              console.log(doc.data());
-            })
-            .catch(err => {
-              commit("setError", err);
-            });
         })
         .catch(err => {
           commit("setLoading", false);
@@ -84,17 +70,6 @@ export default {
             courses: []
           };
           commit("setUser", signedInUser);
-          commit("setUserProfile", signedInUser);
-
-          db.collection("users")
-            .where("userId", "==", signedInUser.id)
-            .get()
-            .then(doc => {
-              console.log(doc);
-            })
-            .catch(err => {
-              console.log(err);
-            });
         })
         .catch(err => {
           commit("setLoading", false);
@@ -111,6 +86,22 @@ export default {
       });
     },
 
+    updateUsename({ commit }, payload) {
+      firebase
+        .auth()
+        .currentUser.updateProfile({
+          displayName: payload.getUserName
+        })
+        .then(() => {
+          commit("setUser", {
+            username: payload.username
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
     logout({ commit }) {
       firebase.auth().signOut();
       commit("setUser", null);
@@ -120,9 +111,6 @@ export default {
   getters: {
     user(state) {
       return state.user;
-    },
-    userProfile(state) {
-      return state.userProfile;
     }
   }
 };

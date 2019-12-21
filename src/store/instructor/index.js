@@ -10,8 +10,7 @@ export default {
       state.user = payload;
     },
 
-    updateUsename(state, payload) {
-      state.user = payload;
+    updateUsername(state, payload) {
       state.userProfile = payload;
     }
   },
@@ -63,12 +62,15 @@ export default {
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(user => {
           commit("setLoading", false);
+
           const signedInUser = {
             email: payload.email,
             id: user.user.uid,
             username: user.user.displayName,
             courses: []
           };
+
+          console.log(signedInUser);
           commit("setUser", signedInUser);
         })
         .catch(err => {

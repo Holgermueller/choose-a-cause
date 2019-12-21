@@ -50,7 +50,7 @@ export default {
   },
 
   created() {
-    //return this.$store.getters.loadCourseList;
+    console.log(this.$store.getters.user.email);
   },
 
   computed: {
@@ -59,15 +59,13 @@ export default {
     },
 
     username() {
-      return this.$store.getters.user.username;
+      return this.$store.getters.username;
     },
 
     loading() {
       return this.$store.getters.loading;
     }
-  },
-
-  methods: {}
+  }
 };
 </script>
 

@@ -86,9 +86,8 @@ export default {
           commit("setUser", signedInUser);
           commit("setUserProfile", signedInUser);
 
-          let userId;
           db.collection("users")
-            .where(signedInUser.id === userId)
+            .where("userId", "==", signedInUser.id)
             .get()
             .then(doc => {
               console.log(doc);

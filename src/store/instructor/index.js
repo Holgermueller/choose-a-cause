@@ -27,13 +27,25 @@ export default {
         .then(userCredential => {
           commit("setLoading", false);
 
-          const user = userCredential.user;
+          const userToUpdate = firebase.auth().currentUser;
+          userToUpdate
+            .updateProfile({
+              displayName: payload.username
+            })
+            .then(() => {
+              console.log("update success!");
+            })
+            .catch(err => {
+              console.log(err);
+            });
 
+          const user = userCredential.user;
           const newUser = {
             username: payload.username,
             email: user.email,
             id: user.uid
           };
+
           commit("setUser", newUser);
           commit("setUserProfile", newUser);
 
@@ -67,17 +79,19 @@ export default {
           commit("setLoading", false);
           const signedInUser = {
             email: payload.email,
-            id: user.id,
+            id: user.user.uid,
+            username: user.user.displayName,
             courses: []
           };
           commit("setUser", signedInUser);
           commit("setUserProfile", signedInUser);
 
+          let userId;
           db.collection("users")
-            .doc(user.id)
+            .where(signedInUser.id === userId)
             .get()
-            .then(querySnapshot => {
-              console.log(querySnapshot);
+            .then(doc => {
+              console.log(doc);
             })
             .catch(err => {
               console.log(err);
@@ -89,17 +103,13 @@ export default {
         });
     },
 
-    getUserProfile({ commit, getters }, payload) {
-      db.collection("users")
-        .get()
-        .then()
-        .catch(err => {
-          console.log(err);
-        });
-    },
-
     autoSignIn({ commit, getters }, payload) {
-      commit("setUser", { id: payload.uid, courses: getters.courses });
+      commit("setUser", {
+        id: payload.uid,
+        email: payload.email,
+        username: payload.username,
+        courses: getters.courses
+      });
     },
 
     logout({ commit }) {

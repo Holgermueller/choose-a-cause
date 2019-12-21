@@ -47,7 +47,11 @@ export default {
       ];
       if (this.userIsAuthenticated) {
         menuLinks = [
-          { icon: "mdi mdi-account", title: "username", link: "/user" },
+          {
+            icon: "mdi mdi-account",
+            title: "{ {getUserProfile} }",
+            link: "/user"
+          },
           {
             icon: "mdi mdi-book-open-page-variant",
             title: "About",
@@ -63,6 +67,10 @@ export default {
         this.$store.getters.user !== null &&
         this.$store.getters.user !== undefined
       );
+    },
+
+    getUserProfile() {
+      return this.$store.user.username;
     }
   },
 

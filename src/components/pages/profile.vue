@@ -48,7 +48,7 @@ export default {
 
   created() {
     //return this.$store.getters.loadCourseList;
-    console.log(this.$store.getters.userProfile);
+    //console.log(this.$store.getters.userProfile);
   },
 
   computed: {

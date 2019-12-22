@@ -39,7 +39,22 @@ export default {
       errors: []
     };
   },
-  methods: {}
+  methods: {
+    checkFormIsEmpty() {
+      this.errors = [];
+
+      if (!this.password && !this.confirmPassword) {
+        this.errors.push("Please fill out all of the fields.");
+      } else if (!this.password) {
+        this.errors.push("New password Required");
+      } else if (!this.confirmPassword) {
+        this.errors.push("Please confirm your password");
+      } else {
+        this.errors.push("Successs!");
+      }
+    },
+    checkIfPasswordIsAlreadyUsed() {}
+  }
 };
 </script>
 

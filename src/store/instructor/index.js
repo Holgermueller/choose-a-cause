@@ -89,6 +89,9 @@ export default {
     },
 
     updateUsename({ commit }, payload) {
+      commit("setLoading", true);
+      commit("clearError");
+
       firebase
         .auth()
         .currentUser.updateProfile({
@@ -100,6 +103,7 @@ export default {
           });
         })
         .catch(err => {
+          commit("setLoading", false);
           console.log(err);
         });
     },
@@ -107,6 +111,22 @@ export default {
     logout({ commit }) {
       firebase.auth().signOut();
       commit("setUser", null);
+    },
+
+    resetPassword({ commit }, payload) {
+      commit("setLoading", true);
+      commit("clearError");
+
+      firebase
+        .auth()
+        .sendPasswordResetEmail(payload.email)
+        .then(() => {
+          console.log("email  sent");
+        })
+        .catch(err => {
+          commit("setLoading", false);
+          commit("setError", err);
+        });
     }
   },
 

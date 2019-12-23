@@ -121,6 +121,7 @@ export default {
         .auth()
         .sendPasswordResetEmail(payload.email)
         .then(() => {
+          commit("setLoading", false);
           console.log("email  sent");
         })
         .catch(err => {

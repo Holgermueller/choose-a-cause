@@ -27,11 +27,26 @@
             <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
           </ul>
         </section>
+
+        <section id="registrationSuccess" v-if="success">
+          <ul class="success-message">
+            <li v-for="(success, index) in successMessages" :key="index">
+              {{ success }}
+            </li>
+          </ul>
+        </section>
       </v-card-text>
       <v-card-actions>
         <v-btn text color="red" @click="resetForm">Clear form</v-btn>
         <v-spacer></v-spacer>
-        <v-btn text color="green" @click="validateForm">Send</v-btn>
+        <v-btn
+          text
+          color="green"
+          @click="validateForm"
+          :loading="loading"
+          :disabled="loading"
+          >Send</v-btn
+        >
       </v-card-actions>
     </v-card>
   </div>
@@ -43,13 +58,22 @@ export default {
   data() {
     return {
       email: "",
-      errors: []
+      errors: [],
+      successMessages: []
     };
   },
 
   computed: {
     error() {
       return this.$store.getters.error;
+    },
+
+    success() {
+      return this.$store.getters.successMessages;
+    },
+
+    loading() {
+      return this.$store.getters.loading;
     }
   },
 
@@ -63,6 +87,7 @@ export default {
         this.errors.push("Email does not meet criteria.");
       } else {
         this.submitEmail();
+        this.resetForm();
       }
     },
 
@@ -77,6 +102,7 @@ export default {
         email: this.email
       });
     },
+
     resetForm() {
       this.$refs.form.reset();
     }

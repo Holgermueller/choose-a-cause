@@ -66,8 +66,7 @@ export default {
           const signedInUser = {
             email: payload.email,
             id: user.user.uid,
-            username: user.user.displayName,
-            courses: []
+            username: user.user.displayName
           };
 
           console.log(signedInUser);

@@ -2,7 +2,7 @@
   <div id="updateUserInfo">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
-        <v-btn color="blue" v-on="on">
+        <v-btn block class="button" color="blue" v-on="on">
           Update Username
         </v-btn>
       </template>

@@ -98,12 +98,14 @@ export default {
           displayName: payload.getUserName
         })
         .then(() => {
+          commit("setLoading", false);
           commit("setUser", {
             username: payload.username
           });
         })
         .catch(err => {
           commit("setLoading", false);
+          commit("setError", err);
           console.log(err);
         });
     },

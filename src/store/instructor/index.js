@@ -106,7 +106,6 @@ export default {
         .catch(err => {
           commit("setLoading", false);
           commit("setError", err);
-          console.log(err);
         });
     },
 
@@ -124,7 +123,6 @@ export default {
         .sendPasswordResetEmail(payload.email)
         .then(() => {
           commit("setLoading", false);
-          console.log("email  sent");
         })
         .catch(err => {
           commit("setLoading", false);

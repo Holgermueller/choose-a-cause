@@ -50,7 +50,7 @@ export default {
   },
 
   created() {
-    console.log(this.$store.getters.user.displayName);
+    console.log(this.$store.getters.user);
   },
 
   computed: {

@@ -28,7 +28,7 @@
           </ul>
         </section>
 
-        <section id="registrationSuccess" v-if="success">
+        <section id="registrationSuccess" v-if="successMessages.length">
           <ul class="success-message">
             <li v-for="(success, index) in successMessages" :key="index">
               {{ success }}
@@ -97,10 +97,14 @@ export default {
     },
 
     submitEmail(e) {
-      console.log(this.email);
+      this.successMessages = [];
+
       this.$store.dispatch("resetPassword", {
         email: this.email
       });
+      this.successMessages.push(
+        "Success! Check your email to reset your password!"
+      );
     },
 
     resetForm() {

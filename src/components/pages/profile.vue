@@ -54,12 +54,12 @@ export default {
   },
 
   computed: {
-    courseList() {
-      return this.$store.getters.loadCourseList;
+    username() {
+      return this.$store.getters.user.username;
     },
 
-    username() {
-      return this.$store.getters.username;
+    courseList() {
+      return this.$store.getters.loadCourseList;
     },
 
     loading() {

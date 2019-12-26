@@ -15,7 +15,12 @@
         >
           <v-btn><span :class="link.icon"></span> {{ link.title }}</v-btn>
         </router-link>
-        <v-btn v-if="userIsAuthenticated" @click="logout">
+        <v-btn
+          v-if="userIsAuthenticated"
+          @click="logout"
+          :loading="loading"
+          :disabled="loading"
+        >
           <span class="mdi mdi-exit-to-app"></span>
           Sign Out
         </v-btn>
@@ -71,6 +76,10 @@ export default {
 
     getUserProfile() {
       return this.$store.user.username;
+    },
+
+    loading() {
+      return this.$store.getters.loading;
     }
   },
 

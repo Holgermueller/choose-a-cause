@@ -11,7 +11,7 @@ export default {
     },
 
     updateUsername(state, payload) {
-      state.userProfile = payload;
+      state.user = payload;
     }
   },
 
@@ -35,7 +35,7 @@ export default {
               console.log("update success!");
             })
             .catch(err => {
-              console.log(err);
+              commit("setError", err);
             });
 
           const user = userCredential.user;
@@ -45,6 +45,7 @@ export default {
             id: user.uid
           };
 
+          console.log(newUser);
           commit("setUser", newUser);
         })
         .catch(err => {
@@ -64,7 +65,7 @@ export default {
           commit("setLoading", false);
 
           const signedInUser = {
-            email: payload.email,
+            email: user.user.email,
             id: user.user.uid,
             username: user.user.displayName
           };
@@ -78,12 +79,11 @@ export default {
         });
     },
 
-    autoSignIn({ commit, getters }, payload) {
+    autoSignIn({ commit }, payload) {
       commit("setUser", {
         id: payload.uid,
         email: payload.email,
-        username: payload.username,
-        courses: getters.courses
+        username: payload.username
       });
     },
 
@@ -108,11 +108,6 @@ export default {
         });
     },
 
-    logout({ commit }) {
-      firebase.auth().signOut();
-      commit("setUser", null);
-    },
-
     resetPassword({ commit }, payload) {
       commit("setLoading", true);
       commit("clearError");
@@ -124,6 +119,24 @@ export default {
           commit("setLoading", false);
         })
         .catch(err => {
+          commit("setLoading", false);
+          commit("setError", err);
+        });
+    },
+
+    logout({ commit }) {
+      commit("setLoading", true);
+
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          console.log("User is signed out!");
+          commit("setLoading", false);
+          commit("setUser", null);
+        })
+        .catch(err => {
+          console.log("err");
           commit("setLoading", false);
           commit("setError", err);
         });

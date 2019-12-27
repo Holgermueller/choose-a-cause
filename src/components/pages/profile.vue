@@ -47,7 +47,6 @@ export default {
   },
 
   created() {
-    console.log(this.$store.getters.user);
     return this.$store.dispatch("getCourseListFromDB");
   },
 

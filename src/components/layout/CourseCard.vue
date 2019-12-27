@@ -18,7 +18,7 @@
               params: { courseName: courseName, courseId: courseId }
             }"
           >
-            <v-btn color="primary" @click="goToRoster">
+            <v-btn color="primary">
               <span class="mdi mdi-account-group"></span> See roster
             </v-btn>
           </router-link>
@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import db from "../firebase/firebaseInit";
 import DeleteCourse from "../Dialogs/deleteCourse";
 
 export default {
@@ -56,11 +55,7 @@ export default {
 
   computed: {},
 
-  methods: {
-    goToRoster() {
-      let targetId = event.currentTarget.courseId;
-    }
-  }
+  methods: {}
 };
 </script>
 

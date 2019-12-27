@@ -16,7 +16,11 @@ export default {
 
   mutations: {
     setCourseList(state, payload) {
-      state.courseList = payload;
+      if (payload) {
+        state.courseList = payload;
+      } else {
+        state.courseList = [];
+      }
     },
 
     addCourse(state, payload) {
@@ -30,7 +34,7 @@ export default {
   },
 
   actions: {
-    getCourseListFromDB({ commit }) {
+    getCourseListFromDB({ commit, state }, payload) {
       commit("setLoading", true);
 
       firebase
@@ -44,12 +48,13 @@ export default {
               courseName: doc.data().courseName
             };
             coursesFromDb.push(courseData);
-            commit("setCourseList", coursesFromDb);
-            commit("setLoading", false);
           });
+          commit("setCourseList", coursesFromDb);
+          commit("setLoading", false);
         })
         .catch(err => {
           commit("setLoading", true);
+          commit("setError", err);
           alert("Error getting docs: " + err);
         });
     },
@@ -64,7 +69,7 @@ export default {
           commit("addCourse", ...newCourse);
         })
         .catch(err => {
-          console.log(err);
+          commit("setError", err);
         });
     },
 
@@ -77,16 +82,15 @@ export default {
         .delete()
         .then(() => {
           commit("deleteCourse");
-          console.log("Document successfully deleted!");
         })
         .catch(err => {
-          console.error("Error removing document: " + err);
+          commit("setError", err);
         });
     }
   },
 
   getters: {
-    loadCourseList(state) {
+    courseList(state) {
       return state.courseList;
     }
   }

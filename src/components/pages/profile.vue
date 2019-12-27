@@ -14,13 +14,10 @@
 
     <h1 class="sub-header">Here are your classes:</h1>
 
-    <div class="courses-display">
-      <v-progress-linear
-        height="11"
-        indeterminate
-        rounded
-        v-if="loading"
-      ></v-progress-linear>
+    <div class="courses-display" :loading="loading" :disabled="loading">
+      <v-layout row v-if="error">
+        <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+      </v-layout>
 
       <CourseCard
         class="single-card"
@@ -51,21 +48,28 @@ export default {
 
   created() {
     console.log(this.$store.getters.user);
+    return this.$store.dispatch("getCourseListFromDB");
   },
 
   computed: {
     username() {
-      return this.$store.getters.user.username;
+      return this.$store.getters.user;
     },
 
     courseList() {
-      return this.$store.getters.loadCourseList;
+      return this.$store.getters.courseList;
     },
 
     loading() {
       return this.$store.getters.loading;
+    },
+
+    error() {
+      return this.$store.getters.error;
     }
-  }
+  },
+
+  watch: {}
 };
 </script>
 

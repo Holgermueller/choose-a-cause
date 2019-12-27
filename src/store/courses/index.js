@@ -2,16 +2,7 @@ import firebase from "../../components/firebase/firebaseInit";
 
 export default {
   state: {
-    courseList: [
-      {
-        courseName: "Schlepping",
-        courseId: "xxx"
-      },
-      {
-        courseId: "ohnoohnoohno",
-        courseName: "No more courses. Sorry."
-      }
-    ]
+    courseList: []
   },
 
   mutations: {
@@ -34,23 +25,35 @@ export default {
   },
 
   actions: {
-    getCourseListFromDB({ commit, state }, payload) {
+    getCourseListFromDB({ commit, getters }) {
       commit("setLoading", true);
 
       firebase
         .collection("courses")
+        .where("creatorId", "==", getters.user.id)
         .get()
         .then(querySnapshot => {
-          let coursesFromDb = [];
-          querySnapshot.forEach(doc => {
-            let courseData = {
-              courseId: doc.id,
-              courseName: doc.data().courseName
-            };
-            coursesFromDb.push(courseData);
-          });
-          commit("setCourseList", coursesFromDb);
-          commit("setLoading", false);
+          if (querySnapshot.empty) {
+            let coursesFromDb = [
+              {
+                courseId: "xxx",
+                courseName: "Better add some courses!"
+              }
+            ];
+            commit("setCourseList", coursesFromDb);
+            commit("setLoading", false);
+          } else {
+            let coursesFromDb = [];
+            querySnapshot.forEach(doc => {
+              let courseData = {
+                courseId: doc.id,
+                courseName: doc.data().courseName
+              };
+              coursesFromDb.push(courseData);
+            });
+            commit("setCourseList", coursesFromDb);
+            commit("setLoading", false);
+          }
         })
         .catch(err => {
           commit("setLoading", true);

@@ -131,7 +131,6 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          console.log("User is signed out!");
           commit("setLoading", false);
           commit("setUser", null);
         })

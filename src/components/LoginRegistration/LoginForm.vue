@@ -160,4 +160,7 @@ export default {
 .errors-list {
   list-style: none;
 }
+a {
+  text-decoration: none;
+}
 </style>

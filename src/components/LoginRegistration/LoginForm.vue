@@ -137,7 +137,6 @@ export default {
         userId: this.userId,
         currentUser: this.currentUser
       });
-      //this.$router.go({ path: this.$router.path });
     },
 
     clearLoginForm() {

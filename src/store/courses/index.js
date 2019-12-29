@@ -30,35 +30,24 @@ export default {
       firebase
         .collection("courses")
         .where("creatorId", "==", getters.user.id)
-        .get()
-        .then(querySnapshot => {
-          if (querySnapshot.empty) {
-            let coursesFromDb = [
-              {
-                courseId: "xxx",
-                courseName: "Better add some courses!"
-              }
-            ];
-            commit("setCourseList", coursesFromDb);
-            commit("setLoading", false);
-          } else {
-            let coursesFromDb = [];
-            querySnapshot.forEach(doc => {
-              let courseData = {
-                courseId: doc.id,
-                courseName: doc.data().courseName
-              };
-              coursesFromDb.push(courseData);
-            });
-            commit("setCourseList", coursesFromDb);
-            commit("setLoading", false);
-          }
-        })
-        .catch(err => {
-          commit("setLoading", true);
-          commit("setError", err);
-          alert("Error getting docs: " + err);
+        // .orderBy("date")
+        .onSnapshot(querySnapshot => {
+          let coursesFromDb = [];
+          querySnapshot.forEach(doc => {
+            let courseData = {
+              courseId: doc.id,
+              courseName: doc.data().courseName
+            };
+            coursesFromDb.push(courseData);
+          });
+          commit("setCourseList", coursesFromDb);
+          commit("setLoading", false);
         });
+      // .catch(err => {
+      //   commit("setLoading", true);
+      //   commit("setError", err);
+      //   alert("Error getting docs: " + err);
+      // });
     },
 
     addNewCourse({ commit, getters }, payload) {

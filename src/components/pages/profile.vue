@@ -66,9 +66,7 @@ export default {
     error() {
       return this.$store.getters.error;
     }
-  },
-
-  watch: {}
+  }
 };
 </script>
 

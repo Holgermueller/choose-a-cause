@@ -19,8 +19,7 @@ export default {
     },
 
     deleteCourse(state, payload) {
-      const index = state.courseList.findIndex(course => course.id === payload);
-      state.courseList.splice(index, 1);
+      state.courseList.findIndex(course => course.id === payload);
     }
   },
 

@@ -30,24 +30,25 @@ export default {
       firebase
         .collection("courses")
         .where("creatorId", "==", getters.user.id)
-        // .orderBy("date")
-        .onSnapshot(querySnapshot => {
-          let coursesFromDb = [];
-          querySnapshot.forEach(doc => {
-            let courseData = {
-              courseId: doc.id,
-              courseName: doc.data().courseName
-            };
-            coursesFromDb.push(courseData);
-          });
-          commit("setCourseList", coursesFromDb);
-          commit("setLoading", false);
-        });
-      // .catch(err => {
-      //   commit("setLoading", true);
-      //   commit("setError", err);
-      //   alert("Error getting docs: " + err);
-      // });
+        .orderBy("courseName")
+        .onSnapshot(
+          querySnapshot => {
+            let coursesFromDb = [];
+            querySnapshot.forEach(doc => {
+              let courseData = {
+                courseId: doc.id,
+                courseName: doc.data().courseName
+              };
+              coursesFromDb.push(courseData);
+            });
+            commit("setCourseList", coursesFromDb);
+            commit("setLoading", false);
+          },
+          err => {
+            commit("setLoading", true);
+            commit("setError", err);
+          }
+        );
     },
 
     addNewCourse({ commit, getters }, payload) {

@@ -34,7 +34,10 @@
             <span class="mdi mdi-cancel"></span> Cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue" @click="addCourse" :disabled="!formIsValid"
+          <v-btn
+            color="blue"
+            @click.prevent="addCourse"
+            :disabled="!formIsValid"
             ><span class="mdi mdi-check-bold"></span> Submit</v-btn
           >
         </v-card-actions>
@@ -46,13 +49,6 @@
 <script>
 export default {
   name: "AddCourseDialog",
-
-  props: {
-    courseList: {
-      type: Array,
-      required: true
-    }
-  },
 
   data() {
     return {

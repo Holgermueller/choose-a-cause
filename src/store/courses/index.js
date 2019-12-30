@@ -14,10 +14,6 @@ export default {
       }
     },
 
-    addCourse(state, payload) {
-      state.courseList.push(payload);
-    },
-
     deleteCourse(state, payload) {
       state.courseList.findIndex(course => course.id === payload);
     }
@@ -57,9 +53,7 @@ export default {
       firebase
         .collection("courses")
         .add({ courseName: newCourse, creatorId: getters.user.id })
-        .then(() => {
-          commit("addCourse", ...newCourse);
-        })
+        .then(() => {})
         .catch(err => {
           commit("setError", err);
         });

@@ -60,12 +60,14 @@ export default {
     AddStudentDialog,
     NameDisplay
   },
+
   props: {
     courseId: {
       type: String,
       required: true
     }
   },
+
   data() {
     return {
       courseRoster: [],
@@ -75,31 +77,22 @@ export default {
   },
 
   created() {
-    db.collection("courses")
-      .doc(this.courseId)
-      .collection("roster")
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          const data = {
-            studentId: doc.id,
-            firstName: doc.data().firstname,
-            lastName: doc.data().lastname,
-            preferredName: doc.data().preferredname
-          };
-          this.courseRoster.push(data);
-        });
-      })
-      .catch(err => {
-        console.log("Error: " + err);
-      });
+    return this.$store.dispatch("getCourseRoster");
   },
 
-  mounted() {},
+  computed: {
+    courseRoster(){
+      return this.$store.getters.studentsOnCourseRoster;
+    },
 
-  watch: {},
+    loading() {
+      return this.$store.getters.loading;
+    },
 
-  methods: {}
+    error() {
+      return this.$store.getters.error;
+  },
+
 };
 </script>
 

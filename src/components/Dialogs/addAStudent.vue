@@ -44,7 +44,11 @@
             <span class="mdi mdi-cancel"></span> Cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue" :courseId="courseId" @click="submitStudent">
+          <v-btn
+            color="blue"
+            :courseId="courseId"
+            @click.prevent="submitStudent"
+          >
             <span class="mdi mdi-check-bold"></span> Submit
           </v-btn>
         </v-card-actions>
@@ -54,20 +58,15 @@
 </template>
 
 <script>
-import db from "../firebase/firebaseInit";
-
 export default {
   name: "AddStudentDialog",
   props: {
     courseId: {
       type: String,
       required: true
-    },
-    courseRoster: {
-      type: Array,
-      required: true
     }
   },
+
   data() {
     return {
       dialog: false,
@@ -76,59 +75,26 @@ export default {
       preferredName: null
     };
   },
+
+  computed: {
+    formIsValid() {}
+  },
+
   methods: {
     submitStudent() {
-      let firstName = this.firstName;
-      let lastName = this.lastName;
-      let preferredName = this.preferredName;
+      this.$store.dispatch("addStudentToRoster", {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        preferredName: this.preferredName,
+        courseId: this.courseId
+      });
 
-      db.collection("courses")
-        .doc(this.courseId)
-        .collection("roster")
-        .add({
-          firstname: firstName,
-          lastname: lastName,
-          preferredname: preferredName
-        })
-        .then(() => {
-          console.log("Student successfully added!");
-        })
-        .catch(err => {
-          console.log("An error has occurred: " + err);
-        });
-
-      this.dialog = false;
       this.clearForm();
-      this.updateRoster();
+      this.dialog = false;
     },
 
     clearForm() {
       this.$refs.form.reset();
-    },
-
-    updateRoster() {
-      let courseRoster = this.courseRoster;
-
-      courseRoster.length = 0;
-
-      db.collection("courses")
-        .doc(this.courseId)
-        .collection("roster")
-        .get()
-        .then(snapshot => {
-          snapshot.forEach(doc => {
-            const data = {
-              studentId: doc.id,
-              firstName: doc.data().firstname,
-              lastName: doc.data().lastname,
-              preferredName: doc.data().preferredname
-            };
-            this.CourseRoster.push(data);
-          });
-        })
-        .catch(err => {
-          console.log("Error: " + err);
-        });
     }
   }
 };

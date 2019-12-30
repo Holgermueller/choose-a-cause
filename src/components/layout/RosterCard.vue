@@ -87,8 +87,6 @@ export default {
 
   methods: {
     updatePreferredNameOnDOM(updatedPreferredName) {
-      console.log("click");
-
       let preferredNameForDisplay = updatedPreferredName;
     }
   }

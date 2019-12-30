@@ -87,7 +87,6 @@ export default {
             lastName: doc.data().lastname,
             preferredName: doc.data().preferredname
           };
-          console.log(data);
           this.courseRoster.push(data);
         });
       })

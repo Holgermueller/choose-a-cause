@@ -28,7 +28,7 @@ export default {
       firebase
         .collection("roster")
         //.where("courseId", "==", getters.$route)
-        //.orderBy("preferredName")
+        .orderBy("preferredname")
         .onSnapshot(
           querySnapshot => {
             let studentsFromDb = [];

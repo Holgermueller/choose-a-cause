@@ -2,22 +2,22 @@ import firebase from "../../components/firebase/firebaseInit";
 
 export default {
   state: {
-    studentsOnCourseRoster: []
+    courseRoster: []
   },
 
   mutations: {
     setCourseRoster(state, payload) {
       if (payload) {
-        state.studentsOnCourseRoster = payload;
+        state.courseRoster = payload;
       } else {
-        state.studentsOnCourseRoster = [];
+        state.courseRoster = [];
       }
     },
 
     updateStudentInfo() {},
 
     removeStudentFromRoster(state, payload) {
-      state.studentsOnCourseRoster.findIndex(student => student.id === payload);
+      state.courseRoster.findIndex(student => student.id === payload);
     }
   },
 
@@ -27,17 +27,17 @@ export default {
 
       firebase
         .collection("roster")
-        .where()
-        .orderBy("preferredName")
+        //.where("courseId", "==", getters.$route)
+        //.orderBy("preferredName")
         .onSnapshot(
           querySnapshot => {
             let studentsFromDb = [];
             querySnapshot.forEach(doc => {
               let studentData = {
                 studentId: doc.id,
-                firstName: doc.data().firstName,
-                lastName: doc.data().lastName,
-                preferredName: doc.data().preferredName,
+                firstName: doc.data().firstname,
+                lastName: doc.data().lastname,
+                preferredName: doc.data().preferredname,
                 courseId: doc.data().courseId
               };
               studentsFromDb.push(studentData);
@@ -90,7 +90,7 @@ export default {
 
   getters: {
     courseRoster(state) {
-      return state.studentsOnCourseRoster;
+      return state.courseRoster;
     }
   }
 };

@@ -14,7 +14,7 @@
           <v-card>
             <v-card-actions>
               <DeleteStudentDialog
-                :CourseRoster="CourseRoster"
+                :courseRoster="courseRoster"
                 :studentId="studentId"
                 :courseId="courseId"
                 :index="index"
@@ -39,7 +39,6 @@
 <script>
 import UpdateStudentDialog from "../Dialogs/updateStudent";
 import DeleteStudentDialog from "../Dialogs/deleteStudent";
-import { bus } from "../../main";
 
 export default {
   name: "RosterCard",
@@ -69,7 +68,7 @@ export default {
       type: Number,
       required: true
     },
-    CourseRoster: {
+    courseRoster: {
       type: Array,
       required: true
     },

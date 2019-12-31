@@ -70,9 +70,7 @@ export default {
 
   data() {
     return {
-      courseRoster: [],
-      courseName: this.$route.params.courseName,
-      newCourseName: ""
+      courseName: this.$route.params.courseName
     };
   },
 
@@ -81,8 +79,8 @@ export default {
   },
 
   computed: {
-    courseRoster(){
-      return this.$store.getters.studentsOnCourseRoster;
+    courseRoster() {
+      return this.$store.getters.courseRoster;
     },
 
     loading() {
@@ -91,8 +89,8 @@ export default {
 
     error() {
       return this.$store.getters.error;
-  },
-
+    }
+  }
 };
 </script>
 

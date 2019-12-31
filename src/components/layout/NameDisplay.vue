@@ -45,8 +45,6 @@ export default {
         this.calledArray.push(randomStudent.preferredName);
       }
 
-      console.log(randomStudent.preferredName);
-
       document.querySelector("#displayedName").innerHTML =
         randomStudent.preferredName;
     }

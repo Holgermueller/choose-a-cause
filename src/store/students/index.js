@@ -74,16 +74,22 @@ export default {
         });
     },
 
-    updateStudentInfo() {},
+    updateStudentInfo() {
+      commit("setLoading", true);
+    },
 
     removeStudentFromRoster({ commit }, payload) {
-      let targetId = payload.studentId;
+      commit("setLoading", true);
 
       firebase
+        .collection("courses")
+        .doc(payload.courseId)
         .collection("roster")
-        .doc(targetId)
+        .doc(payload.studentId)
         .delete()
-        .then(() => {})
+        .then(() => {
+          commit("removeStudentFromRoster");
+        })
         .catch(err => {
           commit("setError", err);
         });

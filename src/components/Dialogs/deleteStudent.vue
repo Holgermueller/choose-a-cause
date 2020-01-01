@@ -6,7 +6,7 @@
       </template>
 
       <v-card>
-        <v-card-title>Delete Student Name</v-card-title>
+        <v-card-title>Delete {{ preferredName }}?</v-card-title>
         <v-card-text>
           <p>Are you certain you want to delete this student?</p>
           <p>This action cannot be reversed.</p>
@@ -20,6 +20,7 @@
           <v-btn
             color="primary"
             :id="studentId"
+            :courseId="courseId"
             class="text--white"
             @click="deleteStudent(index)"
             >YES</v-btn
@@ -31,8 +32,6 @@
 </template>
 
 <script>
-import db from "../firebase/firebaseInit";
-
 export default {
   name: "DeleteStudentDialog",
   props: {
@@ -44,37 +43,34 @@ export default {
       type: Number,
       required: true
     },
-    CourseRoster: {
+    courseRoster: {
       type: Array,
       required: true
     },
-    CourseId: {
+    courseId: {
+      type: String,
+      required: true
+    },
+    preferredName: {
       type: String,
       required: true
     }
   },
+
   data() {
     return {
       dialog: false
     };
   },
+
   methods: {
     deleteStudent(index) {
-      this.CourseRoster.splice(index, 1);
+      this.courseRoster.splice(index, 1);
 
-      let targetId = event.currentTarget.id;
-      db.collection("courses")
-        .doc(this.CourseId)
-        .collection("roster")
-        .doc(targetId)
-        .delete()
-        .then(() => {
-          console.log("Student deleted");
-          this.dialog = false;
-        })
-        .catch(err => {
-          console.error("Error removing document: " + err);
-        });
+      this.$store.dispatch("removeStudentFromRoster", {
+        studentId: this.studentId,
+        courseId: this.courseId
+      });
     }
   }
 };

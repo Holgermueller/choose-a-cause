@@ -70,7 +70,7 @@ export default {
       type: String,
       required: true
     },
-    CourseId: {
+    courseId: {
       type: String,
       required: true
     },
@@ -97,7 +97,7 @@ export default {
       let targetId = event.currentTarget.id;
 
       db.collection("courses")
-        .doc(this.CourseId)
+        .doc(this.courseId)
         .collection("roster")
         .doc(targetId)
         .update({
@@ -106,12 +106,9 @@ export default {
           preferredname: newPreferredName
         })
         .then(() => {
-          console.log("Student info updated successfully!");
           this.dialog = false;
         })
-        .catch(err => {
-          console.log("An error has occurred: " + err);
-        });
+        .catch(err => {});
       this.changePreferredName();
     },
     changePreferredName() {

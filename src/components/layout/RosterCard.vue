@@ -16,6 +16,7 @@
               <DeleteStudentDialog
                 :courseRoster="courseRoster"
                 :studentId="studentId"
+                :preferredName="preferredName"
                 :courseId="courseId"
                 :index="index"
               />

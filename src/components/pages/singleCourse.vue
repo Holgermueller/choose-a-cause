@@ -3,7 +3,6 @@
     <h1 class="course-name-display" id="CourseNameDisplay" :title="courseName">
       {{ courseName }} Roster:
     </h1>
-    <p>{{ courseId }}</p>
 
     <div class="name-display-div">
       <NameDisplay :courseRoster="courseRoster" />
@@ -75,7 +74,9 @@ export default {
   },
 
   created() {
-    return this.$store.dispatch("getCourseRoster");
+    return this.$store.dispatch("getCourseRoster", {
+      courseId: this.courseId
+    });
   },
 
   computed: {
@@ -89,6 +90,12 @@ export default {
 
     error() {
       return this.$store.getters.error;
+    }
+  },
+
+  methods: {
+    onDismissed() {
+      this.$store.dispatch("clearError");
     }
   }
 };

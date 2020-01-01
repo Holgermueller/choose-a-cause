@@ -22,12 +22,13 @@ export default {
   },
 
   actions: {
-    getCourseRoster({ commit, getters }) {
+    getCourseRoster({ commit }, payload) {
       commit("setLoading", true);
 
       firebase
+        .collection("courses")
+        .doc(payload.courseId)
         .collection("roster")
-        //.where("courseId", "==", getters.$route)
         .orderBy("preferredname")
         .onSnapshot(
           querySnapshot => {
@@ -56,12 +57,13 @@ export default {
       commit("setLoading", true);
 
       firebase
+        .collection("courses")
+        .doc(payload.courseId)
         .collection("roster")
         .add({
           firstname: payload.firstName,
           lastname: payload.lastName,
-          preferredname: payload.preferredName,
-          courseId: payload.courseId
+          preferredname: payload.preferredName
         })
         .then(() => {
           commit("setLoading", false);

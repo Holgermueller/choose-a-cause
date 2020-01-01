@@ -66,6 +66,12 @@ export default {
     error() {
       return this.$store.getters.error;
     }
+  },
+
+  methods: {
+    onDismissed() {
+      this.$store.dispatch("clearError");
+    }
   }
 };
 </script>

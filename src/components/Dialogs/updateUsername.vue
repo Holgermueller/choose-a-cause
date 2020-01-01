@@ -36,7 +36,11 @@
             ><span class="mdi mdi-close"></span>Cancel</v-btn
           >
           <v-spacer></v-spacer>
-          <v-btn @click="updateInfo" :loading="loading" :disabled="loading">
+          <v-btn
+            @click.prevent="updateInfo"
+            :loading="loading"
+            :disabled="loading"
+          >
             <span class="mdi mdi-check"></span> Submit</v-btn
           >
         </v-card-actions>

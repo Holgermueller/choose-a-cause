@@ -16,21 +16,21 @@
                 <v-flex xs12 sm12 md12 lg12 xl12>
                   <v-text-field
                     type="text"
-                    v-model="first_name_edit"
+                    v-model="firstNameForEdit"
                     :placeholder="firstName"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm12 md12 lg12 xl12>
                   <v-text-field
                     type="text"
-                    v-model="last_name_edit"
+                    v-model="lastNameForEdit"
                     :placeholder="lastName"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm12 md12 lg12 xl12>
                   <v-text-field
                     type="text"
-                    v-model="preferred_name_edit"
+                    v-model="preferredNameForEdit"
                     :placeholder="preferredName"
                   ></v-text-field>
                 </v-flex>
@@ -44,7 +44,9 @@
             >cancel</v-btn
           >
           <v-spacer></v-spacer>
-          <v-btn :id="studentId" @click="updateStudentInfo">update</v-btn>
+          <v-btn :id="studentId" @click.prevent="updateStudentInfo"
+            >update</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -52,9 +54,6 @@
 </template>
 
 <script>
-import db from "../firebase/firebaseInit";
-import { bus } from "../../main";
-
 export default {
   name: "UpdateStudentDialog",
   props: {
@@ -83,37 +82,21 @@ export default {
   data() {
     return {
       dialog: false,
-      first_name_edit: this.firstName,
-      last_name_edit: this.lastName,
-      preferred_name_edit: this.preferredName
+      firstNameForEdit: this.firstName,
+      lastNameForEdit: this.lastName,
+      preferredNameForEdit: this.preferredName
     };
   },
 
   methods: {
     updateStudentInfo() {
-      let newFirstName = this.first_name_edit;
-      let newLastName = this.last_name_edit;
-      let newPreferredName = this.preferred_name_edit;
-      let targetId = event.currentTarget.id;
+      this.store.dispatch("updateStudentInfo", {
+        newFirstName: this.firstNameForEdit,
+        newLastName: this.lastNameForEdit,
+        newPreferredName: this.preferredNameForEdit
+      });
 
-      db.collection("courses")
-        .doc(this.courseId)
-        .collection("roster")
-        .doc(targetId)
-        .update({
-          firstname: newFirstName,
-          lastname: newLastName,
-          preferredname: newPreferredName
-        })
-        .then(() => {
-          this.dialog = false;
-        })
-        .catch(err => {});
-      this.changePreferredName();
-    },
-    changePreferredName() {
-      let newPreferredName = this.preferred_name_edit;
-      this.$emit("changePreferredName", newPreferredName);
+      this.dialog = false;
     }
   }
 };

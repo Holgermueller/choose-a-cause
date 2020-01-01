@@ -14,7 +14,7 @@ export default {
       }
     },
 
-    updateStudentInfo() {},
+    updateStudentInfo(state, payload) {},
 
     removeStudentFromRoster(state, payload) {
       state.courseRoster.findIndex(student => student.id === payload);
@@ -74,8 +74,25 @@ export default {
         });
     },
 
-    updateStudentInfo() {
+    updateStudentInfo({ commit }, payload) {
       commit("setLoading", true);
+
+      firebase
+        .dcollection("courses")
+        .doc(payload.courseId)
+        .collection("roster")
+        .doc(payload.studentId)
+        .update({
+          firstname: payload.newFirstName,
+          lastname: payload.newLastName,
+          preferredname: payload.newPreferredName
+        })
+        .then(() => {
+          commit("updateStudentInfo");
+        })
+        .catch(err => {
+          commit("setError", err);
+        });
     },
 
     removeStudentFromRoster({ commit }, payload) {

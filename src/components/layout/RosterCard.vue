@@ -7,7 +7,7 @@
             class="student-name"
             v-on:changePreferredName="updatePreferredNameOnDOM($event)"
           >
-            {{ preferredNameForDisplay }}
+            {{ preferredName }}
           </h1>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
@@ -80,16 +80,10 @@ export default {
   },
 
   data() {
-    return {
-      preferredNameForDisplay: this.preferredName
-    };
+    return {};
   },
 
-  methods: {
-    updatePreferredNameOnDOM(updatedPreferredName) {
-      let preferredNameForDisplay = updatedPreferredName;
-    }
-  }
+  methods: {}
 };
 </script>
 

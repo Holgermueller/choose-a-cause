@@ -22,7 +22,7 @@
             :id="studentId"
             :courseId="courseId"
             class="text--white"
-            @click="deleteStudent(index)"
+            @click.prevent="deleteStudent(index)"
             >YES</v-btn
           >
         </v-card-actions>

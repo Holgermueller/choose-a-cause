@@ -71,6 +71,8 @@ export default {
         studentId: this.studentId,
         courseId: this.courseId
       });
+
+      this.dialog = false;
     }
   }
 };

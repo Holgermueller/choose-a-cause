@@ -14,7 +14,20 @@ export default {
       }
     },
 
-    updateStudentInfo(state, payload) {},
+    updateStudentInfo(state, payload) {
+      const student = state.courseRoster.find(student => {
+        return student.id === payload.studentId;
+      });
+      if (payload.firstName) {
+        student.firstname = payload.newFirstName;
+      }
+      if (payload.lastName) {
+        student.lastname = payload.newLastName;
+      }
+      if (payload.preferredName) {
+        student.preferredname = payload.newPreferredName;
+      }
+    },
 
     removeStudentFromRoster(state, payload) {
       state.courseRoster.findIndex(student => student.id === payload);
@@ -78,7 +91,7 @@ export default {
       commit("setLoading", true);
 
       firebase
-        .dcollection("courses")
+        .collection("courses")
         .doc(payload.courseId)
         .collection("roster")
         .doc(payload.studentId)

@@ -44,7 +44,10 @@
             >cancel</v-btn
           >
           <v-spacer></v-spacer>
-          <v-btn :id="studentId" @click.prevent="updateStudentInfo"
+          <v-btn
+            :studentId="studentId"
+            :courseId="courseId"
+            @click.prevent="updateStudentInfo"
             >update</v-btn
           >
         </v-card-actions>
@@ -90,10 +93,12 @@ export default {
 
   methods: {
     updateStudentInfo() {
-      this.store.dispatch("updateStudentInfo", {
+      this.$store.dispatch("updateStudentInfo", {
         newFirstName: this.firstNameForEdit,
         newLastName: this.lastNameForEdit,
-        newPreferredName: this.preferredNameForEdit
+        newPreferredName: this.preferredNameForEdit,
+        studentId: this.studentId,
+        courseId: this.courseId
       });
 
       this.dialog = false;

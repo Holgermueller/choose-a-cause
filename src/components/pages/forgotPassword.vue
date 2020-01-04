@@ -37,7 +37,7 @@
         </section>
       </v-card-text>
       <v-card-actions>
-        <v-btn text color="red" @click="resetForm">Clear form</v-btn>
+        <v-btn text color="red" @click.prevent="resetForm">Clear form</v-btn>
         <v-spacer></v-spacer>
         <v-btn
           text
@@ -91,12 +91,12 @@ export default {
       }
     },
 
-    checkValidEmail(email) {
+    checkValidEmail() {
       const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       return regex.test(this.email);
     },
 
-    submitEmail(e) {
+    submitEmail() {
       this.successMessages = [];
 
       this.$store.dispatch("resetPassword", {

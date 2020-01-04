@@ -123,6 +123,15 @@ export default {
         .catch(err => {
           commit("setError", err);
         });
+    },
+
+    deleteAllStudentsFromRoster({ commit }, payload) {
+      commit("setLoading", true);
+
+      firebase
+        .collection("courses")
+        .doc(payload.courseId)
+        .collection("roster");
     }
   },
 

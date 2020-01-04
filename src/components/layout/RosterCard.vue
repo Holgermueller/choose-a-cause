@@ -3,10 +3,7 @@
     <v-expansion-panels inset>
       <v-expansion-panel>
         <v-expansion-panel-header>
-          <h1
-            class="student-name"
-            v-on:changePreferredName="updatePreferredNameOnDOM($event)"
-          >
+          <h1 class="student-name">
             {{ preferredName }}
           </h1>
         </v-expansion-panel-header>

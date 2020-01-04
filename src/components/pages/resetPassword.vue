@@ -31,7 +31,7 @@
       <v-card-actions>
         <v-btn @click="clearForm">Clear form</v-btn>
         <v-spacer></v-spacer>
-        <v-btn @click="checkFormIsEmpty">
+        <v-btn @click.prevent="checkFormIsEmpty">
           Send
         </v-btn>
       </v-card-actions>
@@ -66,7 +66,7 @@ export default {
       }
     },
 
-    isPasswordValid(password) {
+    isPasswordValid() {
       const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
       return regex.test(this.password);
     },

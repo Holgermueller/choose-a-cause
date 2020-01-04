@@ -24,8 +24,6 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password)
         .then(userCredential => {
-          commit("setLoading", false);
-
           const userToUpdate = firebase.auth().currentUser;
           userToUpdate
             .updateProfile({

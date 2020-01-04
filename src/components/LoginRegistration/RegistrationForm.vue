@@ -161,7 +161,7 @@ export default {
 
     checkPasswordExistsInDatabase(password) {},
 
-    registerUser(e) {
+    registerUser() {
       this.$store.dispatch("registerUser", {
         email: this.email,
         password: this.password,

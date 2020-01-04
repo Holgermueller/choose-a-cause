@@ -43,6 +43,10 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
+
+    <div class="delete-all-div">
+      <DeleteAllStudentsDialog />
+    </div>
   </div>
 </template>
 
@@ -50,13 +54,16 @@
 import RosterCard from "../layout/RosterCard";
 import AddStudentDialog from "../Dialogs/addAStudent";
 import NameDisplay from "../layout/NameDisplay";
+import DeleteAllStudentsDialog from "../Dialogs/deleteAllStudents";
 
 export default {
   name: "SingleCourse",
+
   components: {
     RosterCard,
     AddStudentDialog,
-    NameDisplay
+    NameDisplay,
+    DeleteAllStudentsDialog
   },
 
   props: {
@@ -133,5 +140,9 @@ a {
 }
 .panel-header {
   background-color: aqua;
+}
+.delete-all-div {
+  width: 75%;
+  margin: 2% auto;
 }
 </style>

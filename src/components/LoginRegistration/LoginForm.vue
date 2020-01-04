@@ -120,12 +120,12 @@ export default {
       }
     },
 
-    checkEmailValid(email) {
+    checkEmailValid() {
       const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       return regex.test(this.email);
     },
 
-    checkPasswordValid(password) {
+    checkPasswordValid() {
       const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
       return regex.test(this.password);
     },

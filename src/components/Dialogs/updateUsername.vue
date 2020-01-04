@@ -79,7 +79,7 @@ export default {
   methods: {
     updateInfo() {
       this.$store.dispatch("updateUsename", {
-        newUsername: this.displayNameForEdit
+        newDisplayName: this.displayNameForEdit
       });
       this.dialog = false;
     }

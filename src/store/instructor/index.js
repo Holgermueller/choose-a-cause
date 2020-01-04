@@ -92,12 +92,12 @@ export default {
       firebase
         .auth()
         .currentUser.updateProfile({
-          displayName: payload.newUsername
+          displayName: payload.newDisplayName
         })
         .then(() => {
           commit("setLoading", false);
           commit("setUser", {
-            displayName: payload.newUsername
+            displayName: payload.newDisplayName
           });
         })
         .catch(err => {

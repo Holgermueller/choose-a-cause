@@ -5,7 +5,7 @@
         <h1 class="displayed-name" id="displayedName">Name will appear here</h1>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="amber" class="name-selector" @click="chooseAName"
+        <v-btn color="amber" class="name-selector" @click="chooseAStudent"
           >Choose a student</v-btn
         >
       </v-card-actions>
@@ -28,7 +28,7 @@ export default {
     };
   },
   methods: {
-    chooseAName() {
+    chooseAStudent() {
       let courseRoster = this.courseRoster;
       let randomStudent =
         courseRoster[Math.floor(Math.random() * courseRoster.length)];
@@ -36,9 +36,9 @@ export default {
 
       if (calledArray.length === courseRoster.length) {
         this.calledArray = [];
-        this.chooseAName();
+        this.chooseAStudent();
       } else if (this.calledArray.includes(randomStudent.preferredName)) {
-        this.chooseAName();
+        this.chooseAStudent();
       } else {
         this.calledArray.push(randomStudent.preferredName);
       }

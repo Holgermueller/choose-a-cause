@@ -3,12 +3,12 @@
     <div id="profileHeader">
       <h1>
         <span class="mdi mdi-account-circle"></span> Hello, Professor
-        {{ username }}
+        {{ displayName }}
       </h1>
     </div>
 
     <div class="buttons-div">
-      <UpdateUserInfoDialog />
+      <UpdateUserInfoDialog :displayName="displayName" />
       <AddCourseDialog :courseList="courseList" />
     </div>
 
@@ -51,8 +51,8 @@ export default {
   },
 
   computed: {
-    username() {
-      return this.$store.getters.user;
+    displayName() {
+      return this.$store.getters.user.displayName;
     },
 
     courseList() {

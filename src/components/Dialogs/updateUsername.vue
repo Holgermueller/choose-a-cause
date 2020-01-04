@@ -16,8 +16,8 @@
               <v-flex xs12 sm12 md13 lg12 xl12>
                 <v-text-field
                   type="text"
-                  v-model="getUserName"
-                  :value="getUserName"
+                  v-model="displayNameForEdit"
+                  :placeholder="displayName"
                   prepend-icon="mdi-account"
                 ></v-text-field>
               </v-flex>
@@ -51,23 +51,22 @@
 
 <script>
 export default {
+  name: "UpdateUsernameDialog",
+  props: {
+    displayName: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       dialog: false,
-      errors: []
+      errors: [],
+      displayNameForEdit: this.displayName
     };
   },
 
   computed: {
-    getUserName: {
-      get() {
-        return this.$store.getters.user.username;
-      },
-      set(value) {
-        this.$store.commit("updateUsername", value);
-      }
-    },
-
     loading() {
       return this.$store.getters.loading;
     },
@@ -79,9 +78,10 @@ export default {
 
   methods: {
     updateInfo() {
-      if (!this.getUserName) {
-        this.errors.push("Please provide new username.");
-      }
+      this.$store.dispatch("updateUsename", {
+        newUsername: this.displayNameForEdit
+      });
+      this.dialog = false;
     }
   }
 };

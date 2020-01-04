@@ -29,10 +29,10 @@ export default {
           const userToUpdate = firebase.auth().currentUser;
           userToUpdate
             .updateProfile({
-              displayName: payload.username
+              displayName: payload.displayName
             })
             .then(() => {
-              console.log("update success!");
+              commit("setLoading", false);
             })
             .catch(err => {
               commit("setError", err);
@@ -40,12 +40,11 @@ export default {
 
           const user = userCredential.user;
           const newUser = {
-            username: payload.username,
+            displayName: payload.displayName,
             email: user.email,
             id: user.uid
           };
 
-          console.log(newUser);
           commit("setUser", newUser);
         })
         .catch(err => {
@@ -67,10 +66,9 @@ export default {
           const signedInUser = {
             email: user.user.email,
             id: user.user.uid,
-            username: user.user.displayName
+            displayName: user.user.displayName
           };
 
-          console.log(signedInUser);
           commit("setUser", signedInUser);
         })
         .catch(err => {
@@ -83,7 +81,7 @@ export default {
       commit("setUser", {
         id: payload.uid,
         email: payload.email,
-        username: payload.username
+        displayName: payload.displayName
       });
     },
 
@@ -94,12 +92,12 @@ export default {
       firebase
         .auth()
         .currentUser.updateProfile({
-          displayName: payload.getUserName
+          displayName: payload.newUsername
         })
         .then(() => {
           commit("setLoading", false);
           commit("setUser", {
-            username: payload.username
+            displayName: payload.newUsername
           });
         })
         .catch(err => {
@@ -135,7 +133,6 @@ export default {
           commit("setUser", null);
         })
         .catch(err => {
-          console.log("err");
           commit("setLoading", false);
           commit("setError", err);
         });

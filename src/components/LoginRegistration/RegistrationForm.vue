@@ -9,7 +9,7 @@
       <v-flex xs12 sm12 md12 lg12 xl12>
         <v-text-field
           prepend-icon="mdi-account-circle"
-          v-model="username"
+          v-model="displayName"
           label="Username*"
           outlined
         ></v-text-field>
@@ -85,7 +85,7 @@ export default {
   name: "RegistrationForm",
   data() {
     return {
-      username: "",
+      displayName: "",
       email: "",
       password: "",
       confirm_password: "",
@@ -123,13 +123,13 @@ export default {
       this.errors = [];
 
       if (
-        !this.username &&
+        !this.displayName &&
         !this.email &&
         !this.password &&
         !this.confirm_password
       ) {
         this.errors.push("Please fill out all of the fields.");
-      } else if (!this.username) {
+      } else if (!this.displayName) {
         this.errors.push("Username required.");
       } else if (!this.email) {
         this.errors.push("Email required.");
@@ -159,15 +159,13 @@ export default {
       return regex.test(this.password);
     },
 
-    checkPasswordExistsInDatabase(password) {
-      console.log(password);
-    },
+    checkPasswordExistsInDatabase(password) {},
 
     registerUser(e) {
       this.$store.dispatch("registerUser", {
         email: this.email,
         password: this.password,
-        username: this.username
+        displayName: this.displayName
       });
     },
 

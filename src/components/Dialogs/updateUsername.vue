@@ -2,15 +2,18 @@
   <div id="updateUserInfo">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
-        <v-btn block class="button" color="blue" v-on="on">
+        <v-btn block class="button" color="blue" v-on="on"
+          ><span class="mdi mdi-account-edit"></span>
           Update Username
         </v-btn>
       </template>
 
       <v-card>
-        <v-card-title>Update Username </v-card-title>
+        <v-card-title class="card-header">Update Username </v-card-title>
         <v-card-text>
-          <p>Remember, this name will be displayed on the screen.</p>
+          <p class="title">
+            Remember, this name will be displayed on the screen.
+          </p>
           <v-container>
             <v-layout wrap>
               <v-flex xs12 sm12 md13 lg12 xl12>
@@ -32,11 +35,13 @@
           </section>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="dialog = false"
-            ><span class="mdi mdi-close"></span>Cancel</v-btn
+          <v-btn @click="dialog = false" color="red" dark
+            ><span class="mdi mdi-cancel"></span>Cancel</v-btn
           >
           <v-spacer></v-spacer>
           <v-btn
+            class="green"
+            dark
             @click.prevent="updateInfo"
             :loading="loading"
             :disabled="loading"
@@ -87,4 +92,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.card-header {
+  background-color: #1e90ff;
+}
+</style>

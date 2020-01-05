@@ -1,5 +1,5 @@
 <template>
-  <div data-app id="addCourseForm">
+  <div id="addCourseForm">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
         <v-btn block class="button" color="green" dark v-on="on">
@@ -8,7 +8,7 @@
       </template>
 
       <v-card class="add-course-dialog">
-        <v-card-title>Add a class:</v-card-title>
+        <v-card-title class="card-header">Add a class:</v-card-title>
         <v-card-text>
           <v-container fluid>
             <v-layout wrap>
@@ -30,12 +30,14 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="red" @click="dialog = false">
+          <v-btn class="button" color="red" dark @click="dialog = false">
             <span class="mdi mdi-cancel"></span> Cancel
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            color="blue"
+            class="button"
+            color="green"
+            dark
             @click.prevent="addCourse"
             :disabled="!formIsValid"
             ><span class="mdi mdi-check-bold"></span> Submit</v-btn
@@ -87,6 +89,9 @@ export default {
 
 <style scoped>
 .add-course-dialog {
-  border: 3px ridge blue;
+  border: 3px ridge #1e90ff;
+}
+.card-header {
+  background-color: #1e90ff;
 }
 </style>

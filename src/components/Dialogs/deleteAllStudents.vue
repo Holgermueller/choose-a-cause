@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
         <v-btn block class="button" color="red" dark v-on="on">
-          <span></span>Delete All Students
+          <span class="mdi mdi-trash-can-outline"></span>Delete All Students
         </v-btn>
       </template>
 
@@ -17,11 +17,11 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="red" @click="dialog = false">
+          <v-btn color="red" dark @click="dialog = false">
             <span class="mdi mdi-cancel">Cancel</span>
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue" @click="deleteAll">
+          <v-btn color="blue" dark @click="deleteAll">
             <span class="mdi mdi-check-bold"></span>Delete
           </v-btn>
         </v-card-actions>
@@ -49,5 +49,6 @@ export default {
 <style scoped>
 .headline {
   background-color: red;
+  color: white;
 }
 </style>

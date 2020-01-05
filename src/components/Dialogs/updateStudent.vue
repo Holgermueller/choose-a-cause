@@ -3,12 +3,14 @@
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
         <v-btn color="primary" class="text--white" v-on="on"
-          >Update Student Info</v-btn
+          ><span class="mdi mdi-account-edit"></span> Update Student Info</v-btn
         >
       </template>
 
       <v-card>
-        <v-card-title>Update info for {{ preferredName }}:</v-card-title>
+        <v-card-title class="card-header"
+          >Update info for {{ preferredName }}:</v-card-title
+        >
         <v-card-text>
           <v-form ref="form">
             <v-container fluid>
@@ -40,15 +42,17 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="red" class="text--white" @click="dialog = false"
-            >cancel</v-btn
+          <v-btn color="red" dark class="text--white" @click="dialog = false"
+            ><span class="mdi mdi-cancel"></span> cancel</v-btn
           >
           <v-spacer></v-spacer>
           <v-btn
+            color="green"
+            dark
             :studentId="studentId"
             :courseId="courseId"
             @click.prevent="updateStudentInfo"
-            >update</v-btn
+            ><span class="mdi mdi-check-bold"></span> update</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -107,4 +111,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.card-header {
+  background-color: #1e90ff;
+  color: white;
+}
+</style>

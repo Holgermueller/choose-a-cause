@@ -2,19 +2,23 @@
   <div id="deleteStudent">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
-        <v-btn color="red" class="text--white" v-on="on">Delete Student</v-btn>
+        <v-btn color="red" dark class="text--white" v-on="on"
+          ><span class="mdi mdi-trash-can-outline"></span> Delete Student</v-btn
+        >
       </template>
 
       <v-card>
-        <v-card-title>Delete {{ preferredName }}?</v-card-title>
+        <v-card-title class="card-header"
+          >Delete {{ preferredName }}?</v-card-title
+        >
         <v-card-text>
           <p>Are you certain you want to delete this student?</p>
           <p>This action cannot be reversed.</p>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="red" class="text--white" @click="dialog = false"
-            >NO</v-btn
+          <v-btn color="red" dark @click="dialog = false"
+            ><span class="mdi mdi-cancel"></span> NO</v-btn
           >
           <v-spacer></v-spacer>
           <v-btn
@@ -23,7 +27,7 @@
             :courseId="courseId"
             class="text--white"
             @click.prevent="deleteStudent(index)"
-            >YES</v-btn
+            ><span class="mdi mdi-check-bold"></span> YES</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -77,3 +81,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.card-header {
+  background-color: red;
+  color: white;
+}
+</style>

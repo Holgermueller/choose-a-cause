@@ -8,14 +8,16 @@
       </template>
 
       <v-card class="delete-class-dialog">
-        <v-card-title class="red">Delete {{ courseName }}?</v-card-title>
+        <v-card-title class="card-header"
+          >Delete {{ courseName }}?</v-card-title
+        >
         <v-card-text>
-          <p>Are you certain you want to delete this course?</p>
-          <p>This action cannot be reversed.</p>
+          <p class="title">Are you certain you want to delete this course?</p>
+          <p class="title">This action cannot be reversed.</p>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="red" @click="dialog = false" class="text--white">
+          <v-btn color="red" dark @click="dialog = false" class="text--white">
             <span class="mdi mdi-cancel"></span> cancel
           </v-btn>
           <v-spacer></v-spacer>
@@ -70,5 +72,9 @@ export default {
 <style scoped>
 .delete-class-dialog {
   border: 4px ridge red;
+}
+.card-header {
+  background-color: red;
+  color: white;
 }
 </style>

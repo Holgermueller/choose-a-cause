@@ -13,13 +13,16 @@
           :key="link.title"
           :to="link.link"
         >
-          <v-btn><span :class="link.icon"></span> {{ link.title }}</v-btn>
+          <v-btn color="green"
+            ><span :class="link.icon"></span> {{ link.title }}</v-btn
+          >
         </router-link>
         <v-btn
           v-if="userIsAuthenticated"
           @click="logout"
           :loading="loading"
           :disabled="loading"
+          color="green"
         >
           <span class="mdi mdi-exit-to-app"></span>
           Sign Out
@@ -32,8 +35,11 @@
 <script>
 export default {
   name: "Header",
+
   components: {},
+
   props: {},
+
   data() {
     return {
       userId: null
@@ -54,7 +60,7 @@ export default {
         menuLinks = [
           {
             icon: "mdi mdi-account",
-            title: "{ {getUserProfile} }",
+            title: "displayName",
             link: "/user"
           },
           {
@@ -74,8 +80,8 @@ export default {
       );
     },
 
-    getUserProfile() {
-      return this.$store.user.username;
+    displayName() {
+      return this.$store.getters.user.displayName;
     },
 
     loading() {

@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import LoginRegisterForms from "../components/LoginRegistration/LoginRegistration";
 
 export default {

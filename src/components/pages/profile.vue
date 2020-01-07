@@ -19,6 +19,18 @@
         <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
       </v-layout>
 
+      <v-layout class="progress">
+        <v-flex class="tet-xs-center">
+          <v-progress-circular
+            indeterminate
+            class="primary--text"
+            :width="7"
+            :size="70"
+            v-if="loading"
+          ></v-progress-circular>
+        </v-flex>
+      </v-layout>
+
       <CourseCard
         class="single-card"
         v-for="(singleCourse, index) in courseList"
@@ -95,5 +107,8 @@ export default {
 }
 .single-card {
   margin: 2% 0;
+}
+.progress {
+  margin: 1% auto;
 }
 </style>

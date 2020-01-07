@@ -41,10 +41,9 @@ export default {
         this.chooseAStudent();
       } else {
         this.calledArray.push(randomStudent.preferredName);
+        document.querySelector("#displayedName").innerHTML =
+          randomStudent.preferredName;
       }
-
-      document.querySelector("#displayedName").innerHTML =
-        randomStudent.preferredName;
     }
   }
 };

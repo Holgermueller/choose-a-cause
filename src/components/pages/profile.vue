@@ -9,6 +9,9 @@
 
     <div class="buttons-div">
       <UpdateUserInfoDialog :displayName="displayName" />
+    </div>
+
+    <div class="buttons-div">
       <AddCourseDialog :courseList="courseList" />
     </div>
 
@@ -41,6 +44,10 @@
         :index="index"
       />
     </div>
+
+    <div class="buttons-div">
+      <DeleteUserDialog :displayName="displayName" />
+    </div>
   </div>
 </template>
 
@@ -48,6 +55,7 @@
 import CourseCard from "../layout/CourseCard";
 import AddCourseDialog from "../Dialogs/addACourse";
 import UpdateUserInfoDialog from "../Dialogs/updateUsername";
+import DeleteUserDialog from "../Dialogs/deleteUserProfile";
 
 export default {
   name: "Profile",
@@ -55,7 +63,8 @@ export default {
   components: {
     CourseCard,
     AddCourseDialog,
-    UpdateUserInfoDialog
+    UpdateUserInfoDialog,
+    DeleteUserDialog
   },
 
   created() {

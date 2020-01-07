@@ -134,6 +134,22 @@ export default {
           commit("setLoading", false);
           commit("setError", err);
         });
+    },
+
+    deleteAccount({ commit }) {
+      commit("setLoading", true);
+
+      firebase
+        .auth()
+        .currentUser.delete()
+        .then(() => {
+          commit("setLoading", false);
+          commit("setUser", null);
+        })
+        .catch(err => {
+          commit("setLoading", false);
+          commit("setError", err);
+        });
     }
   },
 

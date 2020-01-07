@@ -2,8 +2,8 @@
   <div id="deleteCourseDialog">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
-        <v-btn color="red" v-on="on">
-          <span class="mdi mdi-trash-can-outline"></span>Delete
+        <v-btn color="red" v-on="on" class="text--white">
+          <span class="mdi mdi-trash-can-outline"></span>Delete Course
         </v-btn>
       </template>
 

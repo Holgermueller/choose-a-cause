@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     deleteAccount() {
-      console.log("click");
+      return this.$store.dispatch("deleteAccount");
     }
   }
 };

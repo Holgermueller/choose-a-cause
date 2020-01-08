@@ -15,13 +15,25 @@
         <v-card-text>
           <p class="title">Are you certain you want to delete your account?</p>
           <p class="title">This action cannot be reversed.</p>
+
+          <v-layout row v-if="error">
+            <app-alert
+              @dismissed="onDismissed"
+              :text="error.message"
+            ></app-alert>
+          </v-layout>
+
           <v-divider></v-divider>
           <v-card-actions>
             <v-btn color="red" dark @click="dialog = false"
               ><span class="mdi mdi-cancel"></span> Cancel</v-btn
             >
             <v-spacer></v-spacer>
-            <v-btn color="green" @click.prevent="deleteAccount"
+            <v-btn
+              color="green"
+              @click.prevent="deleteAccount"
+              :loading="loading"
+              :disabled="loading"
               ><span class="mdi mdi-check"></span> Delete</v-btn
             >
           </v-card-actions>
@@ -34,20 +46,37 @@
 <script>
 export default {
   name: "DeleteAccountDialog",
+
   props: {
     displayName: {
       type: String,
       required: true
     }
   },
+
+  computed: {
+    loading() {
+      return this.$store.getters.loading;
+    },
+
+    error() {
+      return this.$$store.getters.error;
+    }
+  },
+
   data() {
     return {
       dialog: false
     };
   },
+
   methods: {
     deleteAccount() {
       return this.$store.dispatch("deleteAccount");
+    },
+
+    onDismissed() {
+      this.$store.displayName("clearError");
     }
   }
 };

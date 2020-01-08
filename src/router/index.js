@@ -6,6 +6,7 @@ import Profile from "../components/pages/profile";
 import SingleCourse from "../components/pages/singleCourse";
 import ForgotPassword from "../components/pages/forgotPassword";
 import ResetPassword from "../components/pages/resetPassword";
+import AccounteDeleted from "../components/pages/accountDeleted";
 import firebase from "firebase";
 
 Vue.use(VueRouter);
@@ -42,6 +43,11 @@ let router = new VueRouter({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: "/accounteDeleted",
+      name: "AccounteDeleted",
+      component: AccounteDeleted
     }
   ]
 });

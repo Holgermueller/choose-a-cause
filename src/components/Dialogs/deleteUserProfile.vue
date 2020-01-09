@@ -31,7 +31,8 @@
             <v-spacer></v-spacer>
             <v-btn
               color="green"
-              @click.prevent="deleteAccount"
+              class="delete-button"
+              @click.prevent="bothActions"
               :loading="loading"
               :disabled="loading"
               ><span class="mdi mdi-check"></span> Delete</v-btn
@@ -60,7 +61,7 @@ export default {
     },
 
     error() {
-      return this.$$store.getters.error;
+      return this.$store.getters.error;
     }
   },
 
@@ -75,6 +76,15 @@ export default {
       return this.$store.dispatch("deleteAccount");
     },
 
+    goToAccountDeletedPage() {
+      this.router.push({ path: "/accounteDeleted" });
+    },
+
+    bothActions() {
+      this.deleteAccount();
+      this.goToAccountDeletedPage();
+    },
+
     onDismissed() {
       this.$store.displayName("clearError");
     }
@@ -85,6 +95,13 @@ export default {
 <style scoped>
 .card-header {
   background-color: red;
+  color: white;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+.delete-button {
   color: white;
 }
 </style>

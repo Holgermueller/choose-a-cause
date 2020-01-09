@@ -38,7 +38,7 @@ export default {
 
           const user = userCredential.user;
           const newUser = {
-            displayName: payload.displayName,
+            displayName: user.displayName,
             email: user.email,
             id: user.uid
           };

@@ -60,7 +60,7 @@ export default {
         menuLinks = [
           {
             icon: "mdi mdi-account",
-            title: "displayName",
+            title: "Dashboard",
             link: "/user"
           },
           {

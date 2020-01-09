@@ -77,7 +77,12 @@ export default {
     },
 
     goToAccountDeletedPage() {
-      this.router.push({ path: "/accounteDeleted" });
+      this.$router.push({
+        name: "AccounteDeleted",
+        query: {
+          redirect: "/accounteDeleted"
+        }
+      });
     },
 
     bothActions() {
